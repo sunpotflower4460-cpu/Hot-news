@@ -14,7 +14,7 @@ export default function PremiumPage() {
   const premium = hydrated && isPremium;
 
   return (
-    <div className="space-y-6 pb-10">
+    <div className="animate-fade-up space-y-6 pb-10">
       <ScreenHeader back />
 
       <div className="px-5 text-center">

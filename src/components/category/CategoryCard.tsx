@@ -6,7 +6,7 @@ export function CategoryCard({ category, count }: { category: CategoryMeta; coun
   return (
     <Link
       href={`/browse/${category.id}`}
-      className="group relative flex items-center gap-4 overflow-hidden rounded-card border border-line/60 bg-surface p-4 shadow-soft transition-transform active:scale-[0.99]"
+      className="group relative flex items-center gap-4 overflow-hidden rounded-card border border-line/60 bg-surface p-4 shadow-soft transition-all duration-300 ease-gentle active:scale-[0.99] md:hover:-translate-y-0.5 md:hover:shadow-soft-lg"
     >
       <div
         className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl"

@@ -45,7 +45,7 @@ export function OnboardingCarousel() {
   const next = () => (last ? finish() : setIndex((i) => i + 1));
 
   return (
-    <div className="flex min-h-[100dvh] flex-col">
+    <div className="flex min-h-full flex-1 flex-col">
       <div className="flex justify-end px-5 pt-6">
         {!last && (
           <button onClick={finish} className="text-caption font-medium text-muted">

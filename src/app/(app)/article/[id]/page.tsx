@@ -27,7 +27,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
   const paragraphs = article.body.split('\n\n');
 
   return (
-    <article className="pb-10">
+    <article className="animate-fade-up pb-10">
       <ScreenHeader back action={<SaveButton id={article.id} />} />
 
       <div className="px-5">
@@ -46,11 +46,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
           ))}
         </div>
 
-        <h1 className="font-rounded text-h1 font-bold leading-snug text-text">{article.title}</h1>
+        <h1 className="text-pretty font-rounded text-h1 font-bold leading-snug text-text">
+          {article.title}
+        </h1>
 
-        <div className="flex items-center justify-between">
-          <ArticleMeta article={article} />
+        <div className="flex flex-col gap-2 border-y border-line/60 py-3">
           <ComfortScore score={article.comfortScore} />
+          <ArticleMeta article={article} />
         </div>
 
         <WhyComfortBlock text={article.whyComfort} />

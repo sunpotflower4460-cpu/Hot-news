@@ -14,7 +14,7 @@ export default async function HomePage() {
   );
 
   return (
-    <div className="space-y-7 pb-8">
+    <div className="animate-fade-up space-y-7 pb-8">
       <HomeGreeting />
 
       <section className="space-y-3 px-5">

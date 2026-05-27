@@ -6,7 +6,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <PhoneFrame>
       <SkyBackground />
-      <main className="no-scrollbar relative z-10 flex-1 overflow-y-auto overflow-x-hidden">
+      <main className="no-scrollbar relative z-10 flex-1 overflow-y-auto overflow-x-hidden scroll-smooth overscroll-y-contain">
         {children}
       </main>
       <BottomTabBar />

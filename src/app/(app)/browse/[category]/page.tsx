@@ -23,7 +23,7 @@ export default async function CategoryPage({
   const articles = await getArticlesByCategory(category as CategoryId);
 
   return (
-    <div className="pb-8">
+    <div className="animate-fade-up pb-8">
       <ScreenHeader title={`${meta.glyph} ${meta.labelJa}`} subtitle={meta.blurb} back />
       <div className="space-y-3 px-5 pt-2">
         {articles.map((a) => (

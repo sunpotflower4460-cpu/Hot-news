@@ -9,7 +9,7 @@ export default async function BrowsePage() {
   );
 
   return (
-    <div className="pb-8">
+    <div className="animate-fade-up pb-8">
       <ScreenHeader title="さがす" subtitle="気になるテーマから、ゆっくり選んで" />
       <div className="space-y-3 px-5 pt-2">
         {CATEGORIES.map((category, i) => (

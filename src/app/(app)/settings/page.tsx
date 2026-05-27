@@ -22,7 +22,7 @@ export default function SettingsPage() {
   const current = hydrated ? timeOverride : null;
 
   return (
-    <div className="space-y-6 pb-8">
+    <div className="animate-fade-up space-y-6 pb-8">
       <ScreenHeader title="設定" subtitle="あなたに合わせて、そっと整えます" />
 
       <section className="space-y-3 px-5">

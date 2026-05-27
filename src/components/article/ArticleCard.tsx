@@ -20,7 +20,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
     return (
       <Link
         href={`/article/${article.id}`}
-        className="group relative block w-60 shrink-0 overflow-hidden rounded-card border border-line/60 bg-surface shadow-soft transition-transform active:scale-[0.98]"
+        className="group relative block w-60 shrink-0 overflow-hidden rounded-card border border-line/60 bg-surface shadow-soft transition-all duration-300 ease-gentle active:scale-[0.98] md:hover:-translate-y-0.5 md:hover:shadow-soft-lg"
       >
         <div className="relative">
           <CoverArt category={primary} seed={article.id} size="sm" className="h-28 w-full" />
@@ -43,7 +43,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
   return (
     <Link
       href={`/article/${article.id}`}
-      className="group flex gap-3.5 rounded-card border border-line/60 bg-surface p-3 shadow-soft transition-transform active:scale-[0.99]"
+      className="group flex gap-3.5 rounded-card border border-line/60 bg-surface p-3 shadow-soft transition-all duration-300 ease-gentle active:scale-[0.99] md:hover:-translate-y-0.5 md:hover:shadow-soft-lg"
     >
       <CoverArt
         category={primary}

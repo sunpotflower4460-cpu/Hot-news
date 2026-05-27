@@ -27,12 +27,12 @@ export function BottomTabBar() {
               <Link
                 href={href}
                 aria-current={active ? 'page' : undefined}
-                className="relative flex flex-col items-center gap-1 rounded-2xl px-1 py-1.5"
+                className="relative flex flex-col items-center gap-1 py-2"
               >
                 {active && (
                   <motion.span
                     layoutId="tab-pill"
-                    className="absolute inset-x-2 top-0 h-9 rounded-2xl bg-accent-soft"
+                    className="absolute inset-x-2.5 inset-y-0.5 rounded-2xl bg-accent-soft"
                     transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                   />
                 )}

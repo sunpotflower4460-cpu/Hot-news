@@ -13,7 +13,7 @@ export default function NotificationsPage() {
   const s = useSettingsStore();
 
   return (
-    <div className="space-y-6 pb-8">
+    <div className="animate-fade-up space-y-6 pb-8">
       <ScreenHeader title="通知" subtitle="届けかたは、あなたのペースで" back />
 
       <section className="space-y-3 px-5">

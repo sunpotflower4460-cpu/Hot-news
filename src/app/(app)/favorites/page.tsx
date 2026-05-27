@@ -16,7 +16,7 @@ export default function FavoritesPage() {
   const saved = ids.map((id) => map.get(id)).filter((a) => a !== undefined);
 
   return (
-    <div className="pb-8">
+    <div className="animate-fade-up pb-8">
       <ScreenHeader
         title="お気に入り"
         subtitle={hydrated && saved.length > 0 ? `${saved.length}本の大切なお話` : 'もう一度読みたいお話を、ここに'}

@@ -28,9 +28,10 @@ export function CoverArt({ category, seed = '', className, size = 'md' }: CoverA
         background: `radial-gradient(120% 120% at 80% 10%, hsl(${meta.accent} / 0.85), hsl(${meta.accent} / 0.45) 45%, hsl(${meta.accent} / 0.2) 100%)`,
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-white/20" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-white/25" />
+      <div className="absolute -left-6 -top-8 h-24 w-24 rounded-full bg-white/30 blur-2xl" />
       <div
-        className={cn('absolute -right-2 -top-1 opacity-90 drop-shadow', glyphSize)}
+        className={cn('absolute -right-2 -top-1 opacity-90 drop-shadow-lg', glyphSize)}
         style={{ transform: `rotate(${tilt}deg)` }}
       >
         {meta.glyph}

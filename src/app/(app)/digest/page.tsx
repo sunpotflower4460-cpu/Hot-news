@@ -8,7 +8,7 @@ export default async function DigestPage() {
   const articles = await getArticlesByIds(digest.articleIds);
 
   return (
-    <div className="pb-8">
+    <div className="animate-fade-up pb-8">
       <ScreenHeader title="週刊ほっとまとめ" />
       <div className="px-5 pt-1">
         <div className="rounded-card bg-accent-soft/70 p-5">
