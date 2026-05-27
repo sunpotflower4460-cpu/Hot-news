@@ -1,0 +1,19 @@
+{
+  "name": "こころがほっとするニュース",
+  "short_name": "こころのニュース",
+  "description": "世界の中から、こころがほっとする出来事だけをそっとお届けする、やさしいニュースアプリ。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fffaf2",
+  "theme_color": "#fffaf2",
+  "orientation": "portrait",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
