@@ -20,9 +20,9 @@ export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHe
         <button
           aria-label="戻る"
           onClick={() => router.back()}
-          className="glass -ml-1 mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line/60 text-text"
+          className="glass -ml-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line/60 text-text"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={22} />
         </button>
       )}
       <div className="min-w-0 flex-1">

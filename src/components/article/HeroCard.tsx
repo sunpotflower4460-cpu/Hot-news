@@ -18,7 +18,7 @@ export function HeroCard({ article }: { article: Article }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent" />
       <SaveButton id={article.id} className="absolute right-3 top-3" />
       <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-4 text-white">
-        <span className="inline-flex items-center gap-1 rounded-pill bg-white/20 px-2.5 py-1 text-[0.7rem] font-medium backdrop-blur">
+        <span className="inline-flex items-center gap-1 rounded-pill bg-white/20 px-2.5 py-1 text-caption font-medium backdrop-blur">
           {meta.glyph} {meta.labelJa}
         </span>
         <h2 className="font-rounded text-[1.35rem] font-bold leading-snug drop-shadow-sm">

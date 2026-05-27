@@ -43,7 +43,7 @@ export function BottomTabBar() {
                 />
                 <span
                   className={cn(
-                    'relative z-10 text-[0.66rem] font-medium leading-none transition-colors',
+                    'relative z-10 text-[0.72rem] font-medium leading-none transition-colors',
                     active ? 'text-accent' : 'text-muted',
                   )}
                 >

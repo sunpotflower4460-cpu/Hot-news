@@ -48,7 +48,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const NO_FLASH = `(function(){try{var d=document.documentElement;var pref='auto',ov=null;var raw=localStorage.getItem('hotnews-theme');if(raw){var p=JSON.parse(raw);if(p&&p.state){pref=p.state.pref||'auto';ov=p.state.timeOverride||null;}}var h=new Date().getHours();var t=ov||(h>=5&&h<10?'morning':h>=10&&h<16?'day':h>=16&&h<19?'evening':'night');var m=pref==='light'?'light':pref==='dark'?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(location.pathname.indexOf('/night')===0){t='night';m='dark';}d.setAttribute('data-theme',m);d.setAttribute('data-time',t);d.style.colorScheme=m;}catch(e){}})();`;
+const NO_FLASH = `(function(){try{var d=document.documentElement;var pref='auto',ov=null,fs='standard';var raw=localStorage.getItem('hotnews-theme');if(raw){var p=JSON.parse(raw);if(p&&p.state){pref=p.state.pref||'auto';ov=p.state.timeOverride||null;fs=p.state.fontScale||'standard';}}var h=new Date().getHours();var t=ov||(h>=5&&h<10?'morning':h>=10&&h<16?'day':h>=16&&h<19?'evening':'night');var m=pref==='light'?'light':pref==='dark'?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(location.pathname.indexOf('/night')===0){t='night';m='dark';}d.setAttribute('data-theme',m);d.setAttribute('data-time',t);d.setAttribute('data-textsize',fs);d.style.colorScheme=m;}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

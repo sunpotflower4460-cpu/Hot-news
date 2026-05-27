@@ -1,5 +1,6 @@
 import { Sun } from 'lucide-react';
 import { HomeGreeting } from '@/components/home/HomeGreeting';
+import { HomeHint } from '@/components/home/HomeHint';
 import { HeroCard } from '@/components/article/HeroCard';
 import { ArticleCard } from '@/components/article/ArticleCard';
 import { CategoryRail } from '@/components/article/CategoryRail';
@@ -16,6 +17,7 @@ export default async function HomePage() {
   return (
     <div className="animate-fade-up space-y-7 pb-8">
       <HomeGreeting />
+      <HomeHint />
 
       <section className="space-y-3 px-5">
         <div className="flex items-center gap-1.5 text-accent">
@@ -34,7 +36,7 @@ export default async function HomePage() {
         <CategoryRail key={category.id} category={category} articles={articles} />
       ))}
 
-      <p className="px-5 pt-2 text-center text-caption text-muted/80">
+      <p className="px-5 pt-2 text-center text-caption text-muted">
         今日も世界には、小さな灯りがありました。
       </p>
     </div>

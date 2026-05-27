@@ -55,7 +55,7 @@ export default function NotificationsPage() {
         </div>
       </section>
 
-      <p className="px-5 text-center text-[0.7rem] text-muted/70">
+      <p className="px-5 text-center text-caption text-muted">
         ※ これは外観プレビューです。実際の通知はまだ送信されません。
       </p>
     </div>

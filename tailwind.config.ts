@@ -20,12 +20,12 @@ const config: Config = {
         rounded: ['var(--font-rounded)', 'var(--font-sans)', 'sans-serif'],
       },
       fontSize: {
-        display: ['1.875rem', { lineHeight: '1.45', letterSpacing: '0.01em' }],
-        h1: ['1.5rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
-        h2: ['1.25rem', { lineHeight: '1.5' }],
-        'body-lg': ['1.0625rem', { lineHeight: '1.9' }],
-        body: ['0.9375rem', { lineHeight: '1.8' }],
-        caption: ['0.8125rem', { lineHeight: '1.6' }],
+        display: ['2rem', { lineHeight: '1.4', letterSpacing: '0.01em' }],
+        h1: ['1.625rem', { lineHeight: '1.45', letterSpacing: '0.01em' }],
+        h2: ['1.3125rem', { lineHeight: '1.5' }],
+        'body-lg': ['1.125rem', { lineHeight: '1.9' }],
+        body: ['1rem', { lineHeight: '1.8' }],
+        caption: ['0.875rem', { lineHeight: '1.6' }],
       },
       borderRadius: {
         card: '1.5rem',

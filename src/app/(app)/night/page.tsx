@@ -25,7 +25,7 @@ export default async function NightPage() {
         ))}
       </div>
 
-      <p className="px-5 pt-8 text-center text-caption text-muted/80">
+      <p className="px-5 pt-8 text-center text-caption text-muted">
         画面を閉じて、ゆっくりおやすみください。 🌙
       </p>
     </div>

@@ -17,7 +17,7 @@ export function ComfortScore({ score, showLabel = true, className }: ComfortScor
       role="img"
       aria-label={`ほっと度 5段階中 ${level}`}
     >
-      {showLabel && <span className="text-[0.7rem] font-medium text-muted">ほっと度</span>}
+      {showLabel && <span className="text-caption font-medium text-muted">ほっと度</span>}
       <span className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
           <Sun

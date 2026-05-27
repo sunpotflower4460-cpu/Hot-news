@@ -29,7 +29,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
         toggle(id);
       }}
       className={cn(
-        'flex h-9 w-9 items-center justify-center rounded-full transition-colors',
+        'flex h-11 w-11 items-center justify-center rounded-full transition-colors',
         variant === 'glass' ? 'glass border border-line/60' : 'bg-transparent',
         className,
       )}
@@ -41,7 +41,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
         transition={{ type: 'spring', stiffness: 500, damping: 18 }}
       >
         <Heart
-          size={18}
+          size={20}
           strokeWidth={2}
           className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
         />

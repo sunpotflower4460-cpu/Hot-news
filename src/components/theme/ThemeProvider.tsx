@@ -31,6 +31,7 @@ function systemPrefersDark() {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const pref = useThemeStore((s) => s.pref);
   const timeOverride = useThemeStore((s) => s.timeOverride);
+  const fontScale = useThemeStore((s) => s.fontScale);
   const pathname = usePathname();
   const forcedNight = pathname?.startsWith('/night') ?? false;
 
@@ -76,6 +77,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.setAttribute('data-time', resolved.time);
     root.style.colorScheme = resolved.mode;
   }, [resolved.mode, resolved.time]);
+
+  // Text-size axis is independent of theme/time.
+  useEffect(() => {
+    document.documentElement.setAttribute('data-textsize', fontScale);
+  }, [fontScale]);
 
   return <ThemeContext.Provider value={resolved}>{children}</ThemeContext.Provider>;
 }

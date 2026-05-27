@@ -17,7 +17,7 @@ export function CategoryCard({ category, count }: { category: CategoryMeta; coun
       <div className="min-w-0 flex-1">
         <h3 className="text-body font-bold text-text">{category.labelJa}</h3>
         <p className="line-clamp-1 text-caption text-muted">{category.blurb}</p>
-        <span className="text-[0.7rem] text-muted/80">{count}本のお話</span>
+        <span className="text-caption text-muted">{count}本のお話</span>
       </div>
       <ChevronRight size={18} className="shrink-0 text-muted" />
     </Link>

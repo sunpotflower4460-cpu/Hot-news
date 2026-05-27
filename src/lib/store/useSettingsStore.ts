@@ -11,12 +11,14 @@ interface SettingsState {
   weeklyDigest: boolean;
   topicNotify: CategoryId[];
   isPremium: boolean;
+  homeHintDismissed: boolean;
   setOnboarded: (v: boolean) => void;
   setMorningNotify: (v: boolean) => void;
   setNightNotify: (v: boolean) => void;
   setWeeklyDigest: (v: boolean) => void;
   toggleTopic: (id: CategoryId) => void;
   setPremium: (v: boolean) => void;
+  dismissHomeHint: () => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -28,6 +30,7 @@ export const useSettingsStore = create<SettingsState>()(
       weeklyDigest: true,
       topicNotify: [],
       isPremium: false,
+      homeHintDismissed: false,
       setOnboarded: (onboarded) => set({ onboarded }),
       setMorningNotify: (morningNotify) => set({ morningNotify }),
       setNightNotify: (nightNotify) => set({ nightNotify }),
@@ -39,6 +42,7 @@ export const useSettingsStore = create<SettingsState>()(
             : [...state.topicNotify, id],
         })),
       setPremium: (isPremium) => set({ isPremium }),
+      dismissHomeHint: () => set({ homeHintDismissed: true }),
     }),
     { name: 'hotnews-settings' },
   ),

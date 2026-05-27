@@ -24,7 +24,7 @@ export default async function DigestPage() {
           <ArticleCard key={a.id} article={a} layout="list" />
         ))}
       </div>
-      <p className="px-5 pt-6 text-center text-caption text-muted/80">
+      <p className="px-5 pt-6 text-center text-caption text-muted">
         来週も、やさしいお話を集めてお待ちしています。
       </p>
     </div>

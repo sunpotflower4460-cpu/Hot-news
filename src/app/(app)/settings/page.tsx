@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Bell, ChevronRight, Crown, Moon } from 'lucide-react';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { FontSizeControl } from '@/components/theme/FontSizeControl';
 import { Card } from '@/components/ui/Card';
 import { useThemeStore } from '@/lib/store/useThemeStore';
 import { useSettingsStore } from '@/lib/store/useSettingsStore';
@@ -33,6 +34,11 @@ export default function SettingsPage() {
             <ThemeToggle />
           </div>
           <div>
+            <p className="mb-1 text-body font-medium text-text">文字サイズ</p>
+            <p className="mb-2 text-caption text-muted">読みやすい大きさを選べます。</p>
+            <FontSizeControl />
+          </div>
+          <div>
             <p className="mb-1 text-body font-medium text-text">こころの天気</p>
             <p className="mb-2 text-caption text-muted">時間帯にあわせて、空の色が移ろいます。</p>
             <div className="flex flex-wrap gap-1.5">
@@ -40,7 +46,7 @@ export default function SettingsPage() {
                 onClick={() => setTimeOverride(null)}
                 aria-pressed={current === null}
                 className={cn(
-                  'rounded-pill px-3.5 py-1.5 text-caption font-medium transition-colors',
+                  'rounded-pill px-4 py-2.5 text-caption font-medium transition-colors',
                   current === null ? 'bg-accent text-white' : 'bg-surface-2 text-muted',
                 )}
               >
@@ -52,7 +58,7 @@ export default function SettingsPage() {
                   onClick={() => setTimeOverride(t)}
                   aria-pressed={current === t}
                   className={cn(
-                    'rounded-pill px-3.5 py-1.5 text-caption font-medium transition-colors',
+                    'rounded-pill px-4 py-2.5 text-caption font-medium transition-colors',
                     current === t ? 'bg-accent text-white' : 'bg-surface-2 text-muted',
                   )}
                 >
@@ -85,7 +91,7 @@ export default function SettingsPage() {
           <p className="text-caption text-muted">
             世界の中から、こころがほっとする出来事だけを選び、確かめ、やさしくお届けします。
           </p>
-          <p className="pt-1 text-[0.7rem] text-muted/70">バージョン 0.1.0（外観プレビュー）</p>
+          <p className="pt-1 text-caption text-muted">バージョン 0.1.0（外観プレビュー）</p>
         </Card>
       </section>
     </div>

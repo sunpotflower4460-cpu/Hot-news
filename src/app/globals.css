@@ -14,7 +14,7 @@
   --surface: 36 60% 97%;
   --surface-2: 32 48% 94%;
   --text: 28 25% 20%;
-  --muted: 28 12% 45%;
+  --muted: 28 14% 38%;
   --accent: 14 85% 63%;
   --accent-soft: 24 90% 91%;
   --line: 30 26% 88%;
@@ -26,7 +26,7 @@
   --surface: 0 0% 100%;
   --surface-2: 40 32% 95%;
   --text: 220 22% 22%;
-  --muted: 220 10% 46%;
+  --muted: 220 12% 38%;
   --accent: 196 72% 48%;
   --accent-soft: 196 72% 90%;
   --line: 40 22% 90%;
@@ -38,7 +38,7 @@
   --surface: 24 52% 96%;
   --surface-2: 20 46% 93%;
   --text: 350 20% 22%;
-  --muted: 350 10% 45%;
+  --muted: 350 12% 38%;
   --accent: 8 78% 61%;
   --accent-soft: 12 82% 90%;
   --line: 20 32% 88%;
@@ -50,7 +50,7 @@
   --surface: 230 34% 98%;
   --surface-2: 232 26% 93%;
   --text: 232 26% 24%;
-  --muted: 232 12% 48%;
+  --muted: 232 14% 40%;
   --accent: 250 50% 60%;
   --accent-soft: 250 52% 91%;
   --line: 232 22% 88%;
@@ -62,7 +62,7 @@
   --surface: 222 16% 16%;
   --surface-2: 222 14% 21%;
   --text: 36 30% 90%;
-  --muted: 36 10% 66%;
+  --muted: 36 12% 72%;
   --accent: 18 82% 66%;
   --accent-soft: 18 38% 26%;
   --line: 222 12% 27%;
@@ -74,7 +74,7 @@
   --surface: 215 16% 17%;
   --surface-2: 215 14% 22%;
   --text: 210 25% 90%;
-  --muted: 210 10% 64%;
+  --muted: 210 12% 72%;
   --accent: 196 70% 60%;
   --accent-soft: 196 38% 26%;
   --line: 215 12% 28%;
@@ -86,7 +86,7 @@
   --surface: 282 16% 17%;
   --surface-2: 282 14% 22%;
   --text: 30 25% 90%;
-  --muted: 30 10% 66%;
+  --muted: 30 12% 72%;
   --accent: 8 80% 67%;
   --accent-soft: 8 40% 28%;
   --line: 282 12% 28%;
@@ -98,11 +98,19 @@
   --surface: 240 20% 13%;
   --surface-2: 240 18% 17%;
   --text: 40 18% 83%;
-  --muted: 240 8% 58%;
+  --muted: 240 10% 70%;
   --accent: 250 48% 72%;
   --accent-soft: 250 30% 26%;
   --line: 240 14% 22%;
   --shadow: 0 0% 0%;
+}
+
+/* ── Text size (data-textsize on <html>; scales every rem-based size) ──── */
+:root[data-textsize='large'] {
+  font-size: 112.5%;
+}
+:root[data-textsize='xl'] {
+  font-size: 125%;
 }
 
 @layer base {

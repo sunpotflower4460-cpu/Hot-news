@@ -76,7 +76,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
             <ExternalLink size={16} />
             {article.sourceName}の記事を読む
           </a>
-          <p className="mt-1 text-[0.7rem] text-muted/80">
+          <p className="mt-1 text-caption text-muted">
             出典公開日：{formatJaDate(article.sourcePublishedAt)}
           </p>
         </div>

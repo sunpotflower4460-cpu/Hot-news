@@ -19,7 +19,7 @@ export function Chip({ accent, active = false, className, style, children, ...pr
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 rounded-pill px-3 py-1 text-caption font-medium leading-none',
+        'inline-flex items-center gap-1 rounded-pill px-3 py-1.5 text-caption font-medium leading-none',
         !accent && (active ? 'bg-accent text-white' : 'bg-surface-2 text-muted'),
         className,
       )}

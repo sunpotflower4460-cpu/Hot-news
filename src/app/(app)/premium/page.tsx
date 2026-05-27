@@ -58,7 +58,7 @@ export default function PremiumPage() {
         >
           {premium ? 'ご利用中（解除する）' : 'プレミアムをはじめる'}
         </Button>
-        <p className="text-center text-[0.7rem] text-muted/70">
+        <p className="text-center text-caption text-muted">
           いつでも解約できます。これは外観プレビューのため、実際の課金は発生しません。
         </p>
       </div>

@@ -82,12 +82,17 @@ export function OnboardingCarousel() {
             <button
               key={i}
               aria-label={`スライド ${i + 1}`}
+              aria-current={i === index ? 'true' : undefined}
               onClick={() => setIndex(i)}
-              className={cn(
-                'h-2 rounded-pill transition-all duration-300',
-                i === index ? 'w-6 bg-accent' : 'w-2 bg-text/20',
-              )}
-            />
+              className="flex items-center p-2"
+            >
+              <span
+                className={cn(
+                  'h-2 rounded-pill transition-all duration-300',
+                  i === index ? 'w-6 bg-accent' : 'w-2 bg-text/20',
+                )}
+              />
+            </button>
           ))}
         </div>
         <Button size="lg" className="w-full" onClick={next}>

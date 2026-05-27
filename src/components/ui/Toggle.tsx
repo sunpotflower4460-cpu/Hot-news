@@ -18,17 +18,21 @@ export function Toggle({ checked, onChange, label, id }: ToggleProps) {
       aria-checked={checked}
       aria-label={label}
       onClick={() => onChange(!checked)}
-      className={cn(
-        'relative inline-flex h-7 w-12 shrink-0 items-center rounded-pill transition-colors duration-200 ease-gentle',
-        checked ? 'bg-accent' : 'bg-surface-2 border border-line',
-      )}
+      className="-my-2 flex h-11 shrink-0 items-center py-2"
     >
       <span
         className={cn(
-          'inline-block h-5 w-5 transform rounded-full bg-white shadow-soft transition-transform duration-200 ease-gentle',
-          checked ? 'translate-x-6' : 'translate-x-1',
+          'relative inline-flex h-7 w-12 items-center rounded-pill transition-colors duration-200 ease-gentle',
+          checked ? 'bg-accent' : 'border border-line bg-surface-2',
         )}
-      />
+      >
+        <span
+          className={cn(
+            'inline-block h-5 w-5 transform rounded-full bg-white shadow-soft transition-transform duration-200 ease-gentle',
+            checked ? 'translate-x-6' : 'translate-x-1',
+          )}
+        />
+      </span>
     </button>
   );
 }

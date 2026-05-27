@@ -2,6 +2,8 @@ export type TimeOfDay = 'morning' | 'day' | 'evening' | 'night';
 export type ThemeMode = 'light' | 'dark';
 /** User preference: follow clock + OS, force light, or force dark. */
 export type ThemePref = 'auto' | 'light' | 'dark';
+/** User-facing text size; maps to a root rem scale. */
+export type FontScale = 'standard' | 'large' | 'xl';
 
 export interface SkyPalette {
   /** Top of the sky gradient — HSL channels "H S% L%". */
