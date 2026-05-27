@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Semantic color tokens ───────────────────────────────────────────────
+   Two orthogonal axes on <html>: data-theme (light|dark) × data-time
+   (morning|day|evening|night). Components only use semantic classes
+   (bg-bg, text-text, bg-surface, text-accent …), so a palette swap is a
+   single attribute change. Values are HSL channels for /<alpha-value>. */
+
+:root,
+:root[data-theme='light'][data-time='morning'] {
+  --bg: 40 100% 98%;
+  --surface: 36 60% 97%;
+  --surface-2: 32 48% 94%;
+  --text: 28 25% 20%;
+  --muted: 28 12% 45%;
+  --accent: 14 85% 63%;
+  --accent-soft: 24 90% 91%;
+  --line: 30 26% 88%;
+  --shadow: 28 30% 30%;
+}
+
+:root[data-theme='light'][data-time='day'] {
+  --bg: 42 64% 98%;
+  --surface: 0 0% 100%;
+  --surface-2: 40 32% 95%;
+  --text: 220 22% 22%;
+  --muted: 220 10% 46%;
+  --accent: 196 72% 48%;
+  --accent-soft: 196 72% 90%;
+  --line: 40 22% 90%;
+  --shadow: 220 25% 35%;
+}
+
+:root[data-theme='light'][data-time='evening'] {
+  --bg: 28 72% 97%;
+  --surface: 24 52% 96%;
+  --surface-2: 20 46% 93%;
+  --text: 350 20% 22%;
+  --muted: 350 10% 45%;
+  --accent: 8 78% 61%;
+  --accent-soft: 12 82% 90%;
+  --line: 20 32% 88%;
+  --shadow: 350 26% 32%;
+}
+
+:root[data-theme='light'][data-time='night'] {
+  --bg: 232 30% 96%;
+  --surface: 230 34% 98%;
+  --surface-2: 232 26% 93%;
+  --text: 232 26% 24%;
+  --muted: 232 12% 48%;
+  --accent: 250 50% 60%;
+  --accent-soft: 250 52% 91%;
+  --line: 232 22% 88%;
+  --shadow: 232 30% 40%;
+}
+
+:root[data-theme='dark'][data-time='morning'] {
+  --bg: 220 18% 12%;
+  --surface: 222 16% 16%;
+  --surface-2: 222 14% 21%;
+  --text: 36 30% 90%;
+  --muted: 36 10% 66%;
+  --accent: 18 82% 66%;
+  --accent-soft: 18 38% 26%;
+  --line: 222 12% 27%;
+  --shadow: 0 0% 0%;
+}
+
+:root[data-theme='dark'][data-time='day'] {
+  --bg: 215 18% 13%;
+  --surface: 215 16% 17%;
+  --surface-2: 215 14% 22%;
+  --text: 210 25% 90%;
+  --muted: 210 10% 64%;
+  --accent: 196 70% 60%;
+  --accent-soft: 196 38% 26%;
+  --line: 215 12% 28%;
+  --shadow: 0 0% 0%;
+}
+
+:root[data-theme='dark'][data-time='evening'] {
+  --bg: 280 18% 13%;
+  --surface: 282 16% 17%;
+  --surface-2: 282 14% 22%;
+  --text: 30 25% 90%;
+  --muted: 30 10% 66%;
+  --accent: 8 80% 67%;
+  --accent-soft: 8 40% 28%;
+  --line: 282 12% 28%;
+  --shadow: 0 0% 0%;
+}
+
+:root[data-theme='dark'][data-time='night'] {
+  --bg: 240 24% 9%;
+  --surface: 240 20% 13%;
+  --surface-2: 240 18% 17%;
+  --text: 40 18% 83%;
+  --muted: 240 8% 58%;
+  --accent: 250 48% 72%;
+  --accent-soft: 250 30% 26%;
+  --line: 240 14% 22%;
+  --shadow: 0 0% 0%;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bg font-sans text-body text-text antialiased;
+    /* smooth palette crossfade when time-of-day or theme changes */
+    transition:
+      background-color 0.8s ease,
+      color 0.8s ease;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    line-break: strict;
+  }
+
+  ::selection {
+    background-color: hsl(var(--accent) / 0.25);
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-rounded;
+    word-break: keep-all;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent) / 0.7);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Vertical text rhythm tuned for Japanese reading. */
+  .prose-ja {
+    @apply text-body-lg;
+  }
+  .prose-ja p {
+    margin-bottom: 1.15em;
+  }
+  .prose-ja p:last-child {
+    margin-bottom: 0;
+  }
+
+  .glass {
+    background-color: hsl(var(--surface) / 0.72);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
