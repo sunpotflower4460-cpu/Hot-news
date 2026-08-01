@@ -33,7 +33,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
         variant === 'glass'
           ? 'glass border hover:-translate-y-0.5 hover:shadow-glow'
           : 'bg-transparent',
-        saved && 'border-accent/18 bg-accent-soft/82 shadow-glow',
+        saved && 'border-accent/20 bg-accent-soft/80 shadow-glow',
         className,
       )}
     >
@@ -59,7 +59,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
         <Heart
           size={18}
           strokeWidth={2}
-          className={cn(saved ? 'fill-accent text-accent' : 'text-text/68')}
+          className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
         />
       </motion.span>
     </button>
