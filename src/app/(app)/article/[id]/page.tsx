@@ -84,7 +84,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
           </p>
         </aside>
 
-        <div className="glass rounded-card border p-4.5 px-4 py-4">
+        <div className="glass rounded-card border px-4 py-4">
           <p className="text-caption text-muted">
             内容の核を変えないよう短く再編集し、元の情報へたどれるよう出典を明記しています。
           </p>
