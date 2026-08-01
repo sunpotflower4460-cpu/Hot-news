@@ -28,15 +28,15 @@ export function CoverArt({ category, seed = '', className, size = 'md' }: CoverA
         ].join(', '),
       }}
     >
-      <div className="absolute -left-[12%] -top-[26%] h-[75%] w-[72%] rotate-12 rounded-[48%_52%_64%_36%/50%_34%_66%_50%] bg-white/34 blur-[1px]" />
-      <div className="absolute -bottom-[36%] right-[-15%] h-[86%] w-[78%] -rotate-12 rounded-[38%_62%_44%_56%/60%_40%_60%_40%] bg-white/22 blur-[2px]" />
+      <div className="absolute -left-[12%] -top-[26%] h-[75%] w-[72%] rotate-12 rounded-[48%_52%_64%_36%/50%_34%_66%_50%] bg-white/35 blur-[1px]" />
+      <div className="absolute -bottom-[36%] right-[-15%] h-[86%] w-[78%] -rotate-12 rounded-[38%_62%_44%_56%/60%_40%_60%_40%] bg-white/20 blur-[2px]" />
       <div className="absolute left-[18%] top-[18%] h-3 w-3 animate-float rounded-full border border-white/55 bg-white/20" />
       <div className="absolute bottom-[17%] left-[10%] h-5 w-5 animate-float rounded-full border border-white/45 bg-white/15 [animation-delay:-2s]" />
-      <div className="absolute right-[12%] top-[12%] h-8 w-8 rounded-full bg-white/18 blur-md" />
+      <div className="absolute right-[12%] top-[12%] h-8 w-8 rounded-full bg-white/20 blur-md" />
 
       <div
         className={cn(
-          'ambient-ring absolute right-[9%] top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-white/34 shadow-glow backdrop-blur-sm',
+          'ambient-ring absolute right-[9%] top-1/2 flex -translate-y-1/2 items-center justify-center rounded-full bg-white/35 shadow-glow backdrop-blur-sm',
           orbSize,
         )}
       >
@@ -48,8 +48,8 @@ export function CoverArt({ category, seed = '', className, size = 'md' }: CoverA
         </div>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/8 to-transparent" />
-      <div className="absolute inset-0 ring-1 ring-inset ring-white/24" />
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent" />
+      <div className="absolute inset-0 ring-1 ring-inset ring-white/25" />
     </div>
   );
 }
