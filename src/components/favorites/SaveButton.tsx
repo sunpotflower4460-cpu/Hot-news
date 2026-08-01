@@ -1,7 +1,7 @@
 'use client';
 
-import { Heart } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Heart, Sparkles } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useFavoritesStore } from '@/lib/store/useFavoritesStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 import { cn } from '@/lib/utils/cn';
@@ -14,8 +14,8 @@ interface SaveButtonProps {
 
 export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps) {
   const hydrated = useHydrated();
-  const ids = useFavoritesStore((s) => s.ids);
-  const toggle = useFavoritesStore((s) => s.toggle);
+  const ids = useFavoritesStore((state) => state.ids);
+  const toggle = useFavoritesStore((state) => state.toggle);
   const saved = hydrated && ids.includes(id);
 
   return (
@@ -23,27 +23,43 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
       type="button"
       aria-pressed={saved}
       aria-label={saved ? 'お気に入りから外す' : 'お気に入りに保存'}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
         toggle(id);
       }}
       className={cn(
-        'flex h-9 w-9 items-center justify-center rounded-full transition-colors',
-        variant === 'glass' ? 'glass border border-line/60' : 'bg-transparent',
+        'relative flex h-10 w-10 items-center justify-center overflow-visible rounded-full transition-all duration-300 ease-gentle active:scale-90',
+        variant === 'glass'
+          ? 'glass border hover:-translate-y-0.5 hover:shadow-glow'
+          : 'bg-transparent',
+        saved && 'border-accent/18 bg-accent-soft/82 shadow-glow',
         className,
       )}
     >
+      <AnimatePresence>
+        {saved && (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.4 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute -right-1 -top-1 text-accent"
+          >
+            <Sparkles size={12} />
+          </motion.span>
+        )}
+      </AnimatePresence>
       <motion.span
         key={saved ? 'on' : 'off'}
-        initial={{ scale: 0.6 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 500, damping: 18 }}
+        initial={{ scale: 0.58, rotate: saved ? -12 : 0 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 460, damping: 17 }}
       >
         <Heart
           size={18}
           strokeWidth={2}
-          className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
+          className={cn(saved ? 'fill-accent text-accent' : 'text-text/68')}
         />
       </motion.span>
     </button>
