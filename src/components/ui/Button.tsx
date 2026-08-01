@@ -13,10 +13,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const VARIANTS: Record<Variant, string> = {
   primary:
-    'bg-accent text-white shadow-soft hover:brightness-[1.05] active:brightness-95',
-  soft: 'bg-accent-soft text-accent hover:brightness-[0.98] active:brightness-95',
-  ghost: 'bg-transparent text-text hover:bg-surface-2 active:bg-surface-2',
-  outline: 'border border-line bg-surface text-text hover:bg-surface-2',
+    'border border-white/20 bg-accent text-white shadow-glow hover:-translate-y-0.5 hover:brightness-[1.04] active:translate-y-[1px] active:scale-[0.985] active:brightness-95',
+  soft:
+    'border border-accent/10 bg-accent-soft/85 text-accent shadow-inner-light hover:-translate-y-0.5 hover:bg-accent-soft active:translate-y-[1px] active:scale-[0.985]',
+  ghost:
+    'bg-transparent text-text hover:bg-surface/60 active:scale-[0.985] active:bg-surface-2',
+  outline:
+    'border border-line/65 bg-surface/72 text-text shadow-inner-light backdrop-blur hover:-translate-y-0.5 hover:border-accent/20 hover:shadow-soft active:translate-y-[1px] active:scale-[0.985]',
 };
 
 const SIZES: Record<Size, string> = {
@@ -33,7 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <button
       ref={ref}
       className={cn(
-        'inline-flex select-none items-center justify-center gap-2 rounded-pill font-medium transition-all duration-200 ease-gentle disabled:cursor-not-allowed disabled:opacity-50',
+        'inline-flex select-none items-center justify-center gap-2 overflow-hidden rounded-pill font-semibold transition-all duration-300 ease-gentle disabled:cursor-not-allowed disabled:opacity-50',
         VARIANTS[variant],
         SIZES[size],
         className,
