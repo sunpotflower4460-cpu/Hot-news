@@ -16,9 +16,9 @@ const TIMES: TimeOfDay[] = ['morning', 'day', 'evening', 'night'];
 
 export default function SettingsPage() {
   const hydrated = useHydrated();
-  const timeOverride = useThemeStore((s) => s.timeOverride);
-  const setTimeOverride = useThemeStore((s) => s.setTimeOverride);
-  const isPremium = useSettingsStore((s) => s.isPremium);
+  const timeOverride = useThemeStore((state) => state.timeOverride);
+  const setTimeOverride = useThemeStore((state) => state.setTimeOverride);
+  const isPremium = useSettingsStore((state) => state.isPremium);
   const current = hydrated ? timeOverride : null;
 
   return (
@@ -46,17 +46,17 @@ export default function SettingsPage() {
               >
                 自動
               </button>
-              {TIMES.map((t) => (
+              {TIMES.map((time) => (
                 <button
-                  key={t}
-                  onClick={() => setTimeOverride(t)}
-                  aria-pressed={current === t}
+                  key={time}
+                  onClick={() => setTimeOverride(time)}
+                  aria-pressed={current === time}
                   className={cn(
                     'rounded-pill px-3.5 py-1.5 text-caption font-medium transition-colors',
-                    current === t ? 'bg-accent text-white' : 'bg-surface-2 text-muted',
+                    current === time ? 'bg-accent text-white' : 'bg-surface-2 text-muted',
                   )}
                 >
-                  {TIME_LABELS_JA[t]}
+                  {TIME_LABELS_JA[time]}
                 </button>
               ))}
             </div>
@@ -67,13 +67,18 @@ export default function SettingsPage() {
       <section className="space-y-3 px-5">
         <h2 className="text-caption font-bold text-muted">体験</h2>
         <Card className="divide-y divide-line/60">
-          <SettingsLink href="/settings/notifications" Icon={Bell} label="通知" hint="朝・夜・テーマ別" />
-          <SettingsLink href="/night" Icon={Moon} label="寝る前モード" hint="夜の短いお話だけ" />
+          <SettingsLink
+            href="/settings/notifications"
+            Icon={Bell}
+            label="通知"
+            hint="朝・夜・テーマ別"
+          />
+          <SettingsLink href="/night" Icon={Moon} label="寝る前モード" hint="夜の一件だけ" />
           <SettingsLink
             href="/premium"
             Icon={Crown}
             label="プレミアム"
-            hint={hydrated && isPremium ? '利用中' : '広告なし・全記事'}
+            hint={hydrated && isPremium ? 'プレビュー利用中' : '機能プレビュー'}
           />
         </Card>
       </section>
@@ -81,9 +86,9 @@ export default function SettingsPage() {
       <section className="space-y-3 px-5">
         <h2 className="text-caption font-bold text-muted">このアプリについて</h2>
         <Card inset className="space-y-1">
-          <p className="text-body text-text">こころがほっとするニュース</p>
+          <p className="text-body text-text">明るいニュース｜Hot News</p>
           <p className="text-caption text-muted">
-            世界の中から、こころがほっとする出来事だけを選び、確かめ、やさしくお届けします。
+            暗い出来事をやさしく言い換えるのではなく、出来事そのものが明るく、希望や喜びを感じられるニュースだけを選びます。
           </p>
           <p className="pt-1 text-[0.7rem] text-muted/70">バージョン 0.1.0（外観プレビュー）</p>
         </Card>
