@@ -1,7 +1,7 @@
 {
-  "name": "こころがほっとするニュース",
-  "short_name": "こころのニュース",
-  "description": "世界の中から、こころがほっとする出来事だけをそっとお届けする、やさしいニュースアプリ。",
+  "name": "明るいニュース｜Hot News",
+  "short_name": "明るいニュース",
+  "description": "世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#fffaf2",
