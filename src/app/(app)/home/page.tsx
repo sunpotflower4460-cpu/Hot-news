@@ -10,7 +10,10 @@ export default async function HomePage() {
   const hot3 = await getTodayHot3();
   const [hero, ...rest] = hot3;
   const rails = await Promise.all(
-    CATEGORIES.map(async (c) => ({ category: c, articles: await getArticlesByCategory(c.id) })),
+    CATEGORIES.map(async (category) => ({
+      category,
+      articles: await getArticlesByCategory(category.id),
+    })),
   );
 
   return (
@@ -20,12 +23,12 @@ export default async function HomePage() {
       <section className="space-y-3 px-5">
         <div className="flex items-center gap-1.5 text-accent">
           <Sun size={16} className="fill-accent/30" />
-          <h2 className="text-h2 font-bold text-text">今日のほっと</h2>
+          <h2 className="text-h2 font-bold text-text">今日の明るいニュース</h2>
         </div>
         {hero && <HeroCard article={hero} />}
         <div className="space-y-3">
-          {rest.map((a) => (
-            <ArticleCard key={a.id} article={a} layout="list" />
+          {rest.map((article) => (
+            <ArticleCard key={article.id} article={article} layout="list" />
           ))}
         </div>
       </section>
@@ -35,7 +38,7 @@ export default async function HomePage() {
       ))}
 
       <p className="px-5 pt-2 text-center text-caption text-muted/80">
-        今日も世界には、小さな灯りがありました。
+        今日も世界には、明るい出来事がありました。
       </p>
     </div>
   );
