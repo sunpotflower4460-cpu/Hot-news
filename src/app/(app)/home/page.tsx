@@ -25,7 +25,7 @@ export default async function HomePage() {
           <div>
             <div className="flex items-center gap-2 text-accent">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft shadow-inner-light">
-                <Sun size={15} className="fill-accent/18" />
+                <Sun size={15} className="fill-accent/20" />
               </span>
               <p className="text-[0.7rem] font-bold tracking-[0.12em]">TODAY&apos;S LIGHT</p>
             </div>
