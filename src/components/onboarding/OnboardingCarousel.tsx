@@ -46,54 +46,60 @@ export function OnboardingCarousel() {
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
-      <div className="flex justify-end px-5 pt-6">
+      <div className="safe-top flex justify-end px-5 pt-5">
         {!last && (
-          <button onClick={finish} className="text-caption font-medium text-muted">
+          <button
+            type="button"
+            onClick={finish}
+            className="rounded-pill bg-white/24 px-3.5 py-2 text-caption font-semibold text-muted shadow-inner-light backdrop-blur-sm transition-colors hover:bg-white/38"
+          >
             スキップ
           </button>
         )}
       </div>
 
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex flex-1 items-center justify-center py-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.18}
+            dragElastic={0.16}
             onDragEnd={(_, info) => {
               if (info.offset.x < -60) next();
               else if (info.offset.x > 60 && index > 0) {
                 setIndex((current) => current - 1);
               }
             }}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -40 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full cursor-grab active:cursor-grabbing"
+            initial={{ opacity: 0, x: 34, scale: 0.985 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: -34, scale: 0.985 }}
+            transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full cursor-grab touch-pan-y active:cursor-grabbing"
           >
             <OnboardingSlide slide={SLIDES[index]} />
           </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="safe-bottom flex flex-col items-center gap-5 px-8 pb-10">
-        <div className="flex gap-2">
+      <div className="safe-bottom flex flex-col items-center gap-5 px-7 pb-8">
+        <div className="glass flex gap-2 rounded-pill border px-3 py-2 shadow-soft">
           {SLIDES.map((_, slideIndex) => (
             <button
+              type="button"
               key={slideIndex}
               aria-label={`スライド ${slideIndex + 1}`}
+              aria-current={slideIndex === index ? 'step' : undefined}
               onClick={() => setIndex(slideIndex)}
               className={cn(
-                'h-2 rounded-pill transition-all duration-300',
-                slideIndex === index ? 'w-6 bg-accent' : 'w-2 bg-text/20',
+                'h-2 rounded-pill transition-all duration-500 ease-gentle',
+                slideIndex === index ? 'w-7 bg-accent shadow-glow' : 'w-2 bg-text/16',
               )}
             />
           ))}
         </div>
-        <Button size="lg" className="w-full" onClick={next}>
-          {last ? 'はじめる' : 'つぎへ'}
+        <Button size="lg" className="w-full max-w-sm" onClick={next}>
+          {last ? '明るいニュースを見にいく' : 'つぎへ'}
         </Button>
       </div>
     </div>
