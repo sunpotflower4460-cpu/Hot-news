@@ -25,7 +25,7 @@ export function HomeGreeting() {
         <div className="absolute -bottom-10 -left-6 h-28 w-28 rounded-full bg-white/35 blur-2xl" />
         <div className="absolute right-5 top-5 h-16 w-16 animate-float rounded-full border border-white/45 bg-white/20 shadow-inner-light backdrop-blur-sm">
           <div className="absolute inset-2.5 flex items-center justify-center rounded-full bg-accent-soft/70 text-accent shadow-glow">
-            <Sun size={25} strokeWidth={1.8} className="fill-accent/16" />
+            <Sun size={25} strokeWidth={1.8} className="fill-accent/15" />
           </div>
         </div>
 
@@ -44,7 +44,7 @@ export function HomeGreeting() {
         {showNight && (
           <Link
             href="/night"
-            className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-pill border border-line/50 bg-surface/72 px-3.5 py-2 text-caption font-medium text-text shadow-soft backdrop-blur transition-all duration-300 ease-gentle hover:-translate-y-0.5 hover:shadow-glow active:translate-y-0"
+            className="relative z-10 mt-4 inline-flex items-center gap-2 rounded-pill border border-line/50 bg-surface/70 px-3.5 py-2 text-caption font-medium text-text shadow-soft backdrop-blur transition-all duration-300 ease-gentle hover:-translate-y-0.5 hover:shadow-glow active:translate-y-0"
           >
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft text-accent">
               <Moon size={13} />
