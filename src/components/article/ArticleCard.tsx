@@ -20,7 +20,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
       <article className="soft-surface float-card group relative w-[17rem] shrink-0 rounded-card shadow-soft">
         <Link href={`/article/${article.id}`} className="block overflow-hidden rounded-card">
           <CoverArt category={primary} seed={article.id} size="sm" className="h-36 w-full" />
-          <div className="space-y-2.5 p-4.5 px-4 pb-4 pt-3.5">
+          <div className="space-y-2.5 px-4 pb-4 pt-3.5">
             <span
               className="inline-flex items-center rounded-pill bg-white/32 px-2.5 py-1 text-[0.68rem] font-semibold backdrop-blur-sm"
               style={{ color: `hsl(${meta.accent})` }}
