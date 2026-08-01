@@ -21,9 +21,9 @@ const BUBBLES = Array.from({ length: 8 }, (_, i) => ({
 function Cloud({ className }: { className: string }) {
   return (
     <div className={className}>
-      <span className="absolute bottom-0 left-[8%] h-[62%] w-[42%] rounded-full bg-white/52 blur-[1px]" />
-      <span className="absolute bottom-0 left-[32%] h-[88%] w-[46%] rounded-full bg-white/58 blur-[1px]" />
-      <span className="absolute bottom-0 right-[4%] h-[58%] w-[40%] rounded-full bg-white/48 blur-[1px]" />
+      <span className="absolute bottom-0 left-[8%] h-[62%] w-[42%] rounded-full bg-white/50 blur-[1px]" />
+      <span className="absolute bottom-0 left-[32%] h-[88%] w-[46%] rounded-full bg-white/60 blur-[1px]" />
+      <span className="absolute bottom-0 right-[4%] h-[58%] w-[40%] rounded-full bg-white/50 blur-[1px]" />
       <span className="absolute bottom-0 left-0 h-[44%] w-full rounded-full bg-white/45 blur-[2px]" />
     </div>
   );
@@ -64,12 +64,12 @@ export function SkyBackground({ full = false }: { full?: boolean }) {
 
           {sky.motif !== 'stars' && (
             <>
-              <div className="ambient-ring absolute right-[8%] top-[8%] h-24 w-24 animate-float rounded-full bg-white/32 backdrop-blur-sm">
-                <div className="absolute inset-[18%] rounded-full bg-white/44 blur-md" />
+              <div className="ambient-ring absolute right-[8%] top-[8%] h-24 w-24 animate-float rounded-full bg-white/30 backdrop-blur-sm">
+                <div className="absolute inset-[18%] rounded-full bg-white/45 blur-md" />
               </div>
               <Cloud className="absolute left-[-12%] top-[18%] h-24 w-64 animate-drift opacity-55 blur-[0.5px]" />
-              <Cloud className="absolute right-[-18%] top-[32%] h-20 w-56 animate-drift-reverse opacity-42 blur-[1px]" />
-              <Cloud className="absolute left-[20%] top-[48%] h-16 w-44 animate-drift opacity-28 blur-[2px] [animation-delay:-9s]" />
+              <Cloud className="absolute right-[-18%] top-[32%] h-20 w-56 animate-drift-reverse opacity-40 blur-[1px]" />
+              <Cloud className="absolute left-[20%] top-[48%] h-16 w-44 animate-drift opacity-30 blur-[2px] [animation-delay:-9s]" />
               <div className="absolute inset-x-0 bottom-[12%] h-28 bg-gradient-to-b from-transparent via-white/10 to-white/30 blur-2xl" />
             </>
           )}
@@ -89,10 +89,10 @@ export function SkyBackground({ full = false }: { full?: boolean }) {
                   }}
                 />
               ))}
-              <div className="ambient-ring absolute right-[13%] top-[9%] h-20 w-20 animate-float rounded-full bg-white/76 blur-[0.5px]">
+              <div className="ambient-ring absolute right-[13%] top-[9%] h-20 w-20 animate-float rounded-full bg-white/75 blur-[0.5px]">
                 <div className="absolute -left-2 top-2 h-16 w-16 rounded-full bg-bg/45" />
               </div>
-              <div className="absolute left-[8%] top-[42%] h-28 w-72 animate-drift rounded-full bg-white/6 blur-3xl" />
+              <div className="absolute left-[8%] top-[42%] h-28 w-72 animate-drift rounded-full bg-white/5 blur-3xl" />
             </div>
           )}
 
