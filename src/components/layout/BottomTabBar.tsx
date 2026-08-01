@@ -33,7 +33,7 @@ export function BottomTabBar() {
                   {active && (
                     <motion.span
                       layoutId="tab-pill"
-                      className="absolute inset-x-1.5 inset-y-0 rounded-[1.2rem] border border-white/35 bg-accent-soft/78 shadow-inner-light"
+                      className="absolute inset-x-1.5 inset-y-0 rounded-[1.2rem] border border-white/35 bg-accent-soft/80 shadow-inner-light"
                       transition={{ type: 'spring', stiffness: 360, damping: 31, mass: 0.8 }}
                     />
                   )}
