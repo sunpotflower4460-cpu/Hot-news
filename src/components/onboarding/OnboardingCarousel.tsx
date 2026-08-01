@@ -51,7 +51,7 @@ export function OnboardingCarousel() {
           <button
             type="button"
             onClick={finish}
-            className="rounded-pill bg-white/24 px-3.5 py-2 text-caption font-semibold text-muted shadow-inner-light backdrop-blur-sm transition-colors hover:bg-white/38"
+            className="rounded-pill bg-white/25 px-3.5 py-2 text-caption font-semibold text-muted shadow-inner-light backdrop-blur-sm transition-colors hover:bg-white/40"
           >
             スキップ
           </button>
@@ -93,7 +93,7 @@ export function OnboardingCarousel() {
               onClick={() => setIndex(slideIndex)}
               className={cn(
                 'h-2 rounded-pill transition-all duration-500 ease-gentle',
-                slideIndex === index ? 'w-7 bg-accent shadow-glow' : 'w-2 bg-text/16',
+                slideIndex === index ? 'w-7 bg-accent shadow-glow' : 'w-2 bg-text/15',
               )}
             />
           ))}
