@@ -5,9 +5,46 @@ export type CategoryId =
   | 'arts-culture'
   | 'night-reads';
 
-export type ArticleStatus = 'PUBLISHED' | 'SAFE_SHORT_VERSION' | 'READY_TO_PUBLISH';
+export type ArticleStatus =
+  | 'INGESTED'
+  | 'SOURCE_VALIDATING'
+  | 'EDITORIAL_REVIEW'
+  | 'RIGHTS_REVIEW'
+  | 'READY_TO_PUBLISH'
+  | 'PUBLISHED'
+  | 'SAFE_SHORT_VERSION'
+  | 'QUARANTINED'
+  | 'REJECTED'
+  | 'RETRACTED';
 
 export type PublishMode = 'normal' | 'safe_short' | 'no_image' | 'source_link_only';
+
+export type EditorialDecision = 'APPROVE' | 'REVIEW' | 'REJECT';
+export type RightsStatus = 'CLEARED' | 'SOURCE_LINK_ONLY' | 'REVIEW_REQUIRED';
+
+/**
+ * Editorial evidence used to enforce the product promise: the event itself must
+ * be bright. A warm ending does not make a dark or distressing story eligible.
+ */
+export interface EditorialAssessment {
+  policyVersion: 'bright-news-v1';
+  decision: EditorialDecision;
+  /** 0–100: how bright and positive the event itself is. */
+  brightnessScore: number;
+  /** 0–100: how safely the story can be read without emotional burden. */
+  emotionalSafetyScore: number;
+  /** 0–100: how much hope or positive possibility remains after reading. */
+  hopeScore: number;
+  /** 0–100: whether a concrete improvement, creation, recovery, or progress occurred. */
+  positiveChangeScore: number;
+  /** 0–100: proportion of the story that depends on tragedy, fear, illness, or loss. */
+  darkContextRatio: number;
+  /** 0–100: confidence in the source and factual support. */
+  reliabilityScore: number;
+  rightsStatus: RightsStatus;
+  reasons: string[];
+  assessedAt: string;
+}
 
 export interface Article {
   id: string;
@@ -19,10 +56,14 @@ export interface Article {
   sourcePublishedAt: string;
   appPublishedAt: string;
   category: CategoryId[];
-  /** 0–100; surfaced as a gentle "ほっと度" visual, never a raw number. */
+  /**
+   * Legacy UI score retained while the mock corpus is migrated. New content
+   * must use editorialAssessment for publication eligibility.
+   */
   comfortScore: number;
+  editorialAssessment?: EditorialAssessment;
   imageUrl?: string;
-  /** "なぜほっとするか" — the signature editorial note. */
+  /** Editorial note explaining the positive value of the event. */
   whyComfort: string;
   region: string;
   readingMinutes: number;
@@ -30,7 +71,7 @@ export interface Article {
   publishMode: PublishMode;
   /** Hand-picked highlights for the home hero. */
   isTodayHot?: boolean;
-  /** Short, calming pieces for 夜に読む / 寝る前モード. */
+  /** Short, emotionally safe pieces for the bedtime experience. */
   isNightRead?: boolean;
 }
 
