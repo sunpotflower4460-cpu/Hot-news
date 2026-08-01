@@ -13,7 +13,7 @@ export default async function BrowsePage() {
     <div className="pb-10">
       <ScreenHeader title="さがす" subtitle="いまの気分に合う光を、ゆっくり選んで" />
       <div className="space-y-4 px-5 pt-1">
-        <div className="rounded-card border border-white/40 bg-accent-soft/48 px-4 py-3.5 shadow-inner-light backdrop-blur-sm">
+        <div className="rounded-card border border-white/40 bg-accent-soft/50 px-4 py-3.5 shadow-inner-light backdrop-blur-sm">
           <div className="flex items-center gap-2 text-accent">
             <Sparkles size={15} />
             <p className="text-caption font-bold">どの入口からでも、明るい出来事だけ</p>
