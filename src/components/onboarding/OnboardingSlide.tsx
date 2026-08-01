@@ -17,7 +17,7 @@ export function OnboardingSlide({ slide }: { slide: Slide }) {
       <h2 className="max-w-sm font-rounded text-display font-bold leading-[1.48] text-text">
         {slide.title}
       </h2>
-      <p className="mt-4 max-w-xs text-body-lg leading-[1.95] text-text/76">{slide.body}</p>
+      <p className="mt-4 max-w-xs text-body-lg leading-[1.95] text-text/75">{slide.body}</p>
     </div>
   );
 }
