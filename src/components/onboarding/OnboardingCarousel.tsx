@@ -11,29 +11,29 @@ import { cn } from '@/lib/utils/cn';
 const SLIDES: Slide[] = [
   {
     glyph: '☀️',
-    title: 'こころがほっとするニュース',
-    body: '世界の中から、こころがほっとする出来事だけを、そっとお届けします。',
+    title: '明るいニュースだけを',
+    body: '世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けます。',
+  },
+  {
+    glyph: '🔎',
+    title: '暗い話を言い換えるのではなく',
+    body: '悲しい前提をやわらかく見せるのではなく、最初から明るい出来事を選ぶことを大切にします。',
   },
   {
     glyph: '🫧',
-    title: 'やさしいお話だけを、えらんで',
-    body: 'AIの編集部が、信頼できる出典をたしかめ、不安をあおらない話だけを短くまとめます。',
+    title: '出典と安全性をたしかめて',
+    body: '信頼できる情報か、読む人に大きな負担がないかを確認し、内容の核を変えず短くまとめます。',
   },
   {
     glyph: '🌤️',
-    title: 'こころの天気に、寄りそって',
-    body: '朝・昼・夕・夜。時間にあわせて画面の空の色が移ろい、夜はそっと目に優しくなります。',
-  },
-  {
-    glyph: '🌙',
-    title: '毎朝ひらくと、心の窓が少し開く',
-    body: 'いそがなくて大丈夫。あなたのペースで、一日に小さな灯りをひとつ。',
+    title: '毎日に、小さな明るさを',
+    body: '朝・昼・夕・夜。あなたのペースで、世界に実在する明るい出来事と出会えます。',
   },
 ];
 
 export function OnboardingCarousel() {
   const router = useRouter();
-  const setOnboarded = useSettingsStore((s) => s.setOnboarded);
+  const setOnboarded = useSettingsStore((state) => state.setOnboarded);
   const [index, setIndex] = useState(0);
   const last = index === SLIDES.length - 1;
 
@@ -42,7 +42,7 @@ export function OnboardingCarousel() {
     router.replace('/home');
   };
 
-  const next = () => (last ? finish() : setIndex((i) => i + 1));
+  const next = () => (last ? finish() : setIndex((current) => current + 1));
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
@@ -63,7 +63,9 @@ export function OnboardingCarousel() {
             dragElastic={0.18}
             onDragEnd={(_, info) => {
               if (info.offset.x < -60) next();
-              else if (info.offset.x > 60 && index > 0) setIndex((i) => i - 1);
+              else if (info.offset.x > 60 && index > 0) {
+                setIndex((current) => current - 1);
+              }
             }}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -78,14 +80,14 @@ export function OnboardingCarousel() {
 
       <div className="safe-bottom flex flex-col items-center gap-5 px-8 pb-10">
         <div className="flex gap-2">
-          {SLIDES.map((_, i) => (
+          {SLIDES.map((_, slideIndex) => (
             <button
-              key={i}
-              aria-label={`スライド ${i + 1}`}
-              onClick={() => setIndex(i)}
+              key={slideIndex}
+              aria-label={`スライド ${slideIndex + 1}`}
+              onClick={() => setIndex(slideIndex)}
               className={cn(
                 'h-2 rounded-pill transition-all duration-300',
-                i === index ? 'w-6 bg-accent' : 'w-2 bg-text/20',
+                slideIndex === index ? 'w-6 bg-accent' : 'w-2 bg-text/20',
               )}
             />
           ))}
