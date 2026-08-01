@@ -18,25 +18,26 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
 
   if (layout === 'rail') {
     return (
-      <Link
-        href={`/article/${article.id}`}
-        className="group relative block w-60 shrink-0 overflow-hidden rounded-card border border-line/60 bg-surface shadow-soft transition-transform active:scale-[0.98]"
-      >
-        <div className="relative">
+      <article className="group relative w-60 shrink-0 overflow-hidden rounded-card border border-line/60 bg-surface shadow-soft transition-transform active:scale-[0.98]">
+        <Link href={`/article/${article.id}`} className="block">
           <CoverArt category={primary} seed={article.id} size="sm" className="h-28 w-full" />
-          <SaveButton id={article.id} className="absolute right-2 top-2" />
-        </div>
-        <div className="space-y-2 p-3.5">
-          <span className="text-[0.7rem] font-medium" style={{ color: `hsl(${meta.accent})` }}>
-            {meta.glyph} {meta.labelJa}
-          </span>
-          <h3 className="line-clamp-2 text-body font-bold leading-snug text-text">{article.title}</h3>
-          <div className="flex items-center justify-between pt-0.5">
-            <ComfortScore score={article.comfortScore} showLabel={false} />
-            <span className="text-[0.7rem] text-muted">{relativeJa(article.appPublishedAt)}</span>
+          <div className="space-y-2 p-3.5">
+            <span className="text-[0.7rem] font-medium" style={{ color: `hsl(${meta.accent})` }}>
+              {meta.glyph} {meta.labelJa}
+            </span>
+            <h3 className="line-clamp-2 text-body font-bold leading-snug text-text">
+              {article.title}
+            </h3>
+            <div className="flex items-center justify-between pt-0.5">
+              <ComfortScore score={article.comfortScore} showLabel={false} />
+              <span className="text-[0.7rem] text-muted">
+                {relativeJa(article.appPublishedAt)}
+              </span>
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+        <SaveButton id={article.id} className="absolute right-2 top-2 z-10" />
+      </article>
     );
   }
 
