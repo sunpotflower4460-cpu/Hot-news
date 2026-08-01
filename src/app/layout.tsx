@@ -26,14 +26,14 @@ const rounded = Zen_Maru_Gothic({
 });
 
 export const metadata: Metadata = {
-  title: 'こころがほっとするニュース',
+  title: '明るいニュース｜Hot News',
   description:
-    '世界の中から、こころがほっとする出来事だけをそっとお届けする、やさしいニュースアプリ。',
-  applicationName: 'こころのニュース',
+    '世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。',
+  applicationName: '明るいニュース',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'こころのニュース',
+    title: '明るいニュース',
   },
   manifest: '/manifest.webmanifest',
 };
