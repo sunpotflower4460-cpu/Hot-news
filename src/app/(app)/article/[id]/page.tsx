@@ -9,12 +9,13 @@ import { WhyComfortBlock } from '@/components/article/WhyComfortBlock';
 import { CategoryChip } from '@/components/category/CategoryChip';
 import { ArticleCard } from '@/components/article/ArticleCard';
 import { SaveButton } from '@/components/favorites/SaveButton';
-import { ARTICLES } from '@/mock/articles';
 import { getArticleById, getArticlesByCategory } from '@/lib/data/selectors';
+import { isArticleEligibleForPublication } from '@/lib/editorial/policy';
 import { formatJaDate } from '@/lib/utils/date';
+import { ARTICLES } from '@/mock/articles';
 
 export function generateStaticParams() {
-  return ARTICLES.map((a) => ({ id: a.id }));
+  return ARTICLES.filter(isArticleEligibleForPublication).map((article) => ({ id: article.id }));
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ id: string }> }) {
@@ -23,8 +24,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
   if (!article) notFound();
 
   const primary = article.category[0];
-  const related = (await getArticlesByCategory(primary)).filter((a) => a.id !== article.id).slice(0, 6);
+  const related = (await getArticlesByCategory(primary))
+    .filter((candidate) => candidate.id !== article.id)
+    .slice(0, 6);
   const paragraphs = article.body.split('\n\n');
+  const brightnessScore =
+    article.editorialAssessment?.brightnessScore ?? article.comfortScore;
 
   return (
     <article className="pb-10">
@@ -41,8 +46,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
       <div className="space-y-4 px-5 pt-4">
         <div className="flex flex-wrap gap-1.5">
-          {article.category.map((c) => (
-            <CategoryChip key={c} id={c} />
+          {article.category.map((category) => (
+            <CategoryChip key={category} id={category} />
           ))}
         </div>
 
@@ -50,20 +55,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
         <div className="flex items-center justify-between">
           <ArticleMeta article={article} />
-          <ComfortScore score={article.comfortScore} />
+          <ComfortScore score={brightnessScore} />
         </div>
 
         <WhyComfortBlock text={article.whyComfort} />
 
         <div className="prose-ja font-serif text-text/90">
-          {paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
+          {paragraphs.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
           ))}
         </div>
 
         <div className="rounded-card border border-line/70 bg-surface-2/50 p-4">
           <p className="text-caption text-muted">
-            本文は出典をもとに、読者に負担のないようやさしく再編集しています。詳しくは出典をご覧ください。
+            内容の核を変えないよう短く再編集し、元の情報へたどれるよう出典を明記しています。
           </p>
           <a
             href={article.sourceUrl}
@@ -83,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
       {related.length > 0 && (
         <section className="mt-8 space-y-3">
           <div className="flex items-center justify-between px-5">
-            <h2 className="text-h2 font-bold text-text">同じテーマのお話</h2>
+            <h2 className="text-h2 font-bold text-text">同じテーマの明るいニュース</h2>
             <Link
               href={`/browse/${primary}`}
               className="flex items-center gap-0.5 text-caption font-medium text-accent"
@@ -93,8 +98,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
             </Link>
           </div>
           <div className="no-scrollbar flex gap-3 overflow-x-auto px-5 pb-1">
-            {related.map((a) => (
-              <ArticleCard key={a.id} article={a} layout="rail" />
+            {related.map((candidate) => (
+              <ArticleCard key={candidate.id} article={candidate} layout="rail" />
             ))}
           </div>
         </section>
