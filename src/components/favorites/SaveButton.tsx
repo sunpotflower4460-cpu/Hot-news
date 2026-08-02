@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Sparkles } from 'lucide-react';
+import { Bookmark, Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFavoritesStore } from '@/lib/store/useFavoritesStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
@@ -19,13 +19,15 @@ export function SaveButton({ id, articleTitle, variant = 'glass', className }: S
   const toggle = useFavoritesStore((state) => state.toggle);
   const saved = hydrated && ids.includes(id);
   const target = articleTitle ? `「${articleTitle}」を` : '';
+  const label = saved ? `${target}保存から外す` : `${target}あとで読むために保存`;
 
   return (
     <button
       type="button"
+      title={saved ? '保存から外す' : '保存する'}
       disabled={!hydrated}
       aria-pressed={saved}
-      aria-label={saved ? `${target}お気に入りから外す` : `${target}お気に入りに保存`}
+      aria-label={label}
       onClick={(event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -57,11 +59,11 @@ export function SaveButton({ id, articleTitle, variant = 'glass', className }: S
       <motion.span
         aria-hidden
         key={saved ? 'on' : 'off'}
-        initial={{ scale: 0.58, rotate: saved ? -12 : 0 }}
+        initial={{ scale: 0.58, rotate: saved ? -8 : 0 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 460, damping: 17 }}
       >
-        <Heart
+        <Bookmark
           size={19}
           strokeWidth={2}
           className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
