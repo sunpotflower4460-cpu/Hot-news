@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ChevronRight, ExternalLink, ShieldCheck, Sparkles } from 'lucide-react';
 import { ArticleCard } from '@/components/article/ArticleCard';
 import { ArticleMeta } from '@/components/article/ArticleMeta';
+import { ArticleTrustPanel } from '@/components/article/ArticleTrustPanel';
 import { ComfortScore } from '@/components/article/ComfortScore';
 import { CoverArt } from '@/components/article/CoverArt';
 import { WhyComfortBlock } from '@/components/article/WhyComfortBlock';
@@ -84,7 +85,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
         {safeShort && (
           <div className="soft-surface rounded-panel px-5 py-6 shadow-soft">
             <div className="mb-3 inline-flex items-center gap-1.5 rounded-pill bg-accent-soft/75 px-3 py-1.5 text-caption font-bold text-accent">
-              <ShieldCheck size={14} />
+              <ShieldCheck aria-hidden size={14} />
               安全な短縮版
             </div>
             <p className="font-serif text-body-lg leading-[1.95] text-text/90">{article.summary}</p>
@@ -130,16 +131,19 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
           <a
             href={article.sourceUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer external"
             className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-pill bg-accent-soft/75 px-3.5 py-2 text-body font-semibold text-accent transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow active:translate-y-0"
           >
             <ExternalLink aria-hidden size={15} />
             {article.sourceName}の記事を読む
           </a>
-          <p className="mt-2 text-[0.7rem] text-muted/75">
-            出典公開日：{formatJaDate(article.sourcePublishedAt)}
-          </p>
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[0.7rem] text-muted/75">
+            <span>出典公開日：{formatJaDate(article.sourcePublishedAt)}</span>
+            <span>記事ID：{article.id}</span>
+          </div>
         </div>
+
+        <ArticleTrustPanel article={article} />
       </div>
 
       {related.length > 0 && (
