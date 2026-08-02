@@ -11,7 +11,7 @@ export function Chip({ accent, active = false, className, style, children, ...pr
   const accentStyle = accent
     ? ({
         backgroundColor: active ? `hsl(${accent})` : `hsl(${accent} / 0.14)`,
-        color: active ? 'hsl(220 25% 18%)' : `hsl(${accent})`,
+        color: active ? '#fff' : `hsl(${accent})`,
         ...style,
       } as CSSProperties)
     : style;
