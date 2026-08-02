@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Noto_Serif_JP, Zen_Maru_Gothic } from 'next/font/google';
 import { MotionProvider } from '@/components/motion/MotionProvider';
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import { commercialConfig, isCommercialPreview } from '@/config/commercial';
 import './globals.css';
 
 const sans = Noto_Sans_JP({
@@ -26,27 +27,55 @@ const rounded = Zen_Maru_Gothic({
   variable: '--font-rounded',
 });
 
+const description =
+  '世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。';
+const publicBaseUrl = commercialConfig.app.publicBaseUrl.trim();
+
 export const metadata: Metadata = {
+  ...(publicBaseUrl ? { metadataBase: new URL(publicBaseUrl) } : {}),
   title: {
-    default: '明るいニュース｜Hot News',
-    template: '%s｜明るいニュース',
+    default: commercialConfig.app.displayName,
+    template: `%s｜${commercialConfig.app.name}`,
   },
-  description:
-    '世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。',
-  applicationName: '明るいニュース',
-  robots: {
-    index: false,
-    follow: false,
-    noarchive: true,
-    nocache: true,
-  },
+  description,
+  applicationName: commercialConfig.app.name,
+  category: 'news',
+  referrer: 'no-referrer',
+  robots: isCommercialPreview
+    ? {
+        index: false,
+        follow: false,
+        noarchive: true,
+        nocache: true,
+      }
+    : {
+        index: true,
+        follow: true,
+      },
   icons: {
     icon: '/icons/icon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ja_JP',
+    siteName: commercialConfig.app.name,
+    title: commercialConfig.app.displayName,
+    description,
+  },
+  twitter: {
+    card: 'summary',
+    title: commercialConfig.app.displayName,
+    description,
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: '明るいニュース',
+    title: commercialConfig.app.name,
   },
   manifest: '/manifest.webmanifest',
 };
