@@ -4,6 +4,8 @@ import { ArticleCard } from '@/components/article/ArticleCard';
 import { CategoryRail } from '@/components/article/CategoryRail';
 import { HeroCard } from '@/components/article/HeroCard';
 import { HomeGreeting } from '@/components/home/HomeGreeting';
+import { HomeUsageHint } from '@/components/home/HomeUsageHint';
+import { TodayReadingProgress } from '@/components/home/TodayReadingProgress';
 import { getArticlesByCategory, getTodayHot3 } from '@/lib/data/selectors';
 import { CATEGORIES } from '@/mock/categories';
 
@@ -34,7 +36,7 @@ export default async function HomePage() {
               まず読みたい、明るいニュース3選
             </h2>
             <p className="mt-0.5 text-caption text-muted">
-              編集基準を満たした出来事から、今日の3件を選びました
+              一件だけでも大丈夫。編集基準を満たした出来事から選びました
             </p>
           </div>
 
@@ -49,6 +51,8 @@ export default async function HomePage() {
 
         {hero ? (
           <>
+            <HomeUsageHint />
+            <TodayReadingProgress articleIds={hot3.map((article) => article.id)} />
             <HeroCard article={hero} />
             {rest.length > 0 && (
               <div className="space-y-3 pt-0.5" aria-label="今日の明るいニュース、続き">
@@ -90,7 +94,7 @@ export default async function HomePage() {
             世界には、今日も明るい出来事があります。
           </p>
           <p className="relative mt-1 text-caption text-muted">
-            小さな光を、明日もここに集めます。
+            ここで閉じても、もう少し読んでも。自分のペースでどうぞ。
           </p>
         </div>
       </div>
