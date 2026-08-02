@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { useSettingsStore } from '@/lib/store/useSettingsStore';
@@ -44,22 +45,26 @@ export function OnboardingCarousel() {
   };
 
   const next = () => (last ? finish() : setIndex((current) => current + 1));
+  const previous = () => setIndex((current) => Math.max(0, current - 1));
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
-      <div className="safe-top flex justify-end px-5 pt-5">
+      <div className="safe-top flex items-center justify-between px-5">
+        <p className="text-caption font-bold text-muted" aria-live="polite">
+          {index + 1} / {SLIDES.length}
+        </p>
         {!last && (
           <button
             type="button"
             onClick={finish}
-            className="rounded-pill bg-white/25 px-3.5 py-2 text-caption font-semibold text-muted shadow-inner-light backdrop-blur-sm transition-colors hover:bg-white/40"
+            className="min-h-11 rounded-pill bg-white/25 px-3.5 text-caption font-semibold text-muted shadow-inner-light backdrop-blur-sm transition-colors hover:bg-white/40"
           >
-            スキップ
+            あとで見る
           </button>
         )}
       </div>
 
-      <div className="flex flex-1 items-center justify-center py-4">
+      <div className="flex flex-1 items-center justify-center py-3">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -68,9 +73,7 @@ export function OnboardingCarousel() {
             dragElastic={0.16}
             onDragEnd={(_, info) => {
               if (info.offset.x < -60) next();
-              else if (info.offset.x > 60 && index > 0) {
-                setIndex((current) => current - 1);
-              }
+              else if (info.offset.x > 60 && index > 0) previous();
             }}
             initial={{ opacity: 0, x: 34, scale: 0.985 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -83,24 +86,30 @@ export function OnboardingCarousel() {
         </AnimatePresence>
       </div>
 
-      <div className="safe-bottom flex flex-col items-center gap-4 px-7 pb-8">
-        <div className="glass flex gap-2 rounded-pill border px-3 py-2 shadow-soft">
-          {SLIDES.map((_, slideIndex) => (
+      <div className="flex flex-col items-center gap-3 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+        <div className="glass flex items-center rounded-pill border px-1.5 py-1 shadow-soft" aria-label="案内ページ">
+          {SLIDES.map((slide, slideIndex) => (
             <button
               type="button"
-              key={slideIndex}
-              aria-label={`スライド ${slideIndex + 1}`}
+              key={slide.title}
+              aria-label={`${slideIndex + 1}ページ目、${slide.title}`}
               aria-current={slideIndex === index ? 'step' : undefined}
               onClick={() => setIndex(slideIndex)}
-              className={cn(
-                'h-2 rounded-pill transition-all duration-500 ease-gentle',
-                slideIndex === index ? 'w-7 bg-accent shadow-glow' : 'w-2 bg-text/15',
-              )}
-            />
+              className="flex h-10 w-10 items-center justify-center rounded-full"
+            >
+              <span
+                aria-hidden
+                className={cn(
+                  'h-2 rounded-pill transition-all duration-500 ease-gentle',
+                  slideIndex === index ? 'w-6 bg-accent shadow-glow' : 'w-2 bg-text/18',
+                )}
+              />
+            </button>
           ))}
         </div>
+
         {last && (
-          <p className="max-w-sm text-center text-[0.7rem] leading-relaxed text-muted">
+          <p className="max-w-sm text-center text-[0.72rem] leading-relaxed text-muted">
             はじめる前に
             <Link
               href="/legal/terms"
@@ -118,9 +127,21 @@ export function OnboardingCarousel() {
             を確認できます。
           </p>
         )}
-        <Button size="lg" className="w-full max-w-sm" onClick={next}>
-          {last ? '確認して、明るいニュースをはじめる' : 'つぎへ'}
-        </Button>
+
+        <div className="flex w-full max-w-sm gap-2.5">
+          {index > 0 ? (
+            <Button variant="outline" size="lg" className="w-[7.5rem] px-4" onClick={previous}>
+              <ChevronLeft aria-hidden size={18} />
+              戻る
+            </Button>
+          ) : (
+            <span aria-hidden className="w-[7.5rem]" />
+          )}
+          <Button size="lg" className="min-w-0 flex-1 px-4" onClick={next}>
+            {last ? '明るいニュースをはじめる' : '次へ'}
+            <ChevronRight aria-hidden size={18} />
+          </Button>
+        </div>
       </div>
     </div>
   );
