@@ -1,0 +1,66 @@
+name: アプリの不具合
+about: 再現できる画面・操作・環境を報告します
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        個人情報、アクセストークン、未公開記事、決済情報は記載しないでください。セキュリティ問題はSecurity Advisoryを使用してください。
+  - type: input
+    id: screen
+    attributes:
+      label: 発生した画面
+      placeholder: 例：記事詳細、お気に入り、設定
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: 最小の手順を番号付きで記載してください。
+      placeholder: |
+        1. ホームを開く
+        2. 記事を選ぶ
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待した動作
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の動作
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: アプリ版・ビルド
+      placeholder: 例：0.1.0 (100)
+  - type: input
+    id: environment
+    attributes:
+      label: 端末・OS・ブラウザ
+      placeholder: 例：iPhone 15 / iOS 19 / アプリ版
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: 発生頻度
+      options:
+        - 毎回
+        - ときどき
+        - 一度だけ
+        - 不明
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 確認
+      options:
+        - label: 個人情報や秘密情報を含めていません
+          required: true
+        - label: 同じ内容のIssueがないか確認しました
+          required: true
