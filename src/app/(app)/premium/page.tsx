@@ -6,11 +6,13 @@ import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { PlanCard } from '@/components/premium/PlanCard';
 import { Button } from '@/components/ui/Button';
 import { commercialConfig, isCommercialPreview } from '@/config/commercial';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useSettingsStore } from '@/lib/store/useSettingsStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 
 export default function PremiumPage() {
   const hydrated = useHydrated();
+  const { locale } = useI18n();
   const isPremium = useSettingsStore((state) => state.isPremium);
   const setPremium = useSettingsStore((state) => state.setPremium);
   const previewEnabled = hydrated && isPremium;
@@ -18,11 +20,38 @@ export default function PremiumPage() {
   if (!isCommercialPreview && !commercialConfig.features.subscriptions) {
     return (
       <FeatureUnavailable
-        title="プレミアムはまだ利用できません"
-        description="購入、復元、解約、サーバー検証を安全に提供できるまで、この機能は公開しません。"
+        title={locale === 'ja' ? 'プレミアムはまだ利用できません' : 'Premium is not available yet'}
+        description={
+          locale === 'ja'
+            ? '購入、復元、解約、サーバー検証を安全に提供できるまで、この機能は公開しません。'
+            : 'This feature will remain unavailable until purchase, restore, cancellation, and server verification are implemented safely.'
+        }
       />
     );
   }
+
+  const premiumFeatures =
+    locale === 'ja'
+      ? [
+          '広告なしの、静かな読み心地',
+          'すべての明るいニュースを閲覧',
+          '保存した記事の端末間同期',
+          '朝・夜・テーマ別の通知',
+          '寝る前モードと読み返し体験',
+          '週刊ライトまとめのフルアクセス',
+        ]
+      : [
+          'A calm, ad-free reading experience',
+          'Access to every published bright story',
+          'Saved-story sync across devices',
+          'Morning, evening, and topic notifications',
+          'Bedtime mode and reading history',
+          'Full weekly digest access',
+        ];
+  const freeFeatures =
+    locale === 'ja'
+      ? ['毎日の明るいニュース', '端末内の保存', '時間帯で変わる空の雰囲気']
+      : ['Daily bright stories', 'On-device saved stories', 'A sky theme that changes through the day'];
 
   return (
     <div className="space-y-7 pb-10">
@@ -42,34 +71,49 @@ export default function PremiumPage() {
           </span>
         </div>
         <h1 className="mt-1 text-display font-bold text-text">
-          {isCommercialPreview ? 'プレミアム構想' : 'プレミアム'}
+          {isCommercialPreview
+            ? locale === 'ja'
+              ? 'プレミアム構想'
+              : 'Premium concept'
+            : 'Premium'}
         </h1>
         <p className="mx-auto mt-2 max-w-xs text-body leading-relaxed text-muted">
-          明るいニュースを、広告に急かされず、自分のペースで受け取れる体験を準備しています。
+          {locale === 'ja'
+            ? '明るいニュースを、広告に急かされず、自分のペースで受け取れる体験を準備しています。'
+            : 'We are designing a calm way to receive bright news at your own pace, without ad pressure.'}
         </p>
       </div>
 
       <div className="space-y-3.5 px-5">
         <PlanCard
           highlight
-          eyebrow={isCommercialPreview ? '提供予定' : 'おすすめ'}
-          name="プレミアム"
+          eyebrow={
+            isCommercialPreview
+              ? locale === 'ja'
+                ? '提供予定'
+                : 'Planned'
+              : locale === 'ja'
+                ? 'おすすめ'
+                : 'Recommended'
+          }
+          name="Premium"
           price="¥400"
-          priceNote={isCommercialPreview ? '/ 月（予定）' : '/ 月'}
-          features={[
-            '広告なしの、静かな読み心地',
-            'すべての明るいニュースを閲覧',
-            'お気に入りと端末間同期',
-            '朝・夜・テーマ別の通知',
-            '寝る前モードと読み返し体験',
-            '週刊ライトまとめのフルアクセス',
-          ]}
+          priceNote={
+            isCommercialPreview
+              ? locale === 'ja'
+                ? '/ 月（予定）'
+                : '/ month (planned)'
+              : locale === 'ja'
+                ? '/ 月'
+                : '/ month'
+          }
+          features={premiumFeatures}
         />
         <PlanCard
-          eyebrow="現在の基本体験"
-          name="無料"
+          eyebrow={locale === 'ja' ? '現在の基本体験' : 'Current core experience'}
+          name={locale === 'ja' ? '無料' : 'Free'}
           price="¥0"
-          features={['毎日の明るいニュース', '端末内のお気に入り', '時間帯で変わる心の天気']}
+          features={freeFeatures}
         />
       </div>
 
@@ -77,7 +121,9 @@ export default function PremiumPage() {
         <div className="px-5">
           <div className="rounded-card border border-line/50 bg-surface/65 p-4 shadow-inner-light backdrop-blur-sm">
             <p className="text-caption leading-relaxed text-muted">
-              現在は課金機能を実装していません。下のボタンは、設定画面などでプレミアム利用中の表示を確認するためのデザインプレビューです。
+              {locale === 'ja'
+                ? '現在は課金機能を実装していません。下のボタンは、設定画面などでプレミアム利用中の表示を確認するためのデザインプレビューです。'
+                : 'Billing is not implemented. The button below only previews how a Premium state would look elsewhere in the app.'}
             </p>
           </div>
           <Button
@@ -86,16 +132,26 @@ export default function PremiumPage() {
             className="mt-3 w-full"
             onClick={() => setPremium(!previewEnabled)}
           >
-            {previewEnabled ? 'プレミアム表示プレビューを終了' : 'プレミアム表示を試す'}
+            {previewEnabled
+              ? locale === 'ja'
+                ? 'プレミアム表示プレビューを終了'
+                : 'End Premium display preview'
+              : locale === 'ja'
+                ? 'プレミアム表示を試す'
+                : 'Preview Premium display'}
           </Button>
           <p className="mt-2 text-center text-[0.7rem] text-muted/70">
-            実際の購入・請求・契約は発生しません。
+            {locale === 'ja'
+              ? '実際の購入・請求・契約は発生しません。'
+              : 'No purchase, charge, or contract occurs.'}
           </p>
         </div>
       ) : (
         <div className="px-5">
           <div className="rounded-card border border-line/55 bg-surface/70 px-4 py-4 text-caption leading-relaxed text-muted">
-            購入画面はStoreKitの価格・期間・自動更新条件を取得した後に表示します。ハードコードした価格だけでは購入を開始しません。
+            {locale === 'ja'
+              ? '購入画面はStoreKitの価格・期間・自動更新条件を取得した後に表示します。ハードコードした価格だけでは購入を開始しません。'
+              : 'The purchase screen must use StoreKit-provided price, duration, and renewal terms. A hard-coded price alone never starts a purchase.'}
           </div>
         </div>
       )}
