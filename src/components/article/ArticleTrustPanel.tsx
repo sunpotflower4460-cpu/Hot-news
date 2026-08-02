@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Bot, BookOpenCheck, ChevronDown, Flag, ShieldCheck } from 'lucide-react';
+import { ShareArticleButton } from '@/components/article/ShareArticleButton';
 import type { Article, SourceType } from '@/types/article';
 import { formatJaDate } from '@/lib/utils/date';
 
@@ -94,6 +95,13 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
           </div>
         </div>
       </details>
+
+      <div className="border-t border-line/45 px-4 py-4">
+        <p className="mb-2 text-center text-caption leading-relaxed text-muted">
+          誰かに伝えたいときだけ、端末の共有機能を使えます。
+        </p>
+        <ShareArticleButton title={article.title} summary={article.summary} />
+      </div>
     </aside>
   );
 }
