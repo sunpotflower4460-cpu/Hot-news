@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import {
+  Accessibility,
   Bell,
   BookOpenCheck,
   ChevronRight,
@@ -145,6 +146,11 @@ export default function SettingsPage() {
             href="/legal/editorial-policy"
             Icon={BookOpenCheck}
             label="編集・訂正方針"
+          />
+          <SettingsLink
+            href="/legal/accessibility"
+            Icon={Accessibility}
+            label="アクセシビリティ方針"
           />
           <SettingsLink href="/legal/privacy" Icon={ShieldCheck} label="プライバシーポリシー" />
           <SettingsLink href="/legal/terms" Icon={FileText} label="利用規約" />
