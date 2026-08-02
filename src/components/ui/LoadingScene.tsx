@@ -1,12 +1,14 @@
-import { Sparkles, Sun } from 'lucide-react';
+'use client';
 
-export function LoadingScene({
-  label = '明るいニュースを集めています…',
-  compact = false,
-}: {
-  label?: string;
-  compact?: boolean;
-}) {
+import { Sparkles, Sun } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/useI18n';
+
+export function LoadingScene({ label, compact = false }: { label?: string; compact?: boolean }) {
+  const { locale } = useI18n();
+  const resolvedLabel =
+    label ??
+    (locale === 'ja' ? '明るいニュースを集めています…' : 'Gathering bright stories…');
+
   return (
     <div
       role="status"
@@ -20,13 +22,15 @@ export function LoadingScene({
       <div className="relative flex h-36 w-36 items-center justify-center">
         <div className="absolute inset-0 animate-breathe rounded-full bg-accent-soft/80 blur-2xl" />
         <div className="ambient-ring relative flex h-24 w-24 animate-float items-center justify-center rounded-full bg-white/35 text-accent shadow-glow backdrop-blur-sm">
-          <Sun size={40} strokeWidth={1.6} className="fill-accent/15" />
+          <Sun aria-hidden size={40} strokeWidth={1.6} className="fill-accent/15" />
         </div>
-        <Sparkles className="absolute right-1 top-5 animate-twinkle text-accent" size={18} />
+        <Sparkles aria-hidden className="absolute right-1 top-5 animate-twinkle text-accent" size={18} />
         <span className="absolute bottom-5 left-2 h-3 w-3 animate-float rounded-full bg-white/55 shadow-glow [animation-delay:-1.5s]" />
       </div>
-      <p className="mt-2 font-rounded text-body font-medium text-text">{label}</p>
-      <p className="mt-1 text-caption text-muted">ほんの少しだけ、お待ちください。</p>
+      <p className="mt-2 font-rounded text-body font-medium text-text">{resolvedLabel}</p>
+      <p className="mt-1 text-caption text-muted">
+        {locale === 'ja' ? 'ほんの少しだけ、お待ちください。' : 'This should only take a moment.'}
+      </p>
     </div>
   );
 }
