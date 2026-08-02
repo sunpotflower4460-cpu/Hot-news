@@ -9,6 +9,9 @@ const packageJson = JSON.parse(await readFile(resolve(root, 'package.json'), 'ut
 const failures = [];
 const warnings = [];
 
+const read = (path) => readFile(resolve(root, path), 'utf8');
+const fileExists = (path) => read(path).then(() => true).catch(() => false);
+
 const requireText = (value, label) => {
   if (typeof value !== 'string' || value.trim().length === 0) failures.push(`${label} is required`);
 };
@@ -95,7 +98,46 @@ if (!nextIsSupported) {
   failures.push('Next.js must be upgraded to a currently supported security baseline before release');
 }
 
-const robots = await readFile(resolve(root, 'public/robots.txt'), 'utf8').catch(() => '');
+const selectors = await read('src/lib/data/selectors.ts').catch(() => '');
+if (/[@/]mock\/articles/.test(selectors) || /\bARTICLES\b/.test(selectors)) {
+  failures.push('reader selectors still load the fictional mock corpus');
+}
+
+const articleRoute = await read('src/app/(app)/article/[id]/page.tsx').catch(() => '');
+if (/[@/]mock\/articles/.test(articleRoute) || /generateStaticParams/.test(articleRoute)) {
+  failures.push('article routes still depend on build-time mock static parameters');
+}
+
+const nativeRequired = [
+  'ios/App/App.xcodeproj/project.pbxproj',
+  'ios/App/App/PrivacyInfo.xcprivacy',
+  'ios/App/App/Assets.xcassets/AppIcon.appiconset/Contents.json',
+];
+for (const path of nativeRequired) {
+  if (!(await fileExists(path))) failures.push(`native release artifact is missing: ${path}`);
+}
+
+if (config.features?.subscriptions) {
+  const billingEvidence = [
+    'src/lib/native/purchases.ts',
+    'server/billing/README.md',
+  ];
+  for (const path of billingEvidence) {
+    if (!(await fileExists(path))) failures.push(`subscription release evidence is missing: ${path}`);
+  }
+}
+
+if (config.features?.pushNotifications) {
+  const notificationEvidence = [
+    'src/lib/native/notifications.ts',
+    'server/notifications/README.md',
+  ];
+  for (const path of notificationEvidence) {
+    if (!(await fileExists(path))) failures.push(`notification release evidence is missing: ${path}`);
+  }
+}
+
+const robots = await read('public/robots.txt').catch(() => '');
 if (/Disallow:\s*\/$/m.test(robots)) {
   failures.push('public/robots.txt still blocks the entire production site');
 }
@@ -121,10 +163,7 @@ const requiredFiles = [
 ];
 
 for (const path of requiredFiles) {
-  const exists = await readFile(resolve(root, path), 'utf8')
-    .then(() => true)
-    .catch(() => false);
-  if (!exists) failures.push(`required commercial file is missing: ${path}`);
+  if (!(await fileExists(path))) failures.push(`required commercial file is missing: ${path}`);
 }
 
 if (!strict) {
