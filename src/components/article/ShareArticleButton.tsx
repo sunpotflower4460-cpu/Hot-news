@@ -2,10 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Check, Copy, Share2 } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { cn } from '@/lib/utils/cn';
 
+type ShareStatus = 'idle' | 'shared' | 'copied' | 'error';
+
 export function ShareArticleButton({ title, summary }: { title: string; summary: string }) {
-  const [status, setStatus] = useState<'idle' | 'copied' | 'error'>('idle');
+  const { locale, t } = useI18n();
+  const [status, setStatus] = useState<ShareStatus>('idle');
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(
@@ -26,6 +30,8 @@ export function ShareArticleButton({ title, summary }: { title: string; summary:
     try {
       if (navigator.share) {
         await navigator.share({ title, text: summary, url });
+        setStatus('shared');
+        resetLater();
         return;
       }
 
@@ -39,6 +45,8 @@ export function ShareArticleButton({ title, summary }: { title: string; summary:
     }
   };
 
+  const success = status === 'copied' || status === 'shared';
+
   return (
     <div>
       <button
@@ -46,43 +54,35 @@ export function ShareArticleButton({ title, summary }: { title: string; summary:
         onClick={share}
         className={cn(
           'flex min-h-12 w-full items-center justify-center gap-2 rounded-pill border px-4 text-body font-bold transition-all duration-300 active:scale-[0.985]',
-          status === 'copied'
+          success
             ? 'border-accent/20 bg-accent-soft text-accent shadow-inner-light'
             : 'border-line/60 bg-surface/75 text-text shadow-soft hover:-translate-y-0.5 hover:shadow-glow',
         )}
       >
-        {status === 'copied' ? (
+        {success ? (
           <>
             <Check aria-hidden size={17} />
-            リンクをコピーしました
+            {status === 'copied' ? t('article.copied') : t('article.shared')}
+          </>
+        ) : status === 'error' ? (
+          <>
+            <Copy aria-hidden size={17} />
+            {locale === 'ja' ? 'もう一度共有する' : 'Try sharing again'}
           </>
         ) : (
-          navigatorShareLabel(status)
+          <>
+            <Share2 aria-hidden size={17} />
+            {t('article.shareTitle')}
+          </>
         )}
       </button>
       {status === 'error' && (
         <p role="status" className="mt-2 text-center text-caption text-muted">
-          共有できませんでした。ブラウザのアドレス欄からリンクをコピーしてください。
+          {locale === 'ja'
+            ? '共有できませんでした。ブラウザのアドレス欄からリンクをコピーしてください。'
+            : 'Sharing failed. You can copy the link from your browser address bar.'}
         </p>
       )}
     </div>
-  );
-}
-
-function navigatorShareLabel(status: 'idle' | 'copied' | 'error') {
-  if (status === 'error') {
-    return (
-      <>
-        <Copy aria-hidden size={17} />
-        もう一度共有する
-      </>
-    );
-  }
-
-  return (
-    <>
-      <Share2 aria-hidden size={17} />
-      このニュースを共有する
-    </>
   );
 }
