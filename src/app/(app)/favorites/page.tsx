@@ -7,6 +7,7 @@ import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { LinkButton } from '@/components/ui/LinkButton';
 import { isArticleEligibleForPublication } from '@/lib/editorial/policy';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useFavoritesStore } from '@/lib/store/useFavoritesStore';
 import { useReadingStore } from '@/lib/store/useReadingStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
@@ -18,6 +19,7 @@ type View = 'saved' | 'recent';
 
 export default function FavoritesPage() {
   const hydrated = useHydrated();
+  const { locale, t, formatNumber } = useI18n();
   const [view, setView] = useState<View>('saved');
   const ids = useFavoritesStore((state) => state.ids);
   const readingEntries = useReadingStore((state) => state.entries);
@@ -30,47 +32,55 @@ export default function FavoritesPage() {
     .map((entry) => map.get(entry.id))
     .filter((article): article is Article => article !== undefined);
   const visible = view === 'saved' ? saved : recent;
+  const title = view === 'saved' ? t('saved.title') : t('saved.tabRecent');
+  const subtitle =
+    view === 'saved'
+      ? hydrated && saved.length > 0
+        ? locale === 'ja'
+          ? `${formatNumber(saved.length)}件を保存しています`
+          : `${formatNumber(saved.length)} saved ${saved.length === 1 ? 'story' : 'stories'}`
+        : t('saved.subtitle')
+      : hydrated && recent.length > 0
+        ? locale === 'ja'
+          ? `最近開いた${formatNumber(recent.length)}件を、新しい順に表示しています`
+          : `Showing ${formatNumber(recent.length)} recently opened ${recent.length === 1 ? 'story' : 'stories'}, newest first`
+        : locale === 'ja'
+          ? '保存し忘れた記事も、ここから戻れます'
+          : 'Return to stories even when you forgot to save them';
 
   return (
     <div className="pb-10">
-      <ScreenHeader
-        title={view === 'saved' ? '保存したニュース' : '最近読んだニュース'}
-        subtitle={
-          view === 'saved'
-            ? hydrated && saved.length > 0
-              ? `${saved.length}件を保存しています`
-              : 'あとでもう一度読みたい出来事を、ここに集めます'
-            : hydrated && recent.length > 0
-              ? `最近開いた${recent.length}件を、新しい順に表示しています`
-              : '保存し忘れた記事も、ここから戻れます'
-        }
-      />
+      <ScreenHeader title={title} subtitle={subtitle} />
 
       <div className="px-5 pb-4">
         <div
           role="group"
-          aria-label="保存したニュースと閲覧履歴を切り替える"
+          aria-label={
+            locale === 'ja'
+              ? '保存したニュースと閲覧履歴を切り替える'
+              : 'Switch between saved and recently read stories'
+          }
           className="grid grid-cols-2 gap-1 rounded-[1.35rem] border border-line/50 bg-surface-2/70 p-1 shadow-inner-light"
         >
           <ViewButton
             active={view === 'saved'}
             onClick={() => setView('saved')}
             Icon={Bookmark}
-            label="保存"
+            label={t('saved.tabSaved')}
             count={saved.length}
           />
           <ViewButton
             active={view === 'recent'}
             onClick={() => setView('recent')}
             Icon={Clock3}
-            label="最近読んだ"
+            label={t('saved.tabRecent')}
             count={recent.length}
           />
         </div>
       </div>
 
       {!hydrated ? (
-        <div aria-label="ニュースを読み込み中" className="space-y-3 px-5 pt-2">
+        <div aria-label={t('common.loading')} className="space-y-3 px-5 pt-2">
           {Array.from({ length: 3 }).map((_, index) => (
             <div
               key={index}
@@ -89,17 +99,17 @@ export default function FavoritesPage() {
       ) : visible.length === 0 ? (
         <EmptyState
           glyph={view === 'saved' ? '🔖' : '🕊️'}
-          title={
-            view === 'saved' ? 'まだ保存したニュースはありません' : '最近読んだニュースはありません'
-          }
+          title={view === 'saved' ? t('saved.emptyTitle') : t('saved.recentEmptyTitle')}
           description={
             view === 'saved'
-              ? '記事カードのブックマークを押すと、あとで読み返せるようここに保存されます。'
-              : '記事を開くと、端末内だけに最近読んだ履歴が残ります。30日を過ぎると自動で消えます。'
+              ? t('saved.emptyBody')
+              : locale === 'ja'
+                ? '記事を開くと、端末内だけに最近読んだ履歴が残ります。30日を過ぎると自動で消えます。'
+                : 'Opened articles are kept only on this device and are automatically removed after 30 days.'
           }
           action={
             <LinkButton href="/home" variant="soft">
-              今日の3選を見る
+              {t('saved.viewToday')}
             </LinkButton>
           }
         />
@@ -140,7 +150,7 @@ function ViewButton({
       )}
     >
       <Icon aria-hidden size={15} />
-      {label}
+      <span className="truncate">{label}</span>
       <span className="text-[0.68rem] opacity-75">{count}</span>
     </button>
   );
