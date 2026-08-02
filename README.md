@@ -186,7 +186,9 @@ public                          PWA、オフライン、セキュリティヘッ
 - [データ棚卸し](./docs/DATA_INVENTORY.md)
 - [編集運用](./docs/CONTENT_OPERATIONS.md)
 - [障害対応](./docs/INCIDENT_RESPONSE.md)
+- [第三者ソフトウェア・ライセンス管理](./docs/THIRD_PARTY_COMPLIANCE.md)
 - [セキュリティ報告方針](./SECURITY.md)
+- [変更履歴](./CHANGELOG.md)
 
 ## 次の実装順序
 
