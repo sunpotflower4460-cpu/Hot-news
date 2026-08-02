@@ -1,0 +1,49 @@
+name: Format retention polish
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: format-retention-polish-branch
+  cancel-in-progress: true
+
+jobs:
+  format:
+    if: github.actor != 'github-actions[bot]' && github.head_ref == 'agent/bright-news-guardrails'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/bright-news-guardrails
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Format changed files
+        run: npx prettier --write docs/DATA_INVENTORY.md src/app/'(app)'/browse/page.tsx src/app/'(app)'/favorites/page.tsx src/components/article/ShareArticleButton.tsx src/components/home/HomeUsageHint.tsx
+
+      - name: Commit formatting only
+        run: |
+          if git diff --quiet; then
+            echo "No formatting changes required."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/DATA_INVENTORY.md src/app/'(app)'/browse/page.tsx src/app/'(app)'/favorites/page.tsx src/components/article/ShareArticleButton.tsx src/components/home/HomeUsageHint.tsx
+          git commit -m "style: format retention UX"
+          git push origin HEAD:agent/bright-news-guardrails
