@@ -1,12 +1,39 @@
 'use client';
 
-import { useState } from 'react';
-import { Check, ClipboardCopy } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { AlertCircle, Check, ClipboardCopy } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { commercialConfig } from '@/config/commercial';
 
+type CopyState = 'idle' | 'copied' | 'failed';
+
+const legacyCopy = (text: string) => {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  textarea.style.pointerEvents = 'none';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    return document.execCommand('copy');
+  } finally {
+    textarea.remove();
+  }
+};
+
 export function DiagnosticCopyButton() {
-  const [copied, setCopied] = useState(false);
+  const [state, setState] = useState<CopyState>('idle');
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    },
+    [],
+  );
 
   const copy = async () => {
     const details = [
@@ -20,15 +47,40 @@ export function DiagnosticCopyButton() {
       `Time: ${new Date().toISOString()}`,
     ].join('\n');
 
-    await navigator.clipboard.writeText(details);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2500);
+    try {
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(details);
+      } else if (!legacyCopy(details)) {
+        throw new Error('Clipboard copy is unavailable');
+      }
+      setState('copied');
+    } catch {
+      setState('failed');
+    }
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setState('idle'), 3500);
   };
 
+  const Icon = state === 'copied' ? Check : state === 'failed' ? AlertCircle : ClipboardCopy;
+  const label =
+    state === 'copied'
+      ? '診断情報をコピーしました'
+      : state === 'failed'
+        ? 'コピーできませんでした'
+        : '問い合わせ用の診断情報をコピー';
+
   return (
-    <Button type="button" variant="outline" className="w-full" onClick={copy}>
-      {copied ? <Check aria-hidden size={17} /> : <ClipboardCopy aria-hidden size={17} />}
-      {copied ? '診断情報をコピーしました' : '問い合わせ用の診断情報をコピー'}
-    </Button>
+    <div>
+      <Button type="button" variant="outline" className="w-full" onClick={copy}>
+        <Icon aria-hidden size={17} />
+        {label}
+      </Button>
+      {state === 'failed' && (
+        <p role="status" className="mt-2 text-center text-[0.68rem] leading-relaxed text-muted">
+          ブラウザの権限や安全な接続を確認して、もう一度お試しください。
+        </p>
+      )}
+    </div>
   );
 }
