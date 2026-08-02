@@ -33,12 +33,9 @@ export default async function HomePage() {
               </span>
               <T id="home.selected" as="p" className="text-[0.72rem] font-bold tracking-[0.08em]" />
             </div>
-            <T
-              id="home.heading"
-              as="h2"
-              id="today-light-heading"
-              className="mt-1.5 text-h2 font-bold text-text"
-            />
+            <h2 id="today-light-heading" className="mt-1.5 text-h2 font-bold text-text">
+              <T id="home.heading" />
+            </h2>
             <T id="home.description" as="p" className="mt-0.5 text-caption text-muted" />
           </div>
 
