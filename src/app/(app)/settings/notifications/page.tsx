@@ -1,9 +1,11 @@
 'use client';
 
 import { Bell, Sparkles } from 'lucide-react';
+import { FeatureUnavailable } from '@/components/commercial/FeatureUnavailable';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { Card } from '@/components/ui/Card';
 import { Toggle } from '@/components/ui/Toggle';
+import { commercialConfig, isCommercialPreview } from '@/config/commercial';
 import { useSettingsStore } from '@/lib/store/useSettingsStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 import { cn } from '@/lib/utils/cn';
@@ -20,35 +22,46 @@ export default function NotificationsPage() {
   const setWeeklyDigest = useSettingsStore((state) => state.setWeeklyDigest);
   const toggleTopic = useSettingsStore((state) => state.toggleTopic);
 
+  if (!isCommercialPreview && !commercialConfig.features.pushNotifications) {
+    return (
+      <FeatureUnavailable
+        title="通知はまだ利用できません"
+        description="許可、配信停止、タイムゾーン、撤回記事の停止まで安全に提供できる状態になってから公開します。"
+      />
+    );
+  }
+
   return (
     <div className="space-y-7 pb-10">
       <ScreenHeader title="通知" subtitle="届けかたは、あなたのペースで" back />
 
-      <div className="px-5">
-        <div className="relative overflow-hidden rounded-card border border-accent/10 bg-accent-soft/55 px-4 py-4 shadow-inner-light">
-          <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/35 blur-2xl" />
-          <div className="relative flex items-start gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/40 text-accent shadow-glow">
-              <Bell size={18} />
-            </span>
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-body font-bold text-text">通知の希望を保存できます</p>
-                <span className="rounded-pill bg-surface/65 px-2 py-0.5 text-[0.65rem] font-bold text-accent">
-                  PREVIEW
-                </span>
+      {isCommercialPreview && (
+        <div className="px-5">
+          <div className="relative overflow-hidden rounded-card border border-accent/10 bg-accent-soft/55 px-4 py-4 shadow-inner-light">
+            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/35 blur-2xl" />
+            <div className="relative flex items-start gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/40 text-accent shadow-glow">
+                <Bell aria-hidden size={18} />
+              </span>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="text-body font-bold text-text">通知の希望を保存できます</p>
+                  <span className="rounded-pill bg-surface/65 px-2 py-0.5 text-[0.65rem] font-bold text-accent">
+                    PREVIEW
+                  </span>
+                </div>
+                <p className="mt-1 text-caption leading-relaxed text-muted">
+                  現在は設定のプレビューです。通知機能の提供開始後に、この好みを利用します。
+                </p>
               </div>
-              <p className="mt-1 text-caption leading-relaxed text-muted">
-                現在は設定のプレビューです。通知機能の提供開始後に、この好みを利用します。
-              </p>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <section className="space-y-3 px-5">
         <div className="flex items-center gap-2">
-          <Sparkles size={14} className="text-accent" />
+          <Sparkles aria-hidden size={14} className="text-accent" />
           <h2 className="text-caption font-bold text-muted">届くタイミング</h2>
         </div>
         <Card className="divide-y divide-line/45">
@@ -102,6 +115,12 @@ export default function NotificationsPage() {
           })}
         </div>
       </section>
+
+      {!isCommercialPreview && (
+        <p className="px-5 text-center text-[0.68rem] leading-relaxed text-muted/75">
+          OSの通知許可は、通知を初めて有効にする操作の直前に確認します。設定をオフにした場合は配信対象から外します。
+        </p>
+      )}
     </div>
   );
 }
