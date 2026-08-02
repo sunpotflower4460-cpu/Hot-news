@@ -1,5 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { localizeCategory } from '@/lib/i18n/content';
+import { useI18n } from '@/lib/i18n/useI18n';
 import type { Article, CategoryMeta } from '@/types/article';
 import { ArticleCard } from './ArticleCard';
 
@@ -8,7 +12,9 @@ interface CategoryRailProps {
   articles: Article[];
 }
 
-export function CategoryRail({ category, articles }: CategoryRailProps) {
+export function CategoryRail({ category: rawCategory, articles }: CategoryRailProps) {
+  const { locale, t } = useI18n();
+  const category = localizeCategory(rawCategory, locale);
   if (articles.length === 0) return null;
 
   const headingId = `category-${category.id}`;
@@ -33,10 +39,14 @@ export function CategoryRail({ category, articles }: CategoryRailProps) {
         </div>
         <Link
           href={`/browse/${category.id}`}
-          aria-label={`${category.labelJa}をすべて見る`}
+          aria-label={
+            locale === 'ja'
+              ? `${category.labelJa}をすべて見る`
+              : `View all stories in ${category.labelJa}`
+          }
           className="flex min-h-11 shrink-0 items-center gap-0.5 rounded-pill bg-surface/45 px-3 text-caption font-semibold text-accent backdrop-blur transition-all duration-300 hover:bg-accent-soft active:scale-95"
         >
-          もっと見る
+          {t('common.viewAll')}
           <ChevronRight aria-hidden size={14} />
         </Link>
       </div>
