@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 
 interface EmptyStateProps {
   glyph: string;
-  title: string;
-  description: string;
+  title: ReactNode;
+  description: ReactNode;
   action?: ReactNode;
 }
 
@@ -22,7 +22,7 @@ export function EmptyState({ glyph, title, description, action }: EmptyStateProp
       <h2 id="empty-state-title" className="text-h2 font-bold text-text">
         {title}
       </h2>
-      <p className="mt-2 max-w-xs text-body leading-relaxed text-muted">{description}</p>
+      <div className="mt-2 max-w-xs text-body leading-relaxed text-muted">{description}</div>
       {action && <div className="mt-6">{action}</div>}
     </section>
   );
