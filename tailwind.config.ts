@@ -15,6 +15,7 @@ const config: Config = {
         text: 'hsl(var(--text) / <alpha-value>)',
         muted: 'hsl(var(--muted) / <alpha-value>)',
         accent: 'hsl(var(--accent) / <alpha-value>)',
+        'accent-strong': 'hsl(var(--accent-strong) / <alpha-value>)',
         'accent-soft': 'hsl(var(--accent-soft) / <alpha-value>)',
         line: 'hsl(var(--line) / <alpha-value>)',
       },
