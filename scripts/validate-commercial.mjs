@@ -10,7 +10,10 @@ const failures = [];
 const warnings = [];
 
 const read = (path) => readFile(resolve(root, path), 'utf8');
-const fileExists = (path) => read(path).then(() => true).catch(() => false);
+const fileExists = (path) =>
+  read(path)
+    .then(() => true)
+    .catch(() => false);
 
 const requireText = (value, label) => {
   if (typeof value !== 'string' || value.trim().length === 0) failures.push(`${label} is required`);
@@ -64,13 +67,17 @@ if (config.features?.subscriptions) {
 if (config.app?.bundleId && !/^[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)+$/.test(config.app.bundleId)) {
   failures.push('app.bundleId is not a valid reverse-domain style identifier');
 }
-if (config.operator?.contactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(config.operator.contactEmail)) {
+if (
+  config.operator?.contactEmail &&
+  !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(config.operator.contactEmail)
+) {
   failures.push('operator.contactEmail is not a valid email address');
 }
 
 if (config.features?.mockContent) failures.push('features.mockContent must be false');
 if (!config.features?.realNewsApi) failures.push('features.realNewsApi must be true');
-if (config.integrations?.contentApi === 'mock') failures.push('integrations.contentApi must not be mock');
+if (config.integrations?.contentApi === 'mock')
+  failures.push('integrations.contentApi must not be mock');
 
 const integrationChecks = [
   ['analytics', 'analyticsProvider'],
@@ -95,7 +102,9 @@ const nextIsSupported =
     (nextVersion[0] === 16 && atLeast(nextVersion, [16, 2, 11])) ||
     nextVersion[0] > 16);
 if (!nextIsSupported) {
-  failures.push('Next.js must be upgraded to a currently supported security baseline before release');
+  failures.push(
+    'Next.js must be upgraded to a currently supported security baseline before release',
+  );
 }
 
 const selectors = await read('src/lib/data/selectors.ts').catch(() => '');
@@ -118,12 +127,10 @@ for (const path of nativeRequired) {
 }
 
 if (config.features?.subscriptions) {
-  const billingEvidence = [
-    'src/lib/native/purchases.ts',
-    'server/billing/README.md',
-  ];
+  const billingEvidence = ['src/lib/native/purchases.ts', 'server/billing/README.md'];
   for (const path of billingEvidence) {
-    if (!(await fileExists(path))) failures.push(`subscription release evidence is missing: ${path}`);
+    if (!(await fileExists(path)))
+      failures.push(`subscription release evidence is missing: ${path}`);
   }
 }
 
@@ -133,7 +140,8 @@ if (config.features?.pushNotifications) {
     'server/notifications/README.md',
   ];
   for (const path of notificationEvidence) {
-    if (!(await fileExists(path))) failures.push(`notification release evidence is missing: ${path}`);
+    if (!(await fileExists(path)))
+      failures.push(`notification release evidence is missing: ${path}`);
   }
 }
 

@@ -73,7 +73,9 @@ export default async function HomePage() {
           <p className="relative mt-2 font-rounded text-body-lg font-medium text-text">
             世界には、今日も明るい出来事があります。
           </p>
-          <p className="relative mt-1 text-caption text-muted">小さな光を、明日もここに集めます。</p>
+          <p className="relative mt-1 text-caption text-muted">
+            小さな光を、明日もここに集めます。
+          </p>
         </div>
       </div>
     </div>

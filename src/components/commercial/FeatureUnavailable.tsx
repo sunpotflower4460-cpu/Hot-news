@@ -2,13 +2,7 @@ import { Construction } from 'lucide-react';
 import { LinkButton } from '@/components/ui/LinkButton';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 
-export function FeatureUnavailable({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) {
+export function FeatureUnavailable({ title, description }: { title: string; description: string }) {
   return (
     <div className="pb-10">
       <ScreenHeader back />

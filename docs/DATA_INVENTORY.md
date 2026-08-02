@@ -4,13 +4,13 @@ This document must match the production binary, backend, support process, and th
 
 ## Current preview data
 
-| Data | Location | Purpose | Sent externally | Retention | User control |
-| --- | --- | --- | --- | --- | --- |
-| Favorite article IDs | Browser/device local storage | Save articles on this device | No | Until removed or local data is cleared | Toggle favorite or delete all local data |
-| Theme and time-of-day settings | Browser/device local storage | Visual preferences | No | Until reset | Settings or delete all local data |
-| Notification preferences | Browser/device local storage | Future preference preview | No | Until reset | Notification settings or delete all local data |
-| Privacy choices | Browser/device local storage | Record future analytics/diagnostics preference | No | Until reset | Privacy settings or delete all local data |
-| Static application cache | Browser/device Cache Storage | Offline shell and previously opened assets | No | Until cache expiry/update/clear | Delete all local data or OS/browser controls |
+| Data                           | Location                     | Purpose                                        | Sent externally | Retention                              | User control                                   |
+| ------------------------------ | ---------------------------- | ---------------------------------------------- | --------------- | -------------------------------------- | ---------------------------------------------- |
+| Favorite article IDs           | Browser/device local storage | Save articles on this device                   | No              | Until removed or local data is cleared | Toggle favorite or delete all local data       |
+| Theme and time-of-day settings | Browser/device local storage | Visual preferences                             | No              | Until reset                            | Settings or delete all local data              |
+| Notification preferences       | Browser/device local storage | Future preference preview                      | No              | Until reset                            | Notification settings or delete all local data |
+| Privacy choices                | Browser/device local storage | Record future analytics/diagnostics preference | No              | Until reset                            | Privacy settings or delete all local data      |
+| Static application cache       | Browser/device Cache Storage | Offline shell and previously opened assets     | No              | Until cache expiry/update/clear        | Delete all local data or OS/browser controls   |
 
 ## Currently not collected
 
@@ -33,16 +33,16 @@ When a user opens an article source, the destination website may receive ordinar
 
 Every planned data flow remains disabled until it has an owner, purpose, legal basis, retention period, deletion behavior, security controls, App Store disclosure, and policy text.
 
-| Planned capability | Possible data | Default status | Minimum release condition |
-| --- | --- | --- | --- |
-| Anonymous product analytics | event name, app version, coarse device class | Off | Explicit consent, reviewed event allowlist, provider contract, retention limit |
-| Diagnostics | error class, build, OS version, non-sensitive context | Off | Explicit consent, redaction, sampling, retention limit, access control |
-| Accounts | user ID, email or Sign in with Apple identifier | Not implemented | Authentication, recovery, export, in-app deletion, breach process |
-| Favorites sync | user ID, article IDs, timestamps | Not implemented | Account controls, encryption, retention/deletion |
-| Push notifications | device push token, topic preference | Not implemented | Permission, token rotation/deletion, provider security |
-| Subscriptions | Apple transaction identifiers, entitlement state | Not implemented | StoreKit, server verification, lifecycle handling, support |
-| Support | contact details and message | Not implemented | Public support channel, retention, access restriction, deletion handling |
-| Editorial admin | staff account, action audit logs | Not implemented | Strong authentication, least privilege, immutable audit trail |
+| Planned capability          | Possible data                                         | Default status  | Minimum release condition                                                      |
+| --------------------------- | ----------------------------------------------------- | --------------- | ------------------------------------------------------------------------------ |
+| Anonymous product analytics | event name, app version, coarse device class          | Off             | Explicit consent, reviewed event allowlist, provider contract, retention limit |
+| Diagnostics                 | error class, build, OS version, non-sensitive context | Off             | Explicit consent, redaction, sampling, retention limit, access control         |
+| Accounts                    | user ID, email or Sign in with Apple identifier       | Not implemented | Authentication, recovery, export, in-app deletion, breach process              |
+| Favorites sync              | user ID, article IDs, timestamps                      | Not implemented | Account controls, encryption, retention/deletion                               |
+| Push notifications          | device push token, topic preference                   | Not implemented | Permission, token rotation/deletion, provider security                         |
+| Subscriptions               | Apple transaction identifiers, entitlement state      | Not implemented | StoreKit, server verification, lifecycle handling, support                     |
+| Support                     | contact details and message                           | Not implemented | Public support channel, retention, access restriction, deletion handling       |
+| Editorial admin             | staff account, action audit logs                      | Not implemented | Strong authentication, least privilege, immutable audit trail                  |
 
 ## Analytics event allowlist
 

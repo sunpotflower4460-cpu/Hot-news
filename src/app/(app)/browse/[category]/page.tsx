@@ -13,11 +13,7 @@ export function generateStaticParams() {
 
 const VALID = new Set(CATEGORIES.map((category) => category.id));
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ category: string }>;
-}) {
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category } = await params;
   if (!VALID.has(category as CategoryId)) notFound();
 

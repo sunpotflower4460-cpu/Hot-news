@@ -102,11 +102,17 @@ export function OnboardingCarousel() {
         {last && (
           <p className="max-w-sm text-center text-[0.7rem] leading-relaxed text-muted">
             はじめる前に
-            <Link href="/legal/terms" className="mx-1 font-semibold text-accent underline underline-offset-4">
+            <Link
+              href="/legal/terms"
+              className="mx-1 font-semibold text-accent underline underline-offset-4"
+            >
               利用規約
             </Link>
             と
-            <Link href="/legal/privacy" className="mx-1 font-semibold text-accent underline underline-offset-4">
+            <Link
+              href="/legal/privacy"
+              className="mx-1 font-semibold text-accent underline underline-offset-4"
+            >
               プライバシーポリシー
             </Link>
             を確認できます。

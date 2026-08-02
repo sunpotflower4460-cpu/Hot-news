@@ -27,8 +27,7 @@ const CATEGORY_IDS = new Set<CategoryId>([
   'night-reads',
 ]);
 
-const bool = (value: unknown, fallback: boolean) =>
-  typeof value === 'boolean' ? value : fallback;
+const bool = (value: unknown, fallback: boolean) => (typeof value === 'boolean' ? value : fallback);
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
@@ -65,7 +64,13 @@ export const useSettingsStore = create<SettingsState>()(
       migrate: (persistedState) => {
         const stored = persistedState as Partial<SettingsState>;
         const topicNotify = Array.isArray(stored.topicNotify)
-          ? [...new Set(stored.topicNotify.filter((id): id is CategoryId => CATEGORY_IDS.has(id as CategoryId)))]
+          ? [
+              ...new Set(
+                stored.topicNotify.filter((id): id is CategoryId =>
+                  CATEGORY_IDS.has(id as CategoryId),
+                ),
+              ),
+            ]
           : [];
 
         return {

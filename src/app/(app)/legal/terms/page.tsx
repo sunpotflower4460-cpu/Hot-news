@@ -2,7 +2,10 @@ import { LegalDocument, LegalSection } from '@/components/legal/LegalDocument';
 import { commercialConfig, configuredValue } from '@/config/commercial';
 
 export default function TermsPage() {
-  const operator = configuredValue(commercialConfig.operator.legalName, 'Hot News 運営者（公開前に確定）');
+  const operator = configuredValue(
+    commercialConfig.operator.legalName,
+    'Hot News 運営者（公開前に確定）',
+  );
 
   return (
     <LegalDocument
@@ -12,7 +15,8 @@ export default function TermsPage() {
     >
       <LegalSection title="1. 適用">
         <p>
-          本規約は、{operator}（以下「運営者」）が提供する「明るいニュース｜Hot News」（以下「本サービス」）の利用条件を定めるものです。利用者は、本規約とプライバシーポリシーに同意したうえで本サービスを利用します。
+          本規約は、{operator}（以下「運営者」）が提供する「明るいニュース｜Hot
+          News」（以下「本サービス」）の利用条件を定めるものです。利用者は、本規約とプライバシーポリシーに同意したうえで本サービスを利用します。
         </p>
       </LegalSection>
 
@@ -20,7 +24,9 @@ export default function TermsPage() {
         <p>
           本サービスは、出来事そのものが明るく、希望、喜び、創造、親切、美しさ、前進を感じられるニュースを選び、出典へたどれる形で届けることを目的とします。
         </p>
-        <p>暗い出来事を単にやわらかく言い換えることや、悲劇を前提とした感動話を主目的とはしません。</p>
+        <p>
+          暗い出来事を単にやわらかく言い換えることや、悲劇を前提とした感動話を主目的とはしません。
+        </p>
       </LegalSection>
 
       <LegalSection title="3. 記事と出典">

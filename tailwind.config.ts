@@ -45,10 +45,8 @@ const config: Config = {
       boxShadow: {
         soft: '0 12px 34px -18px hsl(var(--shadow) / 0.2)',
         'soft-lg': '0 24px 64px -24px hsl(var(--shadow) / 0.28)',
-        float:
-          '0 18px 50px -24px hsl(var(--shadow) / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.45)',
-        glow:
-          '0 0 0 1px hsl(var(--accent) / 0.12), 0 14px 42px -20px hsl(var(--accent) / 0.42)',
+        float: '0 18px 50px -24px hsl(var(--shadow) / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.45)',
+        glow: '0 0 0 1px hsl(var(--accent) / 0.12), 0 14px 42px -20px hsl(var(--accent) / 0.42)',
         'inner-light': 'inset 0 1px 0 hsl(0 0% 100% / 0.55)',
       },
       maxWidth: {

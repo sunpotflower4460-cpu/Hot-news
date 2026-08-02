@@ -13,12 +13,7 @@ interface SaveButtonProps {
   className?: string;
 }
 
-export function SaveButton({
-  id,
-  articleTitle,
-  variant = 'glass',
-  className,
-}: SaveButtonProps) {
+export function SaveButton({ id, articleTitle, variant = 'glass', className }: SaveButtonProps) {
   const hydrated = useHydrated();
   const ids = useFavoritesStore((state) => state.ids);
   const toggle = useFavoritesStore((state) => state.toggle);

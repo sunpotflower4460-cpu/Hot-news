@@ -14,10 +14,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
     'border border-white/20 bg-accent-strong text-white shadow-glow hover:-translate-y-0.5 hover:brightness-[1.04] active:translate-y-[1px] active:scale-[0.985] active:brightness-95',
-  soft:
-    'border border-accent/10 bg-accent-soft/85 text-accent shadow-inner-light hover:-translate-y-0.5 hover:bg-accent-soft active:translate-y-[1px] active:scale-[0.985]',
-  ghost:
-    'bg-transparent text-text hover:bg-surface/60 active:scale-[0.985] active:bg-surface-2',
+  soft: 'border border-accent/10 bg-accent-soft/85 text-accent shadow-inner-light hover:-translate-y-0.5 hover:bg-accent-soft active:translate-y-[1px] active:scale-[0.985]',
+  ghost: 'bg-transparent text-text hover:bg-surface/60 active:scale-[0.985] active:bg-surface-2',
   outline:
     'border border-line/65 bg-surface/72 text-text shadow-inner-light backdrop-blur hover:-translate-y-0.5 hover:border-accent/20 hover:shadow-soft active:translate-y-[1px] active:scale-[0.985]',
 };
@@ -49,11 +47,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   { variant = 'primary', size = 'md', className, ...props },
   ref,
 ) {
-  return (
-    <button
-      ref={ref}
-      className={buttonStyles({ variant, size, className })}
-      {...props}
-    />
-  );
+  return <button ref={ref} className={buttonStyles({ variant, size, className })} {...props} />;
 });

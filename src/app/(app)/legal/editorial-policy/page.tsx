@@ -3,13 +3,11 @@ import { LegalDocument, LegalSection } from '@/components/legal/LegalDocument';
 
 export default function EditorialPolicyPage() {
   return (
-    <LegalDocument
-      title="編集・訂正方針"
-      summary="何を明るいニュースとして掲載し、どう確かめるか"
-    >
+    <LegalDocument title="編集・訂正方針" summary="何を明るいニュースとして掲載し、どう確かめるか">
       <LegalSection title="1. 最優先すること">
         <p>
-          Hot Newsは、暗いニュースをやさしい言葉へ置き換えるサービスではありません。出来事の中心そのものが、希望、喜び、創造、親切、美しさ、進歩、つながりを含むことを掲載の前提にします。
+          Hot
+          Newsは、暗いニュースをやさしい言葉へ置き換えるサービスではありません。出来事の中心そのものが、希望、喜び、創造、親切、美しさ、進歩、つながりを含むことを掲載の前提にします。
         </p>
       </LegalSection>
 
@@ -72,10 +70,7 @@ export default function EditorialPolicyPage() {
       <LegalSection title="9. 指摘の受付">
         <p>
           事実誤認、権利侵害、不適切な暗い文脈、出典切れを見つけた場合は、
-          <Link
-            href="/support"
-            className="font-semibold text-accent underline underline-offset-4"
-          >
+          <Link href="/support" className="font-semibold text-accent underline underline-offset-4">
             サポート
           </Link>
           から記事IDと理由をお知らせください。

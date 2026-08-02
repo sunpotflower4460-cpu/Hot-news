@@ -26,7 +26,10 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
           <TrustValue label="確認ソース" value={`${provenance.sourceCount}件`} />
           <TrustValue label="最終確認" value={formatJaDate(provenance.lastVerifiedAt)} />
           <TrustValue label="編集確認" value={formatJaDate(provenance.editorialReviewedAt)} />
-          <TrustValue label="AI補助" value={provenance.aiAssisted ? '使用・人が確認' : '使用なし'} />
+          <TrustValue
+            label="AI補助"
+            value={provenance.aiAssisted ? '使用・人が確認' : '使用なし'}
+          />
           <TrustValue
             label="訂正状態"
             value={provenance.correctionStatus === 'CORRECTED' ? '訂正あり' : '訂正なし'}
@@ -43,7 +46,9 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
       {provenance?.correctionStatus === 'CORRECTED' && provenance.correctionNote && (
         <div className="mt-4 rounded-card border border-amber-500/20 bg-amber-100/55 px-4 py-3 text-amber-950 dark:bg-amber-950/25 dark:text-amber-100">
           <p className="text-caption font-bold">訂正について</p>
-          <p className="mt-1 text-caption leading-relaxed opacity-85">{provenance.correctionNote}</p>
+          <p className="mt-1 text-caption leading-relaxed opacity-85">
+            {provenance.correctionNote}
+          </p>
         </div>
       )}
 

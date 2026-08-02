@@ -13,11 +13,7 @@ export function HeroCard({ article }: { article: Article }) {
 
   return (
     <article className="soft-surface float-card group relative overflow-hidden rounded-panel shadow-soft-lg">
-      <Link
-        href={`/article/${article.id}`}
-        aria-label={`${article.title}を読む`}
-        className="block"
-      >
+      <Link href={`/article/${article.id}`} aria-label={`${article.title}を読む`} className="block">
         <CoverArt category={primary} seed={article.id} size="lg" className="h-[17.5rem] w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 space-y-2 p-5 text-white">

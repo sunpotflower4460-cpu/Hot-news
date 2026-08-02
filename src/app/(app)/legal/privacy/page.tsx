@@ -3,7 +3,10 @@ import { LegalDocument, LegalSection } from '@/components/legal/LegalDocument';
 import { commercialConfig, configuredValue } from '@/config/commercial';
 
 export default function PrivacyPolicyPage() {
-  const operator = configuredValue(commercialConfig.operator.legalName, 'Hot News 運営者（公開前に確定）');
+  const operator = configuredValue(
+    commercialConfig.operator.legalName,
+    'Hot News 運営者（公開前に確定）',
+  );
   const contact = configuredValue(commercialConfig.operator.contactEmail);
 
   return (
@@ -14,7 +17,8 @@ export default function PrivacyPolicyPage() {
     >
       <LegalSection title="1. 基本方針">
         <p>
-          {operator}（以下「運営者」）は、「明るいニュース｜Hot News」（以下「本サービス」）において、必要以上の情報を収集せず、利用目的を明確にし、利用者が選択・削除できる設計を優先します。
+          {operator}（以下「運営者」）は、「明るいニュース｜Hot
+          News」（以下「本サービス」）において、必要以上の情報を収集せず、利用目的を明確にし、利用者が選択・削除できる設計を優先します。
         </p>
       </LegalSection>
 
@@ -43,9 +47,12 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="5. 将来導入する任意の分析・診断">
         <p>
-          品質改善のため匿名の利用状況や不具合診断を導入する場合があります。その場合、提供開始前に本ポリシーとApp Store上のプライバシー表示を更新し、必要な同意を取得します。
+          品質改善のため匿名の利用状況や不具合診断を導入する場合があります。その場合、提供開始前に本ポリシーとApp
+          Store上のプライバシー表示を更新し、必要な同意を取得します。
         </p>
-        <p>原則として、記事本文、出典URL、検索語、自由入力、連絡先、氏名などを分析イベントへ含めません。</p>
+        <p>
+          原則として、記事本文、出典URL、検索語、自由入力、連絡先、氏名などを分析イベントへ含めません。
+        </p>
       </LegalSection>
 
       <LegalSection title="6. 利用目的">
@@ -71,7 +78,14 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="9. 同意の変更">
         <p>
-          分析・診断の希望は、<Link href="/settings/privacy" className="font-semibold text-accent underline underline-offset-4">プライバシー設定</Link>からいつでも変更できます。将来データ送信を開始する場合も、拒否した利用者の情報は送信しません。
+          分析・診断の希望は、
+          <Link
+            href="/settings/privacy"
+            className="font-semibold text-accent underline underline-offset-4"
+          >
+            プライバシー設定
+          </Link>
+          からいつでも変更できます。将来データ送信を開始する場合も、拒否した利用者の情報は送信しません。
         </p>
       </LegalSection>
 

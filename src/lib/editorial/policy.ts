@@ -129,8 +129,8 @@ export function isArticleEligibleForPublication(article: Article) {
   if (article.editorialAssessment) {
     return Boolean(
       article.provenance &&
-        isAssessmentApproved(article.editorialAssessment) &&
-        isProvenanceComplete(article.provenance),
+      isAssessmentApproved(article.editorialAssessment) &&
+      isProvenanceComplete(article.provenance),
     );
   }
 

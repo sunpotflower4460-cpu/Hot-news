@@ -102,7 +102,8 @@ export default function SupportPage() {
             現在の通知画面は希望設定のプレビューです。実際のプッシュ通知はまだ提供していません。
           </Faq>
           <Faq title="プレミアム料金が発生した">
-            現在のプレビューでは購入処理を実装していないため、Hot Newsから料金は発生しません。正式提供後は購入履歴とAppleのサブスクリプション管理を確認できる導線を用意します。
+            現在のプレビューでは購入処理を実装していないため、Hot
+            Newsから料金は発生しません。正式提供後は購入履歴とAppleのサブスクリプション管理を確認できる導線を用意します。
           </Faq>
           <Faq title="端末内データを消したい">
             設定のプライバシー画面から、お気に入り、表示設定、同意履歴、キャッシュを削除できます。
@@ -126,7 +127,15 @@ export default function SupportPage() {
   );
 }
 
-function SupportType({ Icon, title, body }: { Icon: typeof AlertCircle; title: string; body: string }) {
+function SupportType({
+  Icon,
+  title,
+  body,
+}: {
+  Icon: typeof AlertCircle;
+  title: string;
+  body: string;
+}) {
   return (
     <div className="flex items-start gap-3 px-4 py-4">
       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft/70 text-accent">
@@ -156,7 +165,11 @@ function PolicyLink({ href, label }: { href: string; label: string }) {
       className="group flex min-h-12 items-center rounded-card border border-line/55 bg-surface/65 px-4 text-body font-semibold text-text shadow-inner-light"
     >
       <span className="flex-1">{label}</span>
-      <ChevronRight aria-hidden size={17} className="text-muted transition-transform group-hover:translate-x-0.5" />
+      <ChevronRight
+        aria-hidden
+        size={17}
+        className="text-muted transition-transform group-hover:translate-x-0.5"
+      />
     </Link>
   );
 }

@@ -47,11 +47,16 @@ export function PlanCard({
       </div>
       <ul className="relative mt-4 space-y-3">
         {features.map((feature) => (
-          <li key={feature} className="flex items-start gap-2.5 text-body leading-relaxed text-text/90">
+          <li
+            key={feature}
+            className="flex items-start gap-2.5 text-body leading-relaxed text-text/90"
+          >
             <span
               className={cn(
                 'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full',
-                highlight ? 'bg-white/45 text-accent shadow-inner-light' : 'bg-surface-2 text-muted',
+                highlight
+                  ? 'bg-white/45 text-accent shadow-inner-light'
+                  : 'bg-surface-2 text-muted',
               )}
             >
               <Check size={13} strokeWidth={2.5} />

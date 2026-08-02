@@ -3,13 +3,11 @@ import { LegalDocument, LegalSection } from '@/components/legal/LegalDocument';
 
 export default function AccessibilityPage() {
   return (
-    <LegalDocument
-      title="アクセシビリティ方針"
-      summary="心が休まる体験を、できるだけ多くの人へ"
-    >
+    <LegalDocument title="アクセシビリティ方針" summary="心が休まる体験を、できるだけ多くの人へ">
       <LegalSection title="1. 目標">
         <p>
-          Hot Newsは、視覚、聴覚、運動、認知特性、利用端末にかかわらず、主要なニュース閲覧と設定へ到達できることを目指します。柔らかな表現と読みやすさを両立し、装飾だけに情報を依存させません。
+          Hot
+          Newsは、視覚、聴覚、運動、認知特性、利用端末にかかわらず、主要なニュース閲覧と設定へ到達できることを目指します。柔らかな表現と読みやすさを両立し、装飾だけに情報を依存させません。
         </p>
       </LegalSection>
 
@@ -39,7 +37,8 @@ export default function AccessibilityPage() {
 
       <LegalSection title="4. 既知の制約">
         <p>
-          現在は開発プレビューであり、全支援技術・全端末での検証は完了していません。外部の出典サイトのアクセシビリティはHot Newsが管理できません。
+          現在は開発プレビューであり、全支援技術・全端末での検証は完了していません。外部の出典サイトのアクセシビリティはHot
+          Newsが管理できません。
         </p>
       </LegalSection>
 

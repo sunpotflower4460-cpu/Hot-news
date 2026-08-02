@@ -203,7 +203,9 @@ function SettingsLink({
         <Icon aria-hidden size={18} />
       </span>
       <span className="min-w-0 flex-1 text-body font-semibold text-text">{label}</span>
-      {hint && <span className="max-w-[7rem] text-right text-caption leading-snug text-muted">{hint}</span>}
+      {hint && (
+        <span className="max-w-[7rem] text-right text-caption leading-snug text-muted">{hint}</span>
+      )}
       <ChevronRight
         aria-hidden
         size={18}

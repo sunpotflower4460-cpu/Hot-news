@@ -13,7 +13,7 @@ export function CategoryCard({ category, count }: { category: CategoryMeta; coun
         style={{ backgroundColor: `hsl(${category.accent} / 0.17)` }}
       >
         <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-white/30 blur-md" />
-        <span className="relative transition-transform duration-500 ease-gentle group-hover:scale-110 group-hover:-rotate-3">
+        <span className="relative transition-transform duration-500 ease-gentle group-hover:-rotate-3 group-hover:scale-110">
           {category.glyph}
         </span>
       </div>

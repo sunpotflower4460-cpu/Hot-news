@@ -31,7 +31,9 @@ export default function PrivacyChoicesPage() {
               <ShieldCheck aria-hidden size={21} />
             </span>
             <div>
-              <h1 className="text-h2 font-bold text-text">現在、利用データは外部送信していません</h1>
+              <h1 className="text-h2 font-bold text-text">
+                現在、利用データは外部送信していません
+              </h1>
               <p className="mt-1 text-caption leading-relaxed text-muted">
                 お気に入りや表示設定はこの端末だけに保存されます。分析・診断機能を追加する場合も、方針を更新し、必要な同意を改めて確認します。
               </p>
@@ -103,22 +105,38 @@ export default function PrivacyChoicesPage() {
           className="group flex min-h-14 items-center gap-3 rounded-card border border-line/55 bg-surface/70 px-4 shadow-inner-light"
         >
           <ShieldCheck aria-hidden size={18} className="text-accent" />
-          <span className="flex-1 text-body font-semibold text-text">プライバシーポリシーを読む</span>
-          <ChevronRight aria-hidden size={17} className="text-muted transition-transform group-hover:translate-x-0.5" />
+          <span className="flex-1 text-body font-semibold text-text">
+            プライバシーポリシーを読む
+          </span>
+          <ChevronRight
+            aria-hidden
+            size={17}
+            className="text-muted transition-transform group-hover:translate-x-0.5"
+          />
         </Link>
       </section>
     </div>
   );
 }
 
-function DataLine({ Icon, label, value }: { Icon: typeof Smartphone; label: string; value: string }) {
+function DataLine({
+  Icon,
+  label,
+  value,
+}: {
+  Icon: typeof Smartphone;
+  label: string;
+  value: string;
+}) {
   return (
     <div className="flex items-center gap-3">
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-soft/70 text-accent">
         <Icon aria-hidden size={17} />
       </span>
       <span className="flex-1 text-body font-medium text-text">{label}</span>
-      <span className="rounded-pill bg-surface-2 px-2.5 py-1 text-[0.68rem] font-semibold text-muted">{value}</span>
+      <span className="rounded-pill bg-surface-2 px-2.5 py-1 text-[0.68rem] font-semibold text-muted">
+        {value}
+      </span>
     </div>
   );
 }

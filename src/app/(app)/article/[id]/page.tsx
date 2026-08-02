@@ -36,10 +36,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
   return (
     <article className="pb-12">
-      <ScreenHeader
-        back
-        action={<SaveButton id={article.id} articleTitle={article.title} />}
-      />
+      <ScreenHeader back action={<SaveButton id={article.id} articleTitle={article.title} />} />
 
       <div className="px-5">
         <CoverArt

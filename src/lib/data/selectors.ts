@@ -55,12 +55,8 @@ export async function getTodayHot3(now = new Date()): Promise<Article[]> {
     pool = eligible.filter((article) => tokyoDay(article.appPublishedAt) === latestDay);
   }
 
-  const highlighted = pool
-    .filter((article) => article.isTodayHot)
-    .sort(byBrightnessThenPublished);
-  const fallback = pool
-    .filter((article) => !article.isTodayHot)
-    .sort(byBrightnessThenPublished);
+  const highlighted = pool.filter((article) => article.isTodayHot).sort(byBrightnessThenPublished);
+  const fallback = pool.filter((article) => !article.isTodayHot).sort(byBrightnessThenPublished);
 
   return [...highlighted, ...fallback].slice(0, 3);
 }

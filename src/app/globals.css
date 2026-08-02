@@ -194,8 +194,7 @@
   }
 
   .glass {
-    background:
-      linear-gradient(145deg, hsl(var(--surface) / 0.82), hsl(var(--surface) / 0.62));
+    background: linear-gradient(145deg, hsl(var(--surface) / 0.82), hsl(var(--surface) / 0.62));
     border-color: hsl(var(--line) / 0.58);
     box-shadow:
       inset 0 1px 0 hsl(0 0% 100% / 0.42),
@@ -209,8 +208,7 @@
     isolation: isolate;
     overflow: hidden;
     border: 1px solid hsl(var(--line) / 0.55);
-    background:
-      linear-gradient(145deg, hsl(var(--surface) / 0.96), hsl(var(--surface) / 0.76));
+    background: linear-gradient(145deg, hsl(var(--surface) / 0.96), hsl(var(--surface) / 0.76));
     box-shadow:
       inset 0 1px 0 hsl(0 0% 100% / 0.6),
       0 20px 54px -30px hsl(var(--shadow) / 0.42);
