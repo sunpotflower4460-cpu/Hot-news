@@ -8,27 +8,36 @@ import {
   ChevronRight,
   Crown,
   FileText,
+  Languages,
   LifeBuoy,
   Moon,
   Scale,
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
+import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { Card } from '@/components/ui/Card';
 import { commercialConfig, isCommercialPreview } from '@/config/commercial';
+import type { TranslationKey } from '@/lib/i18n/messages';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useSettingsStore } from '@/lib/store/useSettingsStore';
 import { useThemeStore } from '@/lib/store/useThemeStore';
-import { TIME_LABELS_JA } from '@/lib/theme/timeOfDay';
 import type { TimeOfDay } from '@/lib/theme/types';
 import { useHydrated } from '@/lib/utils/useHydrated';
 import { cn } from '@/lib/utils/cn';
 
-const TIMES: TimeOfDay[] = ['morning', 'day', 'evening', 'night'];
+const TIMES: { value: TimeOfDay; labelKey: TranslationKey }[] = [
+  { value: 'morning', labelKey: 'time.morning' },
+  { value: 'day', labelKey: 'time.day' },
+  { value: 'evening', labelKey: 'time.evening' },
+  { value: 'night', labelKey: 'time.night' },
+];
 
 export default function SettingsPage() {
   const hydrated = useHydrated();
+  const { locale, t } = useI18n();
   const timeOverride = useThemeStore((state) => state.timeOverride);
   const setTimeOverride = useThemeStore((state) => state.setTimeOverride);
   const isPremium = useSettingsStore((state) => state.isPremium);
@@ -39,24 +48,29 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-7 pb-10">
-      <ScreenHeader title="設定" subtitle="見た目、通知、安心に関する項目をまとめています" />
+      <ScreenHeader title={t('settings.title')} subtitle={t('settings.subtitle')} showLanguage={false} />
 
       <section className="space-y-3 px-5">
-        <SectionLabel title="表示と雰囲気" description="読みやすい色と空の時間帯を選べます" />
+        <SectionLabel title={t('settings.display')} description={t('settings.displayBody')} />
         <Card inset className="space-y-5">
           <div>
-            <p className="text-body font-semibold text-text">画面の明るさ</p>
-            <p className="mb-2 mt-0.5 text-caption text-muted">
-              端末に合わせるか、明るい／暗い表示を固定します。
-            </p>
+            <div className="flex items-center gap-2">
+              <Languages aria-hidden size={17} className="text-accent" />
+              <p className="text-body font-semibold text-text">{t('settings.language')}</p>
+            </div>
+            <p className="mb-2 mt-0.5 text-caption text-muted">{t('settings.languageBody')}</p>
+            <LanguageSwitcher className="w-full justify-center" />
+          </div>
+
+          <div className="border-t border-line/45 pt-5">
+            <p className="text-body font-semibold text-text">{t('settings.appearance')}</p>
+            <p className="mb-2 mt-0.5 text-caption text-muted">{t('settings.appearanceBody')}</p>
             <ThemeToggle />
           </div>
 
           <div className="border-t border-line/45 pt-5">
-            <p className="text-body font-semibold text-text">空の時間帯</p>
-            <p className="mb-3 mt-0.5 text-caption text-muted">
-              自動では現在時刻に合わせて、朝・昼・夕・夜の色へ移ろいます。
-            </p>
+            <p className="text-body font-semibold text-text">{t('settings.sky')}</p>
+            <p className="mb-3 mt-0.5 text-caption text-muted">{t('settings.skyBody')}</p>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
@@ -69,22 +83,22 @@ export default function SettingsPage() {
                     : 'border-line/55 bg-surface-2/70 text-muted hover:bg-surface',
                 )}
               >
-                時刻に合わせて自動
+                {t('settings.autoTime')}
               </button>
-              {TIMES.map((time) => (
+              {TIMES.map(({ value, labelKey }) => (
                 <button
                   type="button"
-                  key={time}
-                  onClick={() => setTimeOverride(time)}
-                  aria-pressed={current === time}
+                  key={value}
+                  onClick={() => setTimeOverride(value)}
+                  aria-pressed={current === value}
                   className={cn(
                     'min-h-12 rounded-pill border px-3 text-caption font-semibold shadow-inner-light transition-all duration-300 ease-gentle active:scale-[0.98]',
-                    current === time
+                    current === value
                       ? 'border-transparent bg-accent-strong text-white shadow-glow'
                       : 'border-line/55 bg-surface-2/70 text-muted hover:bg-surface',
                   )}
                 >
-                  {TIME_LABELS_JA[time]}
+                  {t(labelKey)}
                 </button>
               ))}
             </div>
@@ -93,96 +107,126 @@ export default function SettingsPage() {
       </section>
 
       <section className="space-y-3 px-5">
-        <SectionLabel title="使い方" description="通知や寝る前モードなど、読む体験を調整します" />
+        <SectionLabel title={t('settings.usage')} description={t('settings.usageBody')} />
         <Card className="divide-y divide-line/45">
           {showNotifications && (
             <SettingsLink
               href="/settings/notifications"
               Icon={Bell}
-              label="通知の設定"
-              hint={isCommercialPreview ? '配信前のプレビュー' : '朝・夜・テーマ別'}
+              label={t('settings.notifications')}
+              hint={
+                isCommercialPreview
+                  ? t('settings.notificationPreview')
+                  : locale === 'ja'
+                    ? '朝・夜・テーマ別'
+                    : 'Morning, evening, and topic choices'
+              }
             />
           )}
-          <SettingsLink href="/night" Icon={Moon} label="寝る前モード" hint="夜に1件だけ読む" />
+          <SettingsLink
+            href="/night"
+            Icon={Moon}
+            label={t('settings.night')}
+            hint={t('settings.nightBody')}
+          />
           {showPremium && (
             <SettingsLink
               href="/premium"
               Icon={Crown}
-              label={isCommercialPreview ? 'プレミアム機能の構想' : 'プレミアム'}
+              label={
+                isCommercialPreview
+                  ? locale === 'ja'
+                    ? 'プレミアム機能の構想'
+                    : 'Premium feature preview'
+                  : 'Premium'
+              }
               hint={
                 isCommercialPreview
                   ? hydrated && isPremium
-                    ? '表示プレビュー中'
-                    : '料金は発生しません'
-                  : 'プランを確認'
+                    ? locale === 'ja'
+                      ? '表示プレビュー中'
+                      : 'Display preview enabled'
+                    : locale === 'ja'
+                      ? '料金は発生しません'
+                      : 'No payment is made'
+                  : locale === 'ja'
+                    ? 'プランを確認'
+                    : 'View plans'
               }
             />
           )}
           <SettingsLink
             href="/welcome"
             Icon={Sparkles}
-            label="最初の案内を見直す"
-            hint="アプリの特徴を確認"
+            label={t('settings.onboarding')}
+            hint={t('settings.onboardingBody')}
             onClick={() => setOnboarded(false)}
           />
         </Card>
       </section>
 
       <section className="space-y-3 px-5">
-        <SectionLabel
-          title="安心・サポート"
-          description="保存データ、同意内容、問い合わせを確認します"
-        />
+        <SectionLabel title={t('settings.safety')} description={t('settings.safetyBody')} />
         <Card className="divide-y divide-line/45">
           <SettingsLink
             href="/settings/privacy"
             Icon={ShieldCheck}
-            label="プライバシーとデータ"
-            hint="同意・端末内データ"
+            label={t('settings.privacy')}
+            hint={t('settings.privacyBody')}
           />
           <SettingsLink
             href="/support"
             Icon={LifeBuoy}
-            label="問い合わせ・記事の報告"
-            hint="不具合・訂正・権利"
+            label={t('settings.support')}
+            hint={t('settings.supportBody')}
           />
         </Card>
       </section>
 
       <section className="space-y-3 px-5">
-        <SectionLabel title="規約・方針" description="編集基準と法的な情報を確認できます" />
+        <SectionLabel title={t('settings.policies')} description={t('settings.policiesBody')} />
         <Card className="divide-y divide-line/45">
           <SettingsLink
             href="/legal/editorial-policy"
             Icon={BookOpenCheck}
-            label="ニュースの選び方・訂正方針"
+            label={t('settings.editorial')}
           />
           <SettingsLink
             href="/legal/accessibility"
             Icon={Accessibility}
-            label="アクセシビリティ方針"
+            label={t('settings.accessibility')}
           />
-          <SettingsLink href="/legal/privacy" Icon={ShieldCheck} label="プライバシーポリシー" />
-          <SettingsLink href="/legal/terms" Icon={FileText} label="利用規約" />
-          <SettingsLink href="/legal/commerce" Icon={Scale} label="特定商取引法に基づく表記" />
+          <SettingsLink
+            href="/legal/privacy"
+            Icon={ShieldCheck}
+            label={t('settings.privacyPolicy')}
+          />
+          <SettingsLink href="/legal/terms" Icon={FileText} label={t('settings.terms')} />
+          <SettingsLink href="/legal/commerce" Icon={Scale} label={t('settings.commerce')} />
         </Card>
       </section>
 
       <section className="space-y-3 px-5">
-        <SectionLabel title="このアプリについて" />
+        <SectionLabel title={t('settings.about')} />
         <Card inset className="relative space-y-2">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-body font-semibold text-text">{commercialConfig.app.displayName}</p>
             <span className="rounded-pill bg-accent-soft/70 px-2.5 py-1 text-[0.68rem] font-bold text-accent">
-              {isCommercialPreview ? '公開準備中' : '正式版'}
+              {isCommercialPreview ? t('settings.preparing') : t('settings.official')}
             </span>
           </div>
           <p className="text-caption leading-relaxed text-muted">
-            暗い出来事をやさしく言い換えるのではなく、出来事そのものが明るく、希望や喜びを感じられるニュースだけを選びます。
+            {locale === 'ja'
+              ? '暗い出来事をやさしく言い換えるのではなく、出来事そのものが明るく、希望や喜びを感じられるニュースだけを選びます。'
+              : 'We do not soften dark events. We select news whose core event is genuinely bright, hopeful, or joyful.'}
           </p>
           <p className="pt-1 text-[0.72rem] text-muted/75">
-            バージョン {commercialConfig.app.version}
-            {isCommercialPreview ? '（商用公開前）' : ''}
+            {t('common.version')} {commercialConfig.app.version}
+            {isCommercialPreview
+              ? locale === 'ja'
+                ? '（商用公開前）'
+                : ' (pre-release)'
+              : ''}
           </p>
         </Card>
       </section>
