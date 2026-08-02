@@ -36,7 +36,7 @@ jobs:
           npm install --save-dev --save-exact eslint@9.39.2 eslint-config-next@16.2.12 @types/react@19.2.2 @types/react-dom@19.2.2
 
       - name: Migrate next lint to ESLint CLI
-        run: npx --yes @next/codemod@canary next-lint-to-eslint-cli .
+        run: npx --yes @next/codemod@canary next-lint-to-eslint-cli . --force
 
       - name: Format migration changes
         run: npm run format
