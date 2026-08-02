@@ -11,13 +11,24 @@ interface SettingsState {
   weeklyDigest: boolean;
   topicNotify: CategoryId[];
   isPremium: boolean;
-  setOnboarded: (v: boolean) => void;
-  setMorningNotify: (v: boolean) => void;
-  setNightNotify: (v: boolean) => void;
-  setWeeklyDigest: (v: boolean) => void;
+  setOnboarded: (value: boolean) => void;
+  setMorningNotify: (value: boolean) => void;
+  setNightNotify: (value: boolean) => void;
+  setWeeklyDigest: (value: boolean) => void;
   toggleTopic: (id: CategoryId) => void;
-  setPremium: (v: boolean) => void;
+  setPremium: (value: boolean) => void;
 }
+
+const CATEGORY_IDS = new Set<CategoryId>([
+  'animals-nature',
+  'kindness',
+  'bright-tech',
+  'arts-culture',
+  'night-reads',
+]);
+
+const bool = (value: unknown, fallback: boolean) =>
+  typeof value === 'boolean' ? value : fallback;
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
@@ -35,11 +46,37 @@ export const useSettingsStore = create<SettingsState>()(
       toggleTopic: (id) =>
         set((state) => ({
           topicNotify: state.topicNotify.includes(id)
-            ? state.topicNotify.filter((x) => x !== id)
+            ? state.topicNotify.filter((topicId) => topicId !== id)
             : [...state.topicNotify, id],
         })),
       setPremium: (isPremium) => set({ isPremium }),
     }),
-    { name: 'hotnews-settings' },
+    {
+      name: 'hotnews-settings',
+      version: 1,
+      partialize: (state) => ({
+        onboarded: state.onboarded,
+        morningNotify: state.morningNotify,
+        nightNotify: state.nightNotify,
+        weeklyDigest: state.weeklyDigest,
+        topicNotify: state.topicNotify,
+        isPremium: state.isPremium,
+      }),
+      migrate: (persistedState) => {
+        const stored = persistedState as Partial<SettingsState>;
+        const topicNotify = Array.isArray(stored.topicNotify)
+          ? [...new Set(stored.topicNotify.filter((id): id is CategoryId => CATEGORY_IDS.has(id as CategoryId)))]
+          : [];
+
+        return {
+          onboarded: bool(stored.onboarded, false),
+          morningNotify: bool(stored.morningNotify, true),
+          nightNotify: bool(stored.nightNotify, true),
+          weeklyDigest: bool(stored.weeklyDigest, true),
+          topicNotify,
+          isPremium: bool(stored.isPremium, false),
+        };
+      },
+    },
   ),
 );
