@@ -44,7 +44,7 @@ export default function SettingsPage() {
                 className={cn(
                   'min-h-11 rounded-pill border px-3 text-caption font-semibold shadow-inner-light transition-all duration-300 ease-gentle active:scale-95',
                   current === null
-                    ? 'border-transparent bg-accent text-white shadow-glow'
+                    ? 'border-transparent bg-accent-strong text-white shadow-glow'
                     : 'border-line/55 bg-surface-2/70 text-muted hover:bg-surface',
                 )}
               >
@@ -59,7 +59,7 @@ export default function SettingsPage() {
                   className={cn(
                     'min-h-11 rounded-pill border px-3 text-caption font-semibold shadow-inner-light transition-all duration-300 ease-gentle active:scale-95',
                     current === time
-                      ? 'border-transparent bg-accent text-white shadow-glow'
+                      ? 'border-transparent bg-accent-strong text-white shadow-glow'
                       : 'border-line/55 bg-surface-2/70 text-muted hover:bg-surface',
                   )}
                 >
