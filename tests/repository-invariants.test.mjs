@@ -35,6 +35,13 @@ test('commercial configuration has a valid stage and integration consistency', a
   }
 });
 
+test('supported Node.js LTS is pinned consistently', async () => {
+  const nvmrc = (await read('.nvmrc')).trim();
+  const packageJson = JSON.parse(await read('package.json'));
+  assert.equal(nvmrc, '24');
+  assert.equal(packageJson.engines.node, '>=24 <25');
+});
+
 test('reader-facing selectors retain the central publication gate', async () => {
   const selectors = await read('src/lib/data/selectors.ts');
   assert.match(selectors, /isArticleEligibleForPublication/);
