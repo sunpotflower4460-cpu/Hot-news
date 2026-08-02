@@ -20,7 +20,8 @@
     "privacyChoices": "/settings/privacy",
     "terms": "/legal/terms",
     "commercialDisclosure": "/legal/commerce",
-    "editorialPolicy": "/legal/editorial-policy"
+    "editorialPolicy": "/legal/editorial-policy",
+    "accessibility": "/legal/accessibility"
   },
   "legal": {
     "country": "JP",
