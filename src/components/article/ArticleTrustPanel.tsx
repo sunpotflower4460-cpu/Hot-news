@@ -1,21 +1,32 @@
+'use client';
+
 import Link from 'next/link';
 import { Bot, BookOpenCheck, ChevronDown, Flag, ShieldCheck } from 'lucide-react';
 import { ShareArticleButton } from '@/components/article/ShareArticleButton';
+import { localizeArticle } from '@/lib/i18n/articleTranslations';
+import { useI18n } from '@/lib/i18n/useI18n';
 import type { Article, SourceType } from '@/types/article';
-import { formatJaDate } from '@/lib/utils/date';
+import { formatDate } from '@/lib/utils/date';
 
-const SOURCE_LABELS: Record<SourceType, string> = {
-  PRIMARY: '一次資料',
-  OFFICIAL: '公式情報',
-  INDEPENDENT: '独立報道',
-  SECONDARY: '二次情報',
+const SOURCE_LABELS: Record<SourceType, { ja: string; en: string }> = {
+  PRIMARY: { ja: '一次資料', en: 'Primary material' },
+  OFFICIAL: { ja: '公式情報', en: 'Official information' },
+  INDEPENDENT: { ja: '独立報道', en: 'Independent reporting' },
+  SECONDARY: { ja: '二次情報', en: 'Secondary source' },
 };
 
-export function ArticleTrustPanel({ article }: { article: Article }) {
+export function ArticleTrustPanel({ article: rawArticle }: { article: Article }) {
+  const { locale, t } = useI18n();
+  const article = localizeArticle(rawArticle, locale);
   const provenance = article.provenance;
+  const sourceLabel = provenance ? SOURCE_LABELS[provenance.sourceType][locale] : '';
   const overview = provenance
-    ? `${SOURCE_LABELS[provenance.sourceType]}を中心に${provenance.sourceCount}件で確認`
-    : '商用版では出典・確認履歴を公開します';
+    ? locale === 'ja'
+      ? `${sourceLabel}を中心に${provenance.sourceCount}件で確認`
+      : `Checked against ${provenance.sourceCount} source${provenance.sourceCount === 1 ? '' : 's'}, centered on ${sourceLabel.toLowerCase()}`
+    : locale === 'ja'
+      ? '商用版では出典・確認履歴を公開します'
+      : 'Production articles will include source and review history';
 
   return (
     <aside className="glass overflow-hidden rounded-card border">
@@ -25,7 +36,7 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
             <ShieldCheck aria-hidden size={18} />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-body font-bold text-text">確認情報と編集履歴</span>
+            <span className="block text-body font-bold text-text">{t('article.trustTitle')}</span>
             <span className="mt-0.5 block text-caption leading-snug text-muted">{overview}</span>
           </span>
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface/65 text-muted shadow-inner-light">
@@ -40,30 +51,51 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
         <div className="border-t border-line/45 px-4 pb-4 pt-4">
           {provenance ? (
             <dl className="grid grid-cols-2 gap-x-4 gap-y-3.5">
-              <TrustValue label="中心の出典" value={SOURCE_LABELS[provenance.sourceType]} />
-              <TrustValue label="確認ソース" value={`${provenance.sourceCount}件`} />
-              <TrustValue label="最終確認" value={formatJaDate(provenance.lastVerifiedAt)} />
-              <TrustValue label="編集確認" value={formatJaDate(provenance.editorialReviewedAt)} />
+              <TrustValue label={t('article.sourceType')} value={sourceLabel} />
               <TrustValue
-                label="AI補助"
-                value={provenance.aiAssisted ? '使用・人が確認' : '使用なし'}
+                label={t('article.sourceCount')}
+                value={
+                  locale === 'ja'
+                    ? `${provenance.sourceCount}件`
+                    : `${provenance.sourceCount}`
+                }
               />
               <TrustValue
-                label="訂正状態"
-                value={provenance.correctionStatus === 'CORRECTED' ? '訂正あり' : '訂正なし'}
+                label={t('article.lastVerified')}
+                value={formatDate(provenance.lastVerifiedAt, locale)}
+              />
+              <TrustValue
+                label={t('article.editorialReviewed')}
+                value={formatDate(provenance.editorialReviewedAt, locale)}
+              />
+              <TrustValue
+                label={t('article.ai')}
+                value={provenance.aiAssisted ? t('article.aiUsed') : t('article.aiUnused')}
+              />
+              <TrustValue
+                label={t('article.correction')}
+                value={
+                  provenance.correctionStatus === 'CORRECTED'
+                    ? t('article.corrected')
+                    : t('article.notCorrected')
+                }
               />
             </dl>
           ) : (
             <div className="rounded-card bg-accent-soft/45 px-4 py-3">
               <p className="text-caption leading-relaxed text-muted">
-                この画面は架空データによる表示確認です。商用公開する実ニュースには、出典数、AI補助、事実確認、編集確認、訂正状態を必須で記録します。
+                {locale === 'ja'
+                  ? 'この画面は架空データによる表示確認です。商用公開する実ニュースには、出典数、AI補助、事実確認、編集確認、訂正状態を必須で記録します。'
+                  : 'This screen uses fictional preview data. Production news must record source count, AI assistance, fact checking, editorial review, and correction status.'}
               </p>
             </div>
           )}
 
           {provenance?.correctionStatus === 'CORRECTED' && provenance.correctionNote && (
             <div className="mt-4 rounded-card border border-amber-500/20 bg-amber-100/55 px-4 py-3 text-amber-950 dark:bg-amber-950/25 dark:text-amber-100">
-              <p className="text-caption font-bold">訂正について</p>
+              <p className="text-caption font-bold">
+                {locale === 'ja' ? '訂正について' : 'About this correction'}
+              </p>
               <p className="mt-1 text-caption leading-relaxed opacity-85">
                 {provenance.correctionNote}
               </p>
@@ -73,7 +105,9 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
           {provenance?.aiAssisted && (
             <p className="mt-4 flex items-start gap-2 rounded-card bg-surface/55 px-3 py-2.5 text-[0.72rem] leading-relaxed text-muted">
               <Bot aria-hidden size={14} className="mt-0.5 shrink-0 text-accent" />
-              AIは要約案などを補助し、公開前に出典照合と編集確認を行っています。
+              {locale === 'ja'
+                ? 'AIは要約案などを補助し、公開前に出典照合と編集確認を行っています。'
+                : 'AI may assist with a draft summary. A person checks the sources and reviews the article before publication.'}
             </p>
           )}
 
@@ -83,14 +117,14 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
               className="flex min-h-11 items-center justify-center gap-2 rounded-pill bg-accent-soft/65 px-3 text-caption font-semibold text-accent"
             >
               <BookOpenCheck aria-hidden size={15} />
-              編集・訂正方針
+              {t('article.policy')}
             </Link>
             <Link
               href="/support"
               className="flex min-h-11 items-center justify-center gap-2 rounded-pill border border-line/55 bg-surface/70 px-3 text-caption font-semibold text-text"
             >
               <Flag aria-hidden size={15} />
-              この記事を報告
+              {t('article.report')}
             </Link>
           </div>
         </div>
@@ -98,7 +132,9 @@ export function ArticleTrustPanel({ article }: { article: Article }) {
 
       <div className="border-t border-line/45 px-4 py-4">
         <p className="mb-2 text-center text-caption leading-relaxed text-muted">
-          誰かに伝えたいときだけ、端末の共有機能を使えます。
+          {locale === 'ja'
+            ? '誰かに伝えたいときだけ、端末の共有機能を使えます。'
+            : 'Use your device share menu only when you want to pass this story along.'}
         </p>
         <ShareArticleButton title={article.title} summary={article.summary} />
       </div>
