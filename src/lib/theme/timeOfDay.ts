@@ -16,7 +16,6 @@ export const TIME_LABELS_JA: Record<TimeOfDay, string> = {
   night: '夜',
 };
 
-/** A soft greeting that matches the heart-weather metaphor. */
 export const TIME_GREETINGS_JA: Record<TimeOfDay, string> = {
   morning: 'おはようございます',
   day: 'こんにちは',
@@ -25,8 +24,8 @@ export const TIME_GREETINGS_JA: Record<TimeOfDay, string> = {
 };
 
 export const TIME_SUBTITLES_JA: Record<TimeOfDay, string> = {
-  morning: '今日も小さな灯りからはじめましょう',
-  day: 'ひと息ついて、やさしいニュースを',
-  evening: '一日のおわりに、ほっとする話を',
-  night: 'おやすみ前に、静かな知らせを',
+  morning: '急がず、今日の一件からどうぞ',
+  day: 'ひと息ついて、明るい出来事を',
+  evening: '一日の終わりに、短いニュースを',
+  night: '眠る前に、静かな一件だけ',
 };
