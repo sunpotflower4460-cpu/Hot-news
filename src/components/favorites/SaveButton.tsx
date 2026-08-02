@@ -72,9 +72,6 @@ export function SaveButton({
           className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
         />
       </motion.span>
-      <span className="sr-only" aria-live="polite">
-        {saved ? 'お気に入りに保存済み' : 'お気に入り未保存'}
-      </span>
     </button>
   );
 }
