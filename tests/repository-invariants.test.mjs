@@ -123,6 +123,37 @@ test('manifest includes commercial identity and useful shortcuts', async () => {
   assert.ok(shortcutUrls.has('/night'));
 });
 
+test('core mobile ux keeps explicit navigation and safe-area spacing', async () => {
+  const navigation = await read('src/components/layout/BottomTabBar.tsx');
+  assert.match(navigation, /label: 'テーマ'/);
+  assert.match(navigation, /label: '保存'/);
+  assert.match(navigation, /label: '週まとめ'/);
+
+  const onboarding = await read('src/components/onboarding/OnboardingCarousel.tsx');
+  assert.match(onboarding, /戻る/);
+  assert.match(onboarding, /次へ/);
+  assert.match(onboarding, /h-10 w-10/);
+
+  const screenHeader = await read('src/components/layout/ScreenHeader.tsx');
+  assert.match(screenHeader, /sticky top-0/);
+
+  const polish = await read('src/app/ux-polish.css');
+  assert.match(polish, /calc\(1\.25rem \+ env\(safe-area-inset-top\)\)/);
+  assert.match(polish, /calc\(0\.5rem \+ env\(safe-area-inset-bottom\)\)/);
+});
+
+test('article reading flow exposes summary, source context, and progressive trust', async () => {
+  const article = await read('src/app/(app)/article/[id]/page.tsx');
+  assert.match(article, /30秒でわかる要点/);
+  assert.match(article, /外部サイトが新しい画面で開きます/);
+  assert.match(article, /記事を読む/);
+
+  const trust = await read('src/components/article/ArticleTrustPanel.tsx');
+  assert.match(trust, /<details>/);
+  assert.match(trust, /確認情報と編集履歴/);
+  assert.match(trust, /disclosure-summary/);
+});
+
 test('native privacy manifest starts with tracking and collection disabled', async () => {
   const manifest = await read('ios-template/PrivacyInfo.xcprivacy');
   assert.match(manifest, /<key>NSPrivacyTracking<\/key>\s*<false\/>/);
