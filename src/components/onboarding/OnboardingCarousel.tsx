@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -82,7 +83,7 @@ export function OnboardingCarousel() {
         </AnimatePresence>
       </div>
 
-      <div className="safe-bottom flex flex-col items-center gap-5 px-7 pb-8">
+      <div className="safe-bottom flex flex-col items-center gap-4 px-7 pb-8">
         <div className="glass flex gap-2 rounded-pill border px-3 py-2 shadow-soft">
           {SLIDES.map((_, slideIndex) => (
             <button
@@ -98,8 +99,21 @@ export function OnboardingCarousel() {
             />
           ))}
         </div>
+        {last && (
+          <p className="max-w-sm text-center text-[0.7rem] leading-relaxed text-muted">
+            はじめる前に
+            <Link href="/legal/terms" className="mx-1 font-semibold text-accent underline underline-offset-4">
+              利用規約
+            </Link>
+            と
+            <Link href="/legal/privacy" className="mx-1 font-semibold text-accent underline underline-offset-4">
+              プライバシーポリシー
+            </Link>
+            を確認できます。
+          </p>
+        )}
         <Button size="lg" className="w-full max-w-sm" onClick={next}>
-          {last ? '明るいニュースを見にいく' : 'つぎへ'}
+          {last ? '確認して、明るいニュースをはじめる' : 'つぎへ'}
         </Button>
       </div>
     </div>
