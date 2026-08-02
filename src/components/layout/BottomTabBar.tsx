@@ -18,7 +18,10 @@ export function BottomTabBar() {
   const pathname = usePathname();
 
   return (
-    <nav className="safe-bottom relative z-30 shrink-0 px-3 pb-2 pt-1">
+    <nav
+      aria-label="メインナビゲーション"
+      className="safe-bottom relative z-30 shrink-0 px-3 pb-2 pt-1"
+    >
       <div className="glass rounded-[1.65rem] border shadow-float">
         <ul className="flex items-stretch justify-around px-1.5 py-1.5">
           {TABS.map(({ href, label, Icon }) => {
@@ -28,16 +31,19 @@ export function BottomTabBar() {
                 <Link
                   href={href}
                   aria-current={active ? 'page' : undefined}
+                  aria-label={active ? `${label}、現在のページ` : label}
                   className="relative flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-[1.25rem] px-1 py-1.5 active:scale-95"
                 >
                   {active && (
                     <motion.span
                       layoutId="tab-pill"
+                      aria-hidden
                       className="absolute inset-x-1.5 inset-y-0 rounded-[1.2rem] border border-white/35 bg-accent-soft/80 shadow-inner-light"
                       transition={{ type: 'spring', stiffness: 360, damping: 31, mass: 0.8 }}
                     />
                   )}
                   <Icon
+                    aria-hidden
                     size={21}
                     strokeWidth={active ? 2.35 : 1.8}
                     className={cn(
