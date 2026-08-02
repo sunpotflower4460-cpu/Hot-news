@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { Chip } from '@/components/ui/Chip';
 import { getCategory } from '@/mock/categories';
 import type { CategoryId } from '@/types/article';
-import { Chip } from '@/components/ui/Chip';
 
 interface CategoryChipProps {
   id: CategoryId;
@@ -18,8 +18,13 @@ export function CategoryChip({ id, asLink = true }: CategoryChipProps) {
   );
 
   if (!asLink) return chip;
+
   return (
-    <Link href={`/browse/${id}`} className="transition-transform active:scale-95">
+    <Link
+      href={`/browse/${id}`}
+      aria-label={`${meta.labelJa}の明るいニュースを見る`}
+      className="inline-flex min-h-11 items-center rounded-pill transition-transform active:scale-95"
+    >
       {chip}
     </Link>
   );
