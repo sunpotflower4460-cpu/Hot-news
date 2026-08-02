@@ -14,14 +14,19 @@ interface ScreenHeaderProps {
 export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHeaderProps) {
   const router = useRouter();
 
+  const goBack = () => {
+    if (window.history.length > 1) router.back();
+    else router.push('/home');
+  };
+
   return (
     <header className="safe-top relative z-20 flex items-start gap-3 px-5 pb-3 pt-5">
       {back && (
         <button
           type="button"
-          aria-label="戻る"
-          onClick={() => router.back()}
-          className="glass float-card -ml-1 mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-text"
+          aria-label="前の画面へ戻る"
+          onClick={goBack}
+          className="glass float-card -ml-1 mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-text"
         >
           <ChevronLeft size={20} strokeWidth={2.1} />
         </button>
