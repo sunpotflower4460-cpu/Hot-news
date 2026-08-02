@@ -33,6 +33,8 @@ export default function SettingsPage() {
   const isPremium = useSettingsStore((state) => state.isPremium);
   const setOnboarded = useSettingsStore((state) => state.setOnboarded);
   const current = hydrated ? timeOverride : null;
+  const showNotifications = isCommercialPreview || commercialConfig.features.pushNotifications;
+  const showPremium = isCommercialPreview || commercialConfig.features.subscriptions;
 
   return (
     <div className="space-y-7 pb-10">
@@ -86,19 +88,29 @@ export default function SettingsPage() {
       <section className="space-y-3 px-5">
         <h2 className="text-caption font-bold text-muted">体験</h2>
         <Card className="divide-y divide-line/45">
-          <SettingsLink
-            href="/settings/notifications"
-            Icon={Bell}
-            label="通知"
-            hint="希望設定プレビュー"
-          />
+          {showNotifications && (
+            <SettingsLink
+              href="/settings/notifications"
+              Icon={Bell}
+              label="通知"
+              hint={isCommercialPreview ? '希望設定プレビュー' : '朝・夜・テーマ別'}
+            />
+          )}
           <SettingsLink href="/night" Icon={Moon} label="寝る前モード" hint="夜の一件だけ" />
-          <SettingsLink
-            href="/premium"
-            Icon={Crown}
-            label="プレミアム構想"
-            hint={hydrated && isPremium ? '表示プレビュー中' : '機能プレビュー'}
-          />
+          {showPremium && (
+            <SettingsLink
+              href="/premium"
+              Icon={Crown}
+              label={isCommercialPreview ? 'プレミアム構想' : 'プレミアム'}
+              hint={
+                isCommercialPreview
+                  ? hydrated && isPremium
+                    ? '表示プレビュー中'
+                    : '機能プレビュー'
+                  : 'プランを確認'
+              }
+            />
+          )}
           <SettingsLink
             href="/welcome"
             Icon={Sparkles}
