@@ -18,7 +18,7 @@ export default function EditorialPolicyPage() {
           <li>戦争、犯罪、暴力、事故、災害、虐待、炎上を中心とする内容</li>
           <li>死、重い病気、救急、喪失を前提にしなければ成立しない内容</li>
           <li>暗い出来事の後に一つ良い行動があっただけの内容</li>
-          <li>根拠のない奇跡、医療効果、予言、噂、広告 disguised as news</li>
+          <li>根拠のない奇跡、医療効果、予言、噂、広告をニュースに見せかけた内容</li>
           <li>見出しだけで期待や怒りをあおる内容</li>
         </ul>
       </LegalSection>
@@ -71,7 +71,14 @@ export default function EditorialPolicyPage() {
 
       <LegalSection title="9. 指摘の受付">
         <p>
-          事実誤認、権利侵害、不適切な暗い文脈、出典切れを見つけた場合は、<Link href="/support" className="font-semibold text-accent underline underline-offset-4">サポート</Link>から記事IDと理由をお知らせください。
+          事実誤認、権利侵害、不適切な暗い文脈、出典切れを見つけた場合は、
+          <Link
+            href="/support"
+            className="font-semibold text-accent underline underline-offset-4"
+          >
+            サポート
+          </Link>
+          から記事IDと理由をお知らせください。
         </p>
       </LegalSection>
     </LegalDocument>
