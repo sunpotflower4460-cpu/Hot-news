@@ -14,7 +14,7 @@ export default async function NightPage() {
       <div className="px-5 pt-1 text-center">
         <div className="soft-surface relative mx-auto flex h-28 w-28 items-center justify-center rounded-[2.6rem] shadow-float">
           <div className="absolute inset-3 animate-breathe rounded-full bg-accent-soft/80 blur-xl" />
-          <div className="ambient-ring relative flex h-18 w-18 items-center justify-center rounded-full bg-white/30 text-accent shadow-glow">
+          <div className="ambient-ring relative flex h-20 w-20 items-center justify-center rounded-full bg-white/30 text-accent shadow-glow">
             <Moon size={32} strokeWidth={1.7} />
           </div>
           <Sparkles size={14} className="absolute right-5 top-5 animate-twinkle text-accent" />
