@@ -11,8 +11,10 @@ interface CategoryRailProps {
 export function CategoryRail({ category, articles }: CategoryRailProps) {
   if (articles.length === 0) return null;
 
+  const headingId = `category-${category.id}`;
+
   return (
-    <section className="space-y-4">
+    <section aria-labelledby={headingId} className="space-y-4">
       <div className="flex items-end justify-between gap-4 px-5">
         <div className="flex min-w-0 items-center gap-3">
           <span
@@ -23,25 +25,28 @@ export function CategoryRail({ category, articles }: CategoryRailProps) {
             {category.glyph}
           </span>
           <div className="min-w-0">
-            <h2 className="text-h2 font-bold text-text">{category.labelJa}</h2>
+            <h2 id={headingId} className="text-h2 font-bold text-text">
+              {category.labelJa}
+            </h2>
             <p className="truncate text-caption text-muted">{category.blurb}</p>
           </div>
         </div>
         <Link
           href={`/browse/${category.id}`}
-          className="flex shrink-0 items-center gap-0.5 rounded-pill bg-surface/45 px-2.5 py-1.5 text-caption font-semibold text-accent backdrop-blur transition-all duration-300 hover:bg-accent-soft active:scale-95"
+          aria-label={`${category.labelJa}をすべて見る`}
+          className="flex min-h-11 shrink-0 items-center gap-0.5 rounded-pill bg-surface/45 px-3 text-caption font-semibold text-accent backdrop-blur transition-all duration-300 hover:bg-accent-soft active:scale-95"
         >
           もっと見る
-          <ChevronRight size={14} />
+          <ChevronRight aria-hidden size={14} />
         </Link>
       </div>
-      <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 pt-0.5 [scroll-padding-inline:1.25rem]">
+      <ul className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 pt-0.5 [scroll-padding-inline:1.25rem]">
         {articles.map((article) => (
-          <div key={article.id} className="snap-start">
+          <li key={article.id} className="snap-start">
             <ArticleCard article={article} layout="rail" />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
