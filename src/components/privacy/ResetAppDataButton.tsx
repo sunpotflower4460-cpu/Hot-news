@@ -51,7 +51,7 @@ export function ResetAppDataButton() {
         {armed ? 'もう一度押して端末内データを削除' : '端末内データをすべて削除'}
       </Button>
       <p className="mt-2 text-center text-[0.7rem] leading-relaxed text-muted">
-        お気に入り、表示設定、通知の希望、同意設定、キャッシュをこの端末から削除します。
+        保存した記事、最近読んだ履歴、表示・通知の希望、同意設定、キャッシュをこの端末から削除します。
       </p>
     </div>
   );
