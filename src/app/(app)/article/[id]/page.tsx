@@ -35,7 +35,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
   return (
     <article className="pb-12">
-      <ScreenHeader back action={<SaveButton id={article.id} />} />
+      <ScreenHeader
+        back
+        action={<SaveButton id={article.id} articleTitle={article.title} />}
+      />
 
       <div className="px-5">
         <CoverArt
@@ -94,7 +97,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
         {sourceOnly && (
           <div className="soft-surface rounded-panel px-5 py-6 text-center shadow-soft">
             <div className="ambient-ring mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/35 text-accent shadow-glow">
-              <ExternalLink size={26} strokeWidth={1.7} />
+              <ExternalLink aria-hidden size={26} strokeWidth={1.7} />
             </div>
             <h2 className="mt-4 text-h2 font-bold text-text">出典で読むニュースです</h2>
             <p className="mx-auto mt-2 max-w-xs text-body leading-relaxed text-muted">
@@ -106,7 +109,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
         {!sourceOnly && (
           <aside className="relative overflow-hidden rounded-panel border border-accent/10 bg-accent-soft/55 px-5 py-5 shadow-inner-light">
             <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/35 blur-2xl" />
-            <Sparkles size={18} className="relative text-accent" />
+            <Sparkles aria-hidden size={18} className="relative text-accent" />
             <p className="relative mt-2 font-rounded text-body-lg font-medium text-text">
               今日の光を、ひとつ持ち帰って。
             </p>
@@ -156,13 +159,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
               <ChevronRight aria-hidden size={14} />
             </Link>
           </div>
-          <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-5 [scroll-padding-inline:1.25rem]">
+          <ul className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-5 [scroll-padding-inline:1.25rem]">
             {related.map((candidate) => (
-              <div key={candidate.id} className="snap-start">
+              <li key={candidate.id} className="snap-start">
                 <ArticleCard article={candidate} layout="rail" />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       )}
     </article>
