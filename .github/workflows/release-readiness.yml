@@ -8,11 +8,9 @@ permissions:
 
 jobs:
   release-gate:
-    name: Validate commercial release configuration
+    name: Validate commercial release readiness
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      COMMERCIAL_RELEASE: '1'
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -27,8 +25,5 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Validate commercial blockers
-        run: npm run commercial:check
-
-      - name: Run full quality checks
-        run: npm run format:check && npm run typecheck && npm run lint && npm run build
+      - name: Run strict commercial release gate
+        run: npm run release:check
