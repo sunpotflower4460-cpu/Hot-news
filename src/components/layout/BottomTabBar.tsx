@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpenText, Compass, Heart, Home, Settings } from 'lucide-react';
+import { Bookmark, BookOpenText, Compass, Home, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils/cn';
 
 const TABS = [
   { href: '/home', label: 'ホーム', Icon: Home },
   { href: '/browse', label: 'テーマ', Icon: Compass },
-  { href: '/favorites', label: '保存', Icon: Heart },
+  { href: '/favorites', label: '保存', Icon: Bookmark },
   { href: '/digest', label: '週まとめ', Icon: BookOpenText },
   { href: '/settings', label: '設定', Icon: Settings },
 ] as const;
