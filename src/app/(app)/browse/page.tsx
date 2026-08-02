@@ -1,9 +1,50 @@
 import Link from 'next/link';
-import { ChevronRight, Sparkles } from 'lucide-react';
+import {
+  Baby,
+  ChevronRight,
+  Clock3,
+  HeartHandshake,
+  Moon,
+  Rocket,
+  Sparkles,
+} from 'lucide-react';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { CategoryCard } from '@/components/category/CategoryCard';
 import { CATEGORIES } from '@/mock/categories';
 import { getArticlesByCategory } from '@/lib/data/selectors';
+
+const PURPOSES = [
+  {
+    href: '/home',
+    label: '30秒で読みたい',
+    description: '今日の3選から、要点だけ',
+    Icon: Clock3,
+  },
+  {
+    href: '/browse/kindness',
+    label: 'ほっとしたい',
+    description: '人のやさしさに触れる話',
+    Icon: HeartHandshake,
+  },
+  {
+    href: '/browse/bright-tech',
+    label: '未来を感じたい',
+    description: '暮らしを良くする技術',
+    Icon: Rocket,
+  },
+  {
+    href: '/browse/animals-nature',
+    label: '子どもと話したい',
+    description: '動物や自然の明るい話',
+    Icon: Baby,
+  },
+  {
+    href: '/night',
+    label: '寝る前に1件',
+    description: '短く静かなニュースだけ',
+    Icon: Moon,
+  },
+] as const;
 
 export default async function BrowsePage() {
   const counts = await Promise.all(
@@ -13,20 +54,56 @@ export default async function BrowsePage() {
 
   return (
     <div className="pb-10">
-      <ScreenHeader title="テーマから探す" subtitle="いまの気分に近い入口を選んでください" />
+      <ScreenHeader title="テーマから探す" subtitle="分野からでも、今の目的からでも選べます" />
 
-      <div className="space-y-5 px-5 pt-1">
+      <div className="space-y-6 px-5 pt-1">
         <section
           aria-label="掲載内容について"
           className="rounded-card border border-white/40 bg-accent-soft/50 px-4 py-3.5 shadow-inner-light backdrop-blur-sm"
         >
           <div className="flex items-center gap-2 text-accent">
             <Sparkles aria-hidden size={15} />
-            <p className="text-caption font-bold">どのテーマを選んでも、明るい出来事だけ</p>
+            <p className="text-caption font-bold">どの入口を選んでも、明るい出来事だけ</p>
           </div>
           <p className="mt-1 text-caption leading-relaxed text-muted">
             現在、{total}件の掲載基準を満たしたニュースがあります。
           </p>
+        </section>
+
+        <section aria-labelledby="purpose-heading" className="space-y-3">
+          <div className="px-1">
+            <p className="text-[0.72rem] font-bold tracking-[0.08em] text-accent">今の目的から</p>
+            <h2 id="purpose-heading" className="mt-1 text-h2 font-bold text-text">
+              読みたい気分に近いものを選ぶ
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            {PURPOSES.map(({ href, label, description, Icon }, index) => (
+              <Link
+                key={href}
+                href={href}
+                className={
+                  index === PURPOSES.length - 1
+                    ? 'soft-surface float-card col-span-2 flex min-h-[5.6rem] items-center gap-3 rounded-card px-4 py-3 shadow-soft'
+                    : 'soft-surface float-card min-h-[7.6rem] rounded-card p-3.5 shadow-soft'
+                }
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent shadow-inner-light">
+                  <Icon aria-hidden size={18} />
+                </span>
+                <span className={index === PURPOSES.length - 1 ? 'min-w-0 flex-1' : 'mt-3 block'}>
+                  <span className="block text-body font-bold text-text">{label}</span>
+                  <span className="mt-0.5 block text-caption leading-relaxed text-muted">
+                    {description}
+                  </span>
+                </span>
+                {index === PURPOSES.length - 1 && (
+                  <ChevronRight aria-hidden size={18} className="shrink-0 text-accent" />
+                )}
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section aria-labelledby="category-list-heading" className="space-y-3">
