@@ -19,12 +19,12 @@ export function LegalDocument({
       <ScreenHeader title={title} subtitle={summary} back />
       <div className="space-y-5 px-5 pt-1">
         {isCommercialPreview && (
-          <aside className="rounded-card border border-amber-500/20 bg-amber-100/55 px-4 py-4 text-amber-950 shadow-inner-light dark:bg-amber-950/25 dark:text-amber-100">
+          <aside className="rounded-card border border-accent/15 bg-accent-soft/55 px-4 py-4 text-text shadow-inner-light">
             <div className="flex items-start gap-3">
-              <AlertTriangle aria-hidden size={18} className="mt-0.5 shrink-0" />
+              <AlertTriangle aria-hidden size={18} className="mt-0.5 shrink-0 text-accent" />
               <div>
                 <p className="text-body font-bold">商用公開前のドラフトです</p>
-                <p className="mt-1 text-caption leading-relaxed opacity-80">
+                <p className="mt-1 text-caption leading-relaxed text-muted">
                   運営者情報、施行日、問い合わせ先、実際に導入する外部サービスを確定し、専門家の確認後に本番公開してください。
                 </p>
               </div>
