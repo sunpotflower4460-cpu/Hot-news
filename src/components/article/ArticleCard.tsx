@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import { SaveButton } from '@/components/favorites/SaveButton';
-import { relativeJa } from '@/lib/utils/date';
+import { localizeArticle } from '@/lib/i18n/articleTranslations';
+import { localizeCategory } from '@/lib/i18n/content';
+import { useI18n } from '@/lib/i18n/useI18n';
+import { relativeTime } from '@/lib/utils/date';
 import { getCategory } from '@/mock/categories';
 import type { Article } from '@/types/article';
 import { ComfortScore } from './ComfortScore';
@@ -12,17 +17,22 @@ interface ArticleCardProps {
   layout?: 'rail' | 'list';
 }
 
-export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
+export function ArticleCard({ article: rawArticle, layout = 'list' }: ArticleCardProps) {
+  const { locale, t } = useI18n();
+  const article = localizeArticle(rawArticle, locale);
   const primary = article.category[0];
-  const meta = getCategory(primary);
+  const meta = localizeCategory(getCategory(primary), locale);
   const brightnessScore = article.editorialAssessment?.brightnessScore ?? article.comfortScore;
+  const readLabel = t('common.read');
+  const articleLabel =
+    locale === 'ja' ? `${article.title}を読む` : `Read “${article.title}”`;
 
   if (layout === 'rail') {
     return (
       <article className="soft-surface float-card group relative w-[16.5rem] shrink-0 rounded-card shadow-soft">
         <Link
           href={`/article/${article.id}`}
-          aria-label={`${article.title}を読む`}
+          aria-label={articleLabel}
           className="block overflow-hidden rounded-card"
         >
           <CoverArt category={primary} seed={article.id} size="sm" className="h-32 w-full" />
@@ -43,7 +53,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
             <div className="flex items-center justify-between border-t border-line/35 pt-2.5">
               <ComfortScore score={brightnessScore} showLabel={false} />
               <span className="inline-flex items-center gap-0.5 text-[0.7rem] font-semibold text-accent">
-                読む
+                {readLabel}
                 <ChevronRight aria-hidden size={13} />
               </span>
             </div>
@@ -62,7 +72,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
     <article className="soft-surface float-card group relative rounded-card shadow-soft">
       <Link
         href={`/article/${article.id}`}
-        aria-label={`${article.title}を読む`}
+        aria-label={articleLabel}
         className="flex min-h-[8.1rem] gap-3.5 rounded-card p-3.5 pr-[3.75rem]"
       >
         <CoverArt
@@ -85,7 +95,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
               dateTime={article.appPublishedAt}
               className="shrink-0 text-[0.68rem] text-muted/80"
             >
-              {relativeJa(article.appPublishedAt)}
+              {relativeTime(article.appPublishedAt, locale)}
             </time>
           </div>
 
@@ -99,7 +109,7 @@ export function ArticleCard({ article, layout = 'list' }: ArticleCardProps) {
           <div className="mt-auto flex items-center justify-between gap-2 pt-1.5">
             <ComfortScore score={brightnessScore} showLabel={false} />
             <span className="inline-flex items-center gap-0.5 text-[0.7rem] font-semibold text-accent">
-              読む
+              {readLabel}
               <ChevronRight aria-hidden size={13} />
             </span>
           </div>
