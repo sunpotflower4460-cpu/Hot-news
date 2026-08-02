@@ -32,10 +32,10 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
-        .then((response) => {
+        .then(async (response) => {
           if (response.ok) {
-            const copy = response.clone();
-            event.waitUntil(caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy)));
+            const cache = await caches.open(RUNTIME_CACHE);
+            await cache.put(request, response.clone());
           }
           return response;
         })
@@ -52,10 +52,10 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       caches.match(request).then((cached) => {
         const network = fetch(request)
-          .then((response) => {
+          .then(async (response) => {
             if (response.ok) {
-              const copy = response.clone();
-              event.waitUntil(caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy)));
+              const cache = await caches.open(RUNTIME_CACHE);
+              await cache.put(request, response.clone());
             }
             return response;
           })
