@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#fffaf2" />
-    <title>オフライン｜明るいニュース</title>
+    <title>オフライン / Offline｜明るいニュース</title>
     <style>
       :root {
         color-scheme: light;
@@ -58,10 +58,15 @@
       }
       p {
         margin: 12px auto 0;
-        max-width: 290px;
+        max-width: 300px;
         color: #756a63;
         font-size: 15px;
-        line-height: 1.85;
+        line-height: 1.75;
+      }
+      .english {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(117, 106, 99, 0.18);
       }
       button {
         width: 100%;
@@ -84,7 +89,14 @@
       <p>
         接続が戻ったら、もう一度ひらいてください。すでに表示したページは、端末に残っていれば読めることがあります。
       </p>
-      <button type="button" onclick="location.reload()">もう一度つなぐ</button>
+      <div class="english" lang="en">
+        <h1>You are offline</h1>
+        <p>
+          Try again when your connection returns. Pages you opened earlier may still be available on
+          this device.
+        </p>
+      </div>
+      <button type="button" onclick="location.reload()">もう一度つなぐ / Try again</button>
     </main>
   </body>
 </html>
