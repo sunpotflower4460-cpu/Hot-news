@@ -21,6 +21,8 @@ export type PublishMode = 'normal' | 'safe_short' | 'no_image' | 'source_link_on
 
 export type EditorialDecision = 'APPROVE' | 'REVIEW' | 'REJECT';
 export type RightsStatus = 'CLEARED' | 'SOURCE_LINK_ONLY' | 'REVIEW_REQUIRED';
+export type SourceType = 'PRIMARY' | 'OFFICIAL' | 'INDEPENDENT' | 'SECONDARY';
+export type CorrectionStatus = 'NONE' | 'CORRECTED' | 'RETRACTED';
 
 /**
  * Editorial evidence used to enforce the product promise: the event itself must
@@ -46,6 +48,19 @@ export interface EditorialAssessment {
   assessedAt: string;
 }
 
+/** Reader-safe provenance. Private prompts, raw source snapshots, and staff data stay server-side. */
+export interface ArticleProvenance {
+  version: number;
+  sourceType: SourceType;
+  sourceCount: number;
+  aiAssisted: boolean;
+  factCheckedAt: string;
+  editorialReviewedAt: string;
+  correctionStatus: CorrectionStatus;
+  correctionNote?: string;
+  lastVerifiedAt: string;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -62,6 +77,7 @@ export interface Article {
    */
   comfortScore: number;
   editorialAssessment?: EditorialAssessment;
+  provenance?: ArticleProvenance;
   imageUrl?: string;
   /** Editorial note explaining the positive value of the event. */
   whyComfort: string;
