@@ -56,6 +56,39 @@ requireText(config.operator?.contactEmail, 'operator.contactEmail');
 requireText(config.legal?.privacyEffectiveDate, 'legal.privacyEffectiveDate');
 requireText(config.legal?.termsEffectiveDate, 'legal.termsEffectiveDate');
 
+const allowedLocales = new Set(['ja', 'en']);
+const supportedLocales = Array.isArray(config.localization?.supportedLocales)
+  ? [...new Set(config.localization.supportedLocales)]
+  : [];
+const reviewedReleaseLocales = new Set(
+  Array.isArray(config.localization?.reviewedReleaseLocales)
+    ? config.localization.reviewedReleaseLocales
+    : [],
+);
+
+if (!allowedLocales.has(config.localization?.defaultLocale)) {
+  failures.push('localization.defaultLocale must be ja or en');
+}
+if (supportedLocales.length === 0) {
+  failures.push('localization.supportedLocales must contain at least one locale');
+}
+for (const locale of supportedLocales) {
+  if (!allowedLocales.has(locale)) {
+    failures.push(`localization.supportedLocales contains unsupported locale: ${locale}`);
+  }
+  if (!reviewedReleaseLocales.has(locale)) {
+    failures.push(
+      `localization.reviewedReleaseLocales must include ${locale} after legal, support, editorial, billing, notification, and App Store copy review`,
+    );
+  }
+}
+if (
+  config.localization?.defaultLocale &&
+  !supportedLocales.includes(config.localization.defaultLocale)
+) {
+  failures.push('localization.defaultLocale must be included in supportedLocales');
+}
+
 for (const [key, value] of Object.entries(config.urls ?? {})) {
   requireInternalRoute(value, `urls.${key}`);
 }
@@ -76,8 +109,9 @@ if (
 
 if (config.features?.mockContent) failures.push('features.mockContent must be false');
 if (!config.features?.realNewsApi) failures.push('features.realNewsApi must be true');
-if (config.integrations?.contentApi === 'mock')
+if (config.integrations?.contentApi === 'mock') {
   failures.push('integrations.contentApi must not be mock');
+}
 
 const integrationChecks = [
   ['analytics', 'analyticsProvider'],
@@ -137,8 +171,9 @@ for (const path of nativeRequired) {
 if (config.features?.subscriptions) {
   const billingEvidence = ['src/lib/native/purchases.ts', 'server/billing/README.md'];
   for (const path of billingEvidence) {
-    if (!(await fileExists(path)))
+    if (!(await fileExists(path))) {
       failures.push(`subscription release evidence is missing: ${path}`);
+    }
   }
 }
 
@@ -148,8 +183,9 @@ if (config.features?.pushNotifications) {
     'server/notifications/README.md',
   ];
   for (const path of notificationEvidence) {
-    if (!(await fileExists(path)))
+    if (!(await fileExists(path))) {
       failures.push(`notification release evidence is missing: ${path}`);
+    }
   }
 }
 
@@ -163,6 +199,7 @@ const requiredFiles = [
   'docs/COMMERCIAL_RELEASE_CHECKLIST.md',
   'docs/APP_STORE_SUBMISSION.md',
   'docs/APP_STORE_METADATA_JA.md',
+  'docs/APP_STORE_METADATA_EN.md',
   'docs/DATA_INVENTORY.md',
   'docs/CONTENT_OPERATIONS.md',
   'docs/INCIDENT_RESPONSE.md',
@@ -176,6 +213,8 @@ const requiredFiles = [
   'src/app/(app)/legal/accessibility/page.tsx',
   'src/app/(app)/support/page.tsx',
   'src/app/(app)/settings/privacy/page.tsx',
+  'src/lib/i18n/messages.ts',
+  'src/lib/i18n/articleTranslations.ts',
 ];
 
 for (const path of requiredFiles) {
