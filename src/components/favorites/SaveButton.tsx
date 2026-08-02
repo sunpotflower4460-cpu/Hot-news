@@ -8,22 +8,29 @@ import { cn } from '@/lib/utils/cn';
 
 interface SaveButtonProps {
   id: string;
+  articleTitle?: string;
   variant?: 'glass' | 'plain';
   className?: string;
 }
 
-export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps) {
+export function SaveButton({
+  id,
+  articleTitle,
+  variant = 'glass',
+  className,
+}: SaveButtonProps) {
   const hydrated = useHydrated();
   const ids = useFavoritesStore((state) => state.ids);
   const toggle = useFavoritesStore((state) => state.toggle);
   const saved = hydrated && ids.includes(id);
+  const target = articleTitle ? `「${articleTitle}」を` : '';
 
   return (
     <button
       type="button"
       disabled={!hydrated}
       aria-pressed={saved}
-      aria-label={saved ? 'お気に入りから外す' : 'お気に入りに保存'}
+      aria-label={saved ? `${target}お気に入りから外す` : `${target}お気に入りに保存`}
       onClick={(event) => {
         event.preventDefault();
         event.stopPropagation();
