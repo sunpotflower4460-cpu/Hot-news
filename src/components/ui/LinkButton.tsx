@@ -1,17 +1,15 @@
-import Link, { type LinkProps } from 'next/link';
-import type { AnchorHTMLAttributes } from 'react';
+import Link from 'next/link';
+import type { ComponentProps } from 'react';
 import {
   buttonStyles,
   type ButtonSize,
   type ButtonVariant,
 } from '@/components/ui/Button';
 
-interface LinkButtonProps
-  extends LinkProps,
-    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> {
+type LinkButtonProps = ComponentProps<typeof Link> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
-}
+};
 
 export function LinkButton({
   variant = 'primary',
