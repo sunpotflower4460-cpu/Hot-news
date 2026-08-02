@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { ChevronLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { cn } from '@/lib/utils/cn';
 
 interface ScreenHeaderProps {
   title?: string;
@@ -20,7 +21,13 @@ export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHe
   };
 
   return (
-    <header className="safe-top relative z-20 flex items-start gap-3 px-5 pb-3 pt-5">
+    <header
+      className={cn(
+        'safe-top relative z-20 flex items-start gap-3 px-5 pb-3',
+        back &&
+          'sticky top-0 border-b border-line/25 bg-bg/78 shadow-[0_12px_30px_-28px_hsl(var(--shadow)/0.4)] backdrop-blur-xl',
+      )}
+    >
       {back && (
         <button
           type="button"
@@ -28,7 +35,7 @@ export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHe
           onClick={goBack}
           className="glass float-card -ml-1 mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-text"
         >
-          <ChevronLeft size={20} strokeWidth={2.1} />
+          <ChevronLeft aria-hidden size={20} strokeWidth={2.1} />
         </button>
       )}
       <div className="min-w-0 flex-1 pt-0.5">
