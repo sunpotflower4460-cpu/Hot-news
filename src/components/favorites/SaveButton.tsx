@@ -2,6 +2,7 @@
 
 import { Bookmark, Sparkles } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useFavoritesStore } from '@/lib/store/useFavoritesStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 import { cn } from '@/lib/utils/cn';
@@ -15,16 +16,28 @@ interface SaveButtonProps {
 
 export function SaveButton({ id, articleTitle, variant = 'glass', className }: SaveButtonProps) {
   const hydrated = useHydrated();
+  const { locale, t } = useI18n();
   const ids = useFavoritesStore((state) => state.ids);
   const toggle = useFavoritesStore((state) => state.toggle);
   const saved = hydrated && ids.includes(id);
-  const target = articleTitle ? `「${articleTitle}」を` : '';
-  const label = saved ? `${target}保存から外す` : `${target}あとで読むために保存`;
+  const label = articleTitle
+    ? locale === 'ja'
+      ? saved
+        ? `「${articleTitle}」を保存から外す`
+        : `「${articleTitle}」をあとで読むために保存`
+      : saved
+        ? `Remove “${articleTitle}” from saved stories`
+        : `Save “${articleTitle}” for later`
+    : saved
+      ? locale === 'ja'
+        ? '保存から外す'
+        : 'Remove from saved stories'
+      : t('common.save');
 
   return (
     <button
       type="button"
-      title={saved ? '保存から外す' : '保存する'}
+      title={saved ? (locale === 'ja' ? '保存から外す' : 'Remove from saved') : t('common.save')}
       disabled={!hydrated}
       aria-pressed={saved}
       aria-label={label}
