@@ -4,31 +4,48 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Bookmark, BookOpenText, Compass, Home, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
+import type { TranslationKey } from '@/lib/i18n/messages';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { cn } from '@/lib/utils/cn';
 
-const TABS = [
-  { href: '/home', label: 'ホーム', Icon: Home },
-  { href: '/browse', label: 'テーマ', Icon: Compass },
-  { href: '/favorites', label: '保存', Icon: Bookmark },
-  { href: '/digest', label: '週まとめ', Icon: BookOpenText },
-  { href: '/settings', label: '設定', Icon: Settings },
-] as const;
+const TABS: {
+  href: string;
+  labelKey: TranslationKey;
+  Icon: typeof Home;
+}[] = [
+  { href: '/home', labelKey: 'nav.home', Icon: Home },
+  { href: '/browse', labelKey: 'nav.browse', Icon: Compass },
+  { href: '/favorites', labelKey: 'nav.saved', Icon: Bookmark },
+  { href: '/digest', labelKey: 'nav.digest', Icon: BookOpenText },
+  { href: '/settings', labelKey: 'nav.settings', Icon: Settings },
+];
 
 export function BottomTabBar() {
   const pathname = usePathname();
+  const { locale, t } = useI18n();
 
   return (
-    <nav aria-label="メインナビゲーション" className="safe-bottom relative z-30 shrink-0 px-3 pt-1">
+    <nav
+      aria-label={locale === 'ja' ? 'メインナビゲーション' : 'Main navigation'}
+      className="safe-bottom relative z-30 shrink-0 px-3 pt-1"
+    >
       <div className="glass rounded-[1.65rem] border shadow-float">
         <ul className="flex items-stretch justify-around px-1.5 py-1.5">
-          {TABS.map(({ href, label, Icon }) => {
+          {TABS.map(({ href, labelKey, Icon }) => {
             const active = pathname === href || pathname.startsWith(`${href}/`);
+            const label = t(labelKey);
             return (
               <li key={href} className="min-w-0 flex-1">
                 <Link
                   href={href}
                   aria-current={active ? 'page' : undefined}
-                  aria-label={active ? `${label}、現在のページ` : label}
+                  aria-label={
+                    active
+                      ? locale === 'ja'
+                        ? `${label}、現在のページ`
+                        : `${label}, current page`
+                      : label
+                  }
                   className="relative flex min-h-[3.25rem] flex-col items-center justify-center gap-0.5 rounded-[1.25rem] px-0.5 py-1.5 active:scale-95"
                 >
                   {active && (
