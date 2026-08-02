@@ -8,11 +8,12 @@
     "start": "node scripts/serve-static.mjs",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "commercial:check": "node scripts/validate-commercial.mjs",
     "release:check": "COMMERCIAL_RELEASE=1 npm run commercial:check",
-    "check": "npm run format:check && npm run commercial:check && npm run typecheck && npm run lint && npm run build"
+    "check": "npm run format:check && npm run commercial:check && npm test && npm run typecheck && npm run lint && npm run build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
