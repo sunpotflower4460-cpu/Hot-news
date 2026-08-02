@@ -46,7 +46,9 @@ export default function SettingsPage() {
         <Card inset className="space-y-5">
           <div>
             <p className="text-body font-semibold text-text">画面の明るさ</p>
-            <p className="mb-2 mt-0.5 text-caption text-muted">端末に合わせるか、明るい／暗い表示を固定します。</p>
+            <p className="mb-2 mt-0.5 text-caption text-muted">
+              端末に合わせるか、明るい／暗い表示を固定します。
+            </p>
             <ThemeToggle />
           </div>
 
@@ -127,7 +129,10 @@ export default function SettingsPage() {
       </section>
 
       <section className="space-y-3 px-5">
-        <SectionLabel title="安心・サポート" description="保存データ、同意内容、問い合わせを確認します" />
+        <SectionLabel
+          title="安心・サポート"
+          description="保存データ、同意内容、問い合わせを確認します"
+        />
         <Card className="divide-y divide-line/45">
           <SettingsLink
             href="/settings/privacy"

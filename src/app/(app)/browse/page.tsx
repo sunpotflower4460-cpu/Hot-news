@@ -58,7 +58,9 @@ export default async function BrowsePage() {
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-body font-bold text-text">迷ったら、今日の3選から</span>
-            <span className="mt-0.5 block text-caption text-muted">編集部が選んだ3件へ戻ります</span>
+            <span className="mt-0.5 block text-caption text-muted">
+              編集部が選んだ3件へ戻ります
+            </span>
           </span>
           <ChevronRight aria-hidden size={18} className="shrink-0 text-accent" />
         </Link>

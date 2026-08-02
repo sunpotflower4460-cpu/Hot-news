@@ -87,7 +87,10 @@ export function OnboardingCarousel() {
       </div>
 
       <div className="flex flex-col items-center gap-3 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
-        <div className="glass flex items-center rounded-pill border px-1.5 py-1 shadow-soft" aria-label="案内ページ">
+        <div
+          className="glass flex items-center rounded-pill border px-1.5 py-1 shadow-soft"
+          aria-label="案内ページ"
+        >
           {SLIDES.map((slide, slideIndex) => (
             <button
               type="button"

@@ -60,7 +60,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
           </h1>
 
           <div className="mt-4 rounded-card border border-accent/10 bg-accent-soft/45 px-4 py-3.5 shadow-inner-light">
-            <p className="text-[0.7rem] font-bold tracking-[0.06em] text-accent">30秒でわかる要点</p>
+            <p className="text-[0.7rem] font-bold tracking-[0.06em] text-accent">
+              30秒でわかる要点
+            </p>
             <p className="mt-1.5 text-body leading-relaxed text-text/90">{article.summary}</p>
           </div>
 
@@ -75,7 +77,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
         <WhyComfortBlock text={article.whyComfort} />
 
         {fullBody && (
-          <section aria-labelledby="article-body-heading" className="soft-surface rounded-panel px-5 py-6 shadow-soft">
+          <section
+            aria-labelledby="article-body-heading"
+            className="soft-surface rounded-panel px-5 py-6 shadow-soft"
+          >
             <div className="mb-4 flex items-center gap-2 border-b border-line/40 pb-3 text-accent">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft shadow-inner-light">
                 <BookOpenText aria-hidden size={15} />
@@ -93,7 +98,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
         )}
 
         {safeShort && (
-          <section aria-labelledby="safe-short-heading" className="soft-surface rounded-panel px-5 py-6 shadow-soft">
+          <section
+            aria-labelledby="safe-short-heading"
+            className="soft-surface rounded-panel px-5 py-6 shadow-soft"
+          >
             <div className="mb-3 inline-flex items-center gap-1.5 rounded-pill bg-accent-soft/75 px-3 py-1.5 text-caption font-bold text-accent">
               <ShieldCheck aria-hidden size={14} />
               <h2 id="safe-short-heading">安全な短縮版</h2>
@@ -106,7 +114,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
         )}
 
         {sourceOnly && (
-          <section aria-labelledby="source-only-heading" className="soft-surface rounded-panel px-5 py-6 text-center shadow-soft">
+          <section
+            aria-labelledby="source-only-heading"
+            className="soft-surface rounded-panel px-5 py-6 text-center shadow-soft"
+          >
             <div className="ambient-ring mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/35 text-accent shadow-glow">
               <ExternalLink aria-hidden size={26} strokeWidth={1.7} />
             </div>
@@ -121,7 +132,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
         {!sourceOnly && (
           <aside className="relative overflow-hidden rounded-panel border border-accent/10 bg-accent-soft/55 px-5 py-5 shadow-inner-light">
-            <div aria-hidden className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/35 blur-2xl" />
+            <div
+              aria-hidden
+              className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/35 blur-2xl"
+            />
             <Sparkles aria-hidden size={18} className="relative text-accent" />
             <p className="relative mt-2 font-rounded text-body-lg font-medium text-text">
               今日の光を、ひとつ持ち帰って。
@@ -154,8 +168,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
               <ExternalLink aria-hidden size={16} />
             </span>
             <span className="min-w-0 flex-1 text-left">
-              <span className="block truncate text-body font-bold">{article.sourceName}で元記事を読む</span>
-              <span className="mt-0.5 block text-[0.7rem] text-white/78">外部サイトが新しい画面で開きます</span>
+              <span className="block truncate text-body font-bold">
+                {article.sourceName}で元記事を読む
+              </span>
+              <span className="mt-0.5 block text-[0.7rem] text-white/78">
+                外部サイトが新しい画面で開きます
+              </span>
             </span>
             <ChevronRight aria-hidden size={18} className="shrink-0" />
           </a>

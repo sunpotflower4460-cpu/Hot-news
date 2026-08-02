@@ -15,7 +15,10 @@ export function CategoryCard({ category, count }: { category: CategoryMeta; coun
         className="ambient-ring relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[1.45rem] text-[2rem] shadow-inner-light"
         style={{ backgroundColor: `hsl(${category.accent} / 0.17)` }}
       >
-        <div aria-hidden className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-white/30 blur-md" />
+        <div
+          aria-hidden
+          className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-white/30 blur-md"
+        />
         <span
           aria-hidden
           className="relative transition-transform duration-500 ease-gentle group-hover:-rotate-3 group-hover:scale-110"
