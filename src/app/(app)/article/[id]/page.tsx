@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { BookOpenText, ChevronRight, ExternalLink, ShieldCheck, Sparkles } from 'lucide-react';
 import { ArticleCard } from '@/components/article/ArticleCard';
 import { ArticleMeta } from '@/components/article/ArticleMeta';
+import { ArticleReadTracker } from '@/components/article/ArticleReadTracker';
 import { ArticleTrustPanel } from '@/components/article/ArticleTrustPanel';
 import { ComfortScore } from '@/components/article/ComfortScore';
 import { CoverArt } from '@/components/article/CoverArt';
@@ -36,6 +37,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ id: st
 
   return (
     <article className="pb-12">
+      <ArticleReadTracker articleId={article.id} />
       <ScreenHeader back action={<SaveButton id={article.id} articleTitle={article.title} />} />
 
       <div className="px-5">
