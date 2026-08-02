@@ -17,7 +17,10 @@ const PURPOSES: {
   {
     href: '/home',
     labelKey: 'browse.quick',
-    description: { ja: '今日の3選から、要点だけ', en: "Start with the key points from today's three" },
+    description: {
+      ja: '今日の3選から、要点だけ',
+      en: "Start with the key points from today's three",
+    },
     Icon: Clock3,
   },
   {
@@ -125,9 +128,7 @@ export function BrowseContent({
               </h2>
             </div>
             <span className="rounded-pill bg-surface/60 px-3 py-1.5 text-[0.7rem] font-semibold text-muted shadow-inner-light">
-              {locale === 'ja'
-                ? `${categories.length}テーマ`
-                : `${categories.length} topics`}
+              {locale === 'ja' ? `${categories.length}テーマ` : `${categories.length} topics`}
             </span>
           </div>
 
@@ -147,9 +148,7 @@ export function BrowseContent({
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-body font-bold text-text">{t('browse.fallbackTitle')}</span>
-            <span className="mt-0.5 block text-caption text-muted">
-              {t('browse.fallbackBody')}
-            </span>
+            <span className="mt-0.5 block text-caption text-muted">{t('browse.fallbackBody')}</span>
           </span>
           <ChevronRight aria-hidden size={18} className="shrink-0 text-accent" />
         </Link>

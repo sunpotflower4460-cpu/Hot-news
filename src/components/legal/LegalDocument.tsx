@@ -9,7 +9,7 @@ import { useI18n } from '@/lib/i18n/useI18n';
 const ENGLISH_TITLES: Record<string, string> = {
   プライバシーポリシー: 'Privacy policy',
   利用規約: 'Terms of use',
-  '特定商取引法に基づく表記': 'Commercial transaction disclosure',
+  特定商取引法に基づく表記: 'Commercial transaction disclosure',
   '編集・訂正方針': 'Editorial and corrections policy',
   'ニュースの選び方・訂正方針': 'How stories are selected and corrected',
   アクセシビリティ方針: 'Accessibility statement',
@@ -18,7 +18,7 @@ const ENGLISH_TITLES: Record<string, string> = {
 const ENGLISH_SUMMARIES: Record<string, string> = {
   プライバシーポリシー: 'How data is handled and what users can control',
   利用規約: 'The conditions for using this service',
-  '特定商取引法に基づく表記': 'Required operator, pricing, payment, and cancellation information',
+  特定商取引法に基づく表記: 'Required operator, pricing, payment, and cancellation information',
   '編集・訂正方針': 'How stories are selected, verified, corrected, and withdrawn',
   'ニュースの選び方・訂正方針': 'How stories are selected, verified, corrected, and withdrawn',
   アクセシビリティ方針: 'Our approach to inclusive access and ongoing improvement',

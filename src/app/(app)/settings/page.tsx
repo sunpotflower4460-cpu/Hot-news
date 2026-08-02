@@ -48,7 +48,11 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-7 pb-10">
-      <ScreenHeader title={t('settings.title')} subtitle={t('settings.subtitle')} showLanguage={false} />
+      <ScreenHeader
+        title={t('settings.title')}
+        subtitle={t('settings.subtitle')}
+        showLanguage={false}
+      />
 
       <section className="space-y-3 px-5">
         <SectionLabel title={t('settings.display')} description={t('settings.displayBody')} />
@@ -222,11 +226,7 @@ export default function SettingsPage() {
           </p>
           <p className="pt-1 text-[0.72rem] text-muted/75">
             {t('common.version')} {commercialConfig.app.version}
-            {isCommercialPreview
-              ? locale === 'ja'
-                ? '（商用公開前）'
-                : ' (pre-release)'
-              : ''}
+            {isCommercialPreview ? (locale === 'ja' ? '（商用公開前）' : ' (pre-release)') : ''}
           </p>
         </Card>
       </section>

@@ -26,9 +26,7 @@ export function BrightnessScore({ score, showLabel = true, className }: Brightne
       }
     >
       {showLabel && (
-        <span className="text-[0.7rem] font-semibold text-muted">
-          {t('article.brightness')}
-        </span>
+        <span className="text-[0.7rem] font-semibold text-muted">{t('article.brightness')}</span>
       )}
       <span aria-hidden className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, index) => (

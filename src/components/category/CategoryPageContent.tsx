@@ -20,7 +20,11 @@ export function CategoryPageContent({
 
   return (
     <div className="pb-10">
-      <ScreenHeader title={`${category.glyph} ${category.labelJa}`} subtitle={category.blurb} back />
+      <ScreenHeader
+        title={`${category.glyph} ${category.labelJa}`}
+        subtitle={category.blurb}
+        back
+      />
 
       {articles.length === 0 ? (
         <EmptyState

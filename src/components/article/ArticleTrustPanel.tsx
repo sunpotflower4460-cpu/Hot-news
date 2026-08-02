@@ -55,9 +55,7 @@ export function ArticleTrustPanel({ article: rawArticle }: { article: Article })
               <TrustValue
                 label={t('article.sourceCount')}
                 value={
-                  locale === 'ja'
-                    ? `${provenance.sourceCount}件`
-                    : `${provenance.sourceCount}`
+                  locale === 'ja' ? `${provenance.sourceCount}件` : `${provenance.sourceCount}`
                 }
               />
               <TrustValue

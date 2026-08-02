@@ -10,8 +10,7 @@ import type { Article, DigestWeek } from '@/types/article';
 
 export function DigestContent({ digest, articles }: { digest: DigestWeek; articles: Article[] }) {
   const { locale, formatNumber } = useI18n();
-  const weekLabel =
-    locale === 'ja' ? digest.weekLabel : 'May 18–24, 2026';
+  const weekLabel = locale === 'ja' ? digest.weekLabel : 'May 18–24, 2026';
   const intro =
     locale === 'ja'
       ? digest.intro
@@ -31,7 +30,11 @@ export function DigestContent({ digest, articles }: { digest: DigestWeek; articl
       {articles.length === 0 ? (
         <EmptyState
           glyph="✨"
-          title={locale === 'ja' ? '今週のまとめは準備中です' : 'This week’s collection is being prepared'}
+          title={
+            locale === 'ja'
+              ? '今週のまとめは準備中です'
+              : 'This week’s collection is being prepared'
+          }
           description={
             locale === 'ja'
               ? '掲載基準を満たすニュースがそろったら、ここに一週間分の光をまとめます。'
@@ -74,7 +77,9 @@ export function DigestContent({ digest, articles }: { digest: DigestWeek; articl
           </section>
 
           <section
-            aria-label={locale === 'ja' ? '今週の明るいニュース一覧' : 'Bright stories from this week'}
+            aria-label={
+              locale === 'ja' ? '今週の明るいニュース一覧' : 'Bright stories from this week'
+            }
             className="mt-5 space-y-3 px-5"
           >
             {articles.map((article) => (

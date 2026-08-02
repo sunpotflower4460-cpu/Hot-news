@@ -37,9 +37,7 @@ export function ArticleMeta({ article: rawArticle, className }: ArticleMetaProps
       </span>
       <span className="inline-flex items-center gap-1" aria-label={readingLabel}>
         <Clock aria-hidden size={12} />
-        {locale === 'ja'
-          ? `約${article.readingMinutes}分`
-          : `${article.readingMinutes} min`}
+        {locale === 'ja' ? `約${article.readingMinutes}分` : `${article.readingMinutes} min`}
       </span>
     </div>
   );

@@ -103,9 +103,7 @@ export default function NotificationsPage() {
           <Row
             label={locale === 'ja' ? '夜の短いニュース' : 'Short evening story'}
             hint={
-              locale === 'ja'
-                ? '22:00ごろ、寝る前にひとつ'
-                : 'Around 22:00, one story before bed'
+              locale === 'ja' ? '22:00ごろ、寝る前にひとつ' : 'Around 22:00, one story before bed'
             }
           >
             <Toggle
@@ -117,9 +115,7 @@ export default function NotificationsPage() {
           <Row
             label={locale === 'ja' ? '週刊ライトまとめ' : 'Weekly bright digest'}
             hint={
-              locale === 'ja'
-                ? '日曜の朝に、一週間ぶん'
-                : 'A one-week collection on Sunday morning'
+              locale === 'ja' ? '日曜の朝に、一週間ぶん' : 'A one-week collection on Sunday morning'
             }
           >
             <Toggle

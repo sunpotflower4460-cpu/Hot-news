@@ -51,7 +51,11 @@ export default function PremiumPage() {
   const freeFeatures =
     locale === 'ja'
       ? ['毎日の明るいニュース', '端末内の保存', '時間帯で変わる空の雰囲気']
-      : ['Daily bright stories', 'On-device saved stories', 'A sky theme that changes through the day'];
+      : [
+          'Daily bright stories',
+          'On-device saved stories',
+          'A sky theme that changes through the day',
+        ];
 
   return (
     <div className="space-y-7 pb-10">

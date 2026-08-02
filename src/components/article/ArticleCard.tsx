@@ -24,8 +24,7 @@ export function ArticleCard({ article: rawArticle, layout = 'list' }: ArticleCar
   const meta = localizeCategory(getCategory(primary), locale);
   const brightnessScore = article.editorialAssessment?.brightnessScore ?? article.comfortScore;
   const readLabel = t('common.read');
-  const articleLabel =
-    locale === 'ja' ? `${article.title}を読む` : `Read “${article.title}”`;
+  const articleLabel = locale === 'ja' ? `${article.title}を読む` : `Read “${article.title}”`;
 
   if (layout === 'rail') {
     return (

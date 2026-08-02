@@ -18,9 +18,17 @@ export default async function NightPage() {
           <div className="ambient-ring relative flex h-20 w-20 items-center justify-center rounded-full bg-white/30 text-accent shadow-glow">
             <Moon aria-hidden size={32} strokeWidth={1.7} />
           </div>
-          <Sparkles aria-hidden size={14} className="absolute right-5 top-5 animate-twinkle text-accent" />
+          <Sparkles
+            aria-hidden
+            size={14}
+            className="absolute right-5 top-5 animate-twinkle text-accent"
+          />
         </div>
-        <T id="settings.night" as="h1" className="mt-5 font-rounded text-display font-bold text-text" />
+        <T
+          id="settings.night"
+          as="h1"
+          className="mt-5 font-rounded text-display font-bold text-text"
+        />
         <p className="mx-auto mt-2 max-w-xs text-body leading-relaxed text-muted">
           <T id="greeting.nightSubtitle" />
         </p>

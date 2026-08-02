@@ -9,11 +9,7 @@ type Props<T extends ElementType> = {
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, 'children'>;
 
-export function T<TElement extends ElementType = 'span'>({
-  id,
-  as,
-  ...props
-}: Props<TElement>) {
+export function T<TElement extends ElementType = 'span'>({ id, as, ...props }: Props<TElement>) {
   const { t } = useI18n();
   const Component = as ?? 'span';
   return <Component {...props}>{t(id)}</Component>;

@@ -6,7 +6,13 @@ import { localizeCategory } from '@/lib/i18n/content';
 import { useI18n } from '@/lib/i18n/useI18n';
 import type { CategoryMeta } from '@/types/article';
 
-export function CategoryCard({ category: rawCategory, count }: { category: CategoryMeta; count: number }) {
+export function CategoryCard({
+  category: rawCategory,
+  count,
+}: {
+  category: CategoryMeta;
+  count: number;
+}) {
   const { locale } = useI18n();
   const category = localizeCategory(rawCategory, locale);
   const countLabel =

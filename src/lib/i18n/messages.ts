@@ -27,13 +27,15 @@ export const messages = {
     'home.description': '編集基準を満たした出来事から、今日の3件を選びました',
     'home.browse': 'テーマから探す',
     'home.preparing': '今日のニュースを選んでいます',
-    'home.preparingDescription': '基準を満たす明るい出来事が見つかるまで、古い記事を「今日」として表示しません。',
+    'home.preparingDescription':
+      '基準を満たす明るい出来事が見つかるまで、古い記事を「今日」として表示しません。',
     'home.footerTitle': '世界には、今日も明るい出来事があります。',
     'home.footerDescription': '小さな光を、明日もここに集めます。',
     'home.promise': '出来事そのものが明るいニュースだけ',
     'home.night': '寝る前の1本',
     'home.hintTitle': '使い方はとてもシンプルです',
-    'home.hintBody': 'カードを押すと30秒要約から読めます。ブックマークを押すと、あとで保存画面から読み返せます。',
+    'home.hintBody':
+      'カードを押すと30秒要約から読めます。ブックマークを押すと、あとで保存画面から読み返せます。',
     'home.progressTitle': '今日の3選',
     'home.progressOneEnough': '一件だけでも大丈夫です。',
     'home.progressCloseAnytime': 'ここで閉じても大丈夫です。',
@@ -67,9 +69,11 @@ export const messages = {
     'article.summary': '30秒でわかる要点',
     'article.body': '記事を読む',
     'article.safeShort': '安全な短縮版',
-    'article.safeShortBody': '読む負担や掲載上の理由から、要点だけを表示しています。詳しい内容は出典で確認できます。',
+    'article.safeShortBody':
+      '読む負担や掲載上の理由から、要点だけを表示しています。詳しい内容は出典で確認できます。',
     'article.sourceOnlyTitle': '出典で読むニュースです',
-    'article.sourceOnlyBody': '本文の転載や要約を行わず、信頼できる元記事への案内だけを掲載しています。',
+    'article.sourceOnlyBody':
+      '本文の転載や要約を行わず、信頼できる元記事への案内だけを掲載しています。',
     'article.takeaway': '今日の明るさを、ひとつ持ち帰って。',
     'article.takeawayBody': '世界には、静かに前へ進んでいる出来事が今日もあります。',
     'article.sourceHeading': '元の情報を確認する',
@@ -94,7 +98,8 @@ export const messages = {
     'article.brightness': '明るさ',
     'article.minute': '分',
     'article.shareTitle': 'このニュースを共有する',
-    'article.shareBody': '端末の共有機能を使います。共有先や相手の情報をアプリが取得することはありません。',
+    'article.shareBody':
+      '端末の共有機能を使います。共有先や相手の情報をアプリが取得することはありません。',
     'article.shared': '共有画面を開きました',
     'article.copied': 'リンクをコピーしました',
     'article.shareFailed': '共有できませんでした',
@@ -149,9 +154,11 @@ export const messages = {
     'greeting.eveningSubtitle': '一日の終わりに、一件だけでも',
     'greeting.nightSubtitle': '眠る前に、静かな一件だけ',
     'onboarding.firstTitle': '明るい出来事だけを、1日3件',
-    'onboarding.firstBody': '暗いニュースを言い換えるのではなく、出来事そのものが明るく、希望や喜びを感じられるニュースを選びます。',
+    'onboarding.firstBody':
+      '暗いニュースを言い換えるのではなく、出来事そのものが明るく、希望や喜びを感じられるニュースを選びます。',
     'onboarding.secondTitle': '30秒要約と、たどれる出典',
-    'onboarding.secondBody': '要点から短く読めて、元の情報や確認履歴も見られます。AIを使った場合も表示し、公開前に人が確認します。',
+    'onboarding.secondBody':
+      '要点から短く読めて、元の情報や確認履歴も見られます。AIを使った場合も表示し、公開前に人が確認します。',
     'onboarding.later': 'あとで見る',
     'onboarding.previous': '戻る',
     'onboarding.next': '次へ',
@@ -205,13 +212,15 @@ export const messages = {
     'home.description': 'Selected from stories that meet our editorial standards',
     'home.browse': 'Explore topics',
     'home.preparing': "We're selecting today's stories",
-    'home.preparingDescription': "We do not label older stories as today's news while we wait for a genuinely bright story that meets our standards.",
+    'home.preparingDescription':
+      "We do not label older stories as today's news while we wait for a genuinely bright story that meets our standards.",
     'home.footerTitle': 'Bright things are happening in the world today.',
     'home.footerDescription': "We'll gather a few more here tomorrow.",
     'home.promise': 'Only stories whose core event is genuinely bright',
     'home.night': 'One bedtime story',
     'home.hintTitle': 'The app is simple to use',
-    'home.hintBody': 'Tap a card to begin with a 30-second summary. Tap the bookmark to save it for later.',
+    'home.hintBody':
+      'Tap a card to begin with a 30-second summary. Tap the bookmark to save it for later.',
     'home.progressTitle': "Today's three",
     'home.progressOneEnough': 'One story is enough.',
     'home.progressCloseAnytime': 'You can stop here whenever you like.',
@@ -245,9 +254,11 @@ export const messages = {
     'article.summary': '30-second summary',
     'article.body': 'Read the story',
     'article.safeShort': 'Short, reader-safe version',
-    'article.safeShortBody': 'Only the essential points are shown to reduce reading burden or meet publication requirements. See the source for more detail.',
+    'article.safeShortBody':
+      'Only the essential points are shown to reduce reading burden or meet publication requirements. See the source for more detail.',
     'article.sourceOnlyTitle': 'Read this story at the source',
-    'article.sourceOnlyBody': 'We do not reproduce or summarize the article here. This page only links to the trusted original source.',
+    'article.sourceOnlyBody':
+      'We do not reproduce or summarize the article here. This page only links to the trusted original source.',
     'article.takeaway': 'Take one bright thought with you.',
     'article.takeawayBody': 'Quiet progress is happening in the world today, too.',
     'article.sourceHeading': 'Check the original information',
@@ -272,7 +283,8 @@ export const messages = {
     'article.brightness': 'Brightness',
     'article.minute': 'min',
     'article.shareTitle': 'Share this story',
-    'article.shareBody': 'Uses your device share menu. The app does not receive information about the person or service you share it with.',
+    'article.shareBody':
+      'Uses your device share menu. The app does not receive information about the person or service you share it with.',
     'article.shared': 'Share menu opened',
     'article.copied': 'Link copied',
     'article.shareFailed': 'Could not share this story',
@@ -285,7 +297,8 @@ export const messages = {
     'settings.appearance': 'Display brightness',
     'settings.appearanceBody': 'Follow your device or keep the app in light or dark mode.',
     'settings.sky': 'Sky time',
-    'settings.skyBody': 'Automatic mode follows the current time and moves through morning, day, evening, and night.',
+    'settings.skyBody':
+      'Automatic mode follows the current time and moves through morning, day, evening, and night.',
     'settings.autoTime': 'Follow the current time',
     'settings.usage': 'Reading experience',
     'settings.usageBody': 'Adjust notifications and bedtime reading',
@@ -327,9 +340,11 @@ export const messages = {
     'greeting.eveningSubtitle': 'One story is enough at the end of the day',
     'greeting.nightSubtitle': 'One quiet story before you sleep',
     'onboarding.firstTitle': 'Three genuinely bright stories a day',
-    'onboarding.firstBody': 'We do not soften dark news. We select events whose core is hopeful, joyful, or positively meaningful.',
+    'onboarding.firstBody':
+      'We do not soften dark news. We select events whose core is hopeful, joyful, or positively meaningful.',
     'onboarding.secondTitle': 'A 30-second summary with traceable sources',
-    'onboarding.secondBody': 'Start with the key points, then check the original source and verification history. We disclose AI assistance and require human review before publication.',
+    'onboarding.secondBody':
+      'Start with the key points, then check the original source and verification history. We disclose AI assistance and require human review before publication.',
     'onboarding.later': 'Skip for now',
     'onboarding.previous': 'Back',
     'onboarding.next': 'Next',

@@ -34,7 +34,9 @@ export default function PrivacyChoicesPage() {
       <ScreenHeader
         title={locale === 'ja' ? 'プライバシー' : 'Privacy'}
         subtitle={
-          locale === 'ja' ? '送る情報は、あなたが選べます' : 'You choose what information can be sent'
+          locale === 'ja'
+            ? '送る情報は、あなたが選べます'
+            : 'You choose what information can be sent'
         }
         back
       />
@@ -69,7 +71,9 @@ export default function PrivacyChoicesPage() {
         <Card inset className="space-y-4">
           <DataLine
             Icon={Smartphone}
-            label={locale === 'ja' ? '表示設定・通知の希望' : 'Display and notification preferences'}
+            label={
+              locale === 'ja' ? '表示設定・通知の希望' : 'Display and notification preferences'
+            }
             value={locale === 'ja' ? '端末内のみ' : 'On device only'}
           />
           <DataLine

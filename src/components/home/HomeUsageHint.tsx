@@ -26,9 +26,7 @@ export function HomeUsageHint() {
       >
         <X aria-hidden size={17} />
       </button>
-      <p className="text-[0.7rem] font-bold tracking-[0.06em] text-accent">
-        {t('home.hintTitle')}
-      </p>
+      <p className="text-[0.7rem] font-bold tracking-[0.06em] text-accent">{t('home.hintTitle')}</p>
       <div className="mt-2 grid gap-2.5 sm:grid-cols-2">
         <div className="flex items-start gap-2.5">
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent shadow-inner-light">

@@ -41,7 +41,9 @@ export default function SupportPage() {
             </span>
             <div>
               <h1 className="text-h2 font-bold text-text">
-                {locale === 'ja' ? '内容に応じて優先して確認します' : 'Reports are prioritized by risk'}
+                {locale === 'ja'
+                  ? '内容に応じて優先して確認します'
+                  : 'Reports are prioritized by risk'}
               </h1>
               <p className="mt-1 text-caption leading-relaxed text-muted">
                 {locale === 'ja'

@@ -6,8 +6,7 @@ import { useI18n } from '@/lib/i18n/useI18n';
 export function LoadingScene({ label, compact = false }: { label?: string; compact?: boolean }) {
   const { locale } = useI18n();
   const resolvedLabel =
-    label ??
-    (locale === 'ja' ? '明るいニュースを集めています…' : 'Gathering bright stories…');
+    label ?? (locale === 'ja' ? '明るいニュースを集めています…' : 'Gathering bright stories…');
 
   return (
     <div
@@ -24,7 +23,11 @@ export function LoadingScene({ label, compact = false }: { label?: string; compa
         <div className="ambient-ring relative flex h-24 w-24 animate-float items-center justify-center rounded-full bg-white/35 text-accent shadow-glow backdrop-blur-sm">
           <Sun aria-hidden size={40} strokeWidth={1.6} className="fill-accent/15" />
         </div>
-        <Sparkles aria-hidden className="absolute right-1 top-5 animate-twinkle text-accent" size={18} />
+        <Sparkles
+          aria-hidden
+          className="absolute right-1 top-5 animate-twinkle text-accent"
+          size={18}
+        />
         <span className="absolute bottom-5 left-2 h-3 w-3 animate-float rounded-full bg-white/55 shadow-glow [animation-delay:-1.5s]" />
       </div>
       <p className="mt-2 font-rounded text-body font-medium text-text">{resolvedLabel}</p>

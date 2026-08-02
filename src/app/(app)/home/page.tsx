@@ -98,7 +98,11 @@ export default async function HomePage() {
             as="p"
             className="relative mt-2 font-rounded text-body-lg font-medium text-text"
           />
-          <T id="home.progressCloseAnytime" as="p" className="relative mt-1 text-caption text-muted" />
+          <T
+            id="home.progressCloseAnytime"
+            as="p"
+            className="relative mt-1 text-caption text-muted"
+          />
         </div>
       </div>
     </div>
