@@ -20,6 +20,13 @@ const requireHttps = (value, label) => {
   }
 };
 
+const requireInternalRoute = (value, label) => {
+  requireText(value, label);
+  if (typeof value === 'string' && value && !/^\/[a-z0-9/_-]*$/i.test(value)) {
+    failures.push(`${label} must be an internal route beginning with /`);
+  }
+};
+
 const versionParts = (range) => {
   const match = String(range ?? '').match(/(\d+)\.(\d+)\.(\d+)/);
   return match ? match.slice(1).map(Number) : null;
@@ -42,6 +49,14 @@ requireText(config.operator?.postalAddress, 'operator.postalAddress');
 requireText(config.operator?.contactEmail, 'operator.contactEmail');
 requireText(config.legal?.privacyEffectiveDate, 'legal.privacyEffectiveDate');
 requireText(config.legal?.termsEffectiveDate, 'legal.termsEffectiveDate');
+
+for (const [key, value] of Object.entries(config.urls ?? {})) {
+  requireInternalRoute(value, `urls.${key}`);
+}
+
+if (config.features?.subscriptions) {
+  requireText(config.operator?.phone, 'operator.phone when subscriptions are enabled');
+}
 
 if (config.app?.bundleId && !/^[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)+$/.test(config.app.bundleId)) {
   failures.push('app.bundleId is not a valid reverse-domain style identifier');
@@ -89,13 +104,18 @@ const requiredFiles = [
   'SECURITY.md',
   'docs/COMMERCIAL_RELEASE_CHECKLIST.md',
   'docs/APP_STORE_SUBMISSION.md',
+  'docs/APP_STORE_METADATA_JA.md',
   'docs/DATA_INVENTORY.md',
   'docs/CONTENT_OPERATIONS.md',
   'docs/INCIDENT_RESPONSE.md',
+  'docs/PRODUCTION_ARCHITECTURE.md',
   'ios-template/PrivacyInfo.xcprivacy',
   'public/.well-known/security.txt',
   'src/app/(app)/legal/privacy/page.tsx',
   'src/app/(app)/legal/terms/page.tsx',
+  'src/app/(app)/legal/commerce/page.tsx',
+  'src/app/(app)/legal/editorial-policy/page.tsx',
+  'src/app/(app)/legal/accessibility/page.tsx',
   'src/app/(app)/support/page.tsx',
   'src/app/(app)/settings/privacy/page.tsx',
 ];
