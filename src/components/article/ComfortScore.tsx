@@ -1,4 +1,7 @@
+'use client';
+
 import { Sun } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { cn } from '@/lib/utils/cn';
 
 interface BrightnessScoreProps {
@@ -9,15 +12,24 @@ interface BrightnessScoreProps {
 }
 
 export function BrightnessScore({ score, showLabel = true, className }: BrightnessScoreProps) {
+  const { locale, t } = useI18n();
   const level = Math.max(1, Math.min(5, Math.round(score / 20)));
 
   return (
     <div
       className={cn('inline-flex items-center gap-1.5', className)}
       role="img"
-      aria-label={`明るさ 5段階中 ${level}`}
+      aria-label={
+        locale === 'ja'
+          ? `${t('article.brightness')} 5段階中 ${level}`
+          : `${t('article.brightness')}: ${level} out of 5`
+      }
     >
-      {showLabel && <span className="text-[0.7rem] font-semibold text-muted">明るさ</span>}
+      {showLabel && (
+        <span className="text-[0.7rem] font-semibold text-muted">
+          {t('article.brightness')}
+        </span>
+      )}
       <span aria-hidden className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, index) => (
           <Sun
