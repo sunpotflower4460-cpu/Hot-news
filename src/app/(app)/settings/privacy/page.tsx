@@ -1,7 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { BarChart3, Bug, ChevronRight, Database, ShieldCheck, Smartphone } from 'lucide-react';
+import {
+  BarChart3,
+  Bug,
+  ChevronRight,
+  Clock3,
+  Database,
+  ShieldCheck,
+  Smartphone,
+} from 'lucide-react';
 import { ResetAppDataButton } from '@/components/privacy/ResetAppDataButton';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { Card } from '@/components/ui/Card';
@@ -35,7 +43,7 @@ export default function PrivacyChoicesPage() {
                 現在、利用データは外部送信していません
               </h1>
               <p className="mt-1 text-caption leading-relaxed text-muted">
-                お気に入りや表示設定はこの端末だけに保存されます。分析・診断機能を追加する場合も、方針を更新し、必要な同意を改めて確認します。
+                保存した記事、最近読んだ履歴、表示設定はこの端末だけに保存されます。分析・診断機能を追加する場合も、方針を更新し、必要な同意を改めて確認します。
               </p>
             </div>
           </div>
@@ -46,8 +54,12 @@ export default function PrivacyChoicesPage() {
         <h2 className="text-caption font-bold text-muted">この端末に保存されるもの</h2>
         <Card inset className="space-y-4">
           <DataLine Icon={Smartphone} label="表示設定・通知の希望" value="端末内のみ" />
-          <DataLine Icon={Database} label="お気に入り・同意履歴" value="端末内のみ" />
+          <DataLine Icon={Database} label="保存した記事・同意履歴" value="端末内のみ" />
+          <DataLine Icon={Clock3} label="最近読んだ記事" value="最大50件・30日" />
           <p className="border-t border-line/45 pt-3 text-caption leading-relaxed text-muted">
+            最近読んだ履歴は、保存し忘れた記事へ戻れるように保持します。30日を過ぎたものは自動で整理され、端末内データの削除からいつでも消せます。
+          </p>
+          <p className="text-caption leading-relaxed text-muted">
             アカウント、氏名、メールアドレス、位置情報、広告識別子は現在収集していません。
           </p>
         </Card>
