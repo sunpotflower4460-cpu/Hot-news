@@ -6,12 +6,14 @@ import type { CategoryId } from '@/types/article';
 
 interface SettingsState {
   onboarded: boolean;
+  homeHintDismissed: boolean;
   morningNotify: boolean;
   nightNotify: boolean;
   weeklyDigest: boolean;
   topicNotify: CategoryId[];
   isPremium: boolean;
   setOnboarded: (value: boolean) => void;
+  dismissHomeHint: () => void;
   setMorningNotify: (value: boolean) => void;
   setNightNotify: (value: boolean) => void;
   setWeeklyDigest: (value: boolean) => void;
@@ -33,12 +35,14 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       onboarded: false,
-      morningNotify: true,
-      nightNotify: true,
-      weeklyDigest: true,
+      homeHintDismissed: false,
+      morningNotify: false,
+      nightNotify: false,
+      weeklyDigest: false,
       topicNotify: [],
       isPremium: false,
       setOnboarded: (onboarded) => set({ onboarded }),
+      dismissHomeHint: () => set({ homeHintDismissed: true }),
       setMorningNotify: (morningNotify) => set({ morningNotify }),
       setNightNotify: (nightNotify) => set({ nightNotify }),
       setWeeklyDigest: (weeklyDigest) => set({ weeklyDigest }),
@@ -52,16 +56,17 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: 'hotnews-settings',
-      version: 1,
+      version: 2,
       partialize: (state) => ({
         onboarded: state.onboarded,
+        homeHintDismissed: state.homeHintDismissed,
         morningNotify: state.morningNotify,
         nightNotify: state.nightNotify,
         weeklyDigest: state.weeklyDigest,
         topicNotify: state.topicNotify,
         isPremium: state.isPremium,
       }),
-      migrate: (persistedState) => {
+      migrate: (persistedState, version) => {
         const stored = persistedState as Partial<SettingsState>;
         const topicNotify = Array.isArray(stored.topicNotify)
           ? [
@@ -72,13 +77,15 @@ export const useSettingsStore = create<SettingsState>()(
               ),
             ]
           : [];
+        const legacyNotificationDefaults = version < 2;
 
         return {
           onboarded: bool(stored.onboarded, false),
-          morningNotify: bool(stored.morningNotify, true),
-          nightNotify: bool(stored.nightNotify, true),
-          weeklyDigest: bool(stored.weeklyDigest, true),
-          topicNotify,
+          homeHintDismissed: bool(stored.homeHintDismissed, false),
+          morningNotify: legacyNotificationDefaults ? false : bool(stored.morningNotify, false),
+          nightNotify: legacyNotificationDefaults ? false : bool(stored.nightNotify, false),
+          weeklyDigest: legacyNotificationDefaults ? false : bool(stored.weeklyDigest, false),
+          topicNotify: legacyNotificationDefaults ? [] : topicNotify,
           isPremium: bool(stored.isPremium, false),
         };
       },
