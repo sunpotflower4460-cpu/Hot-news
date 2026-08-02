@@ -14,22 +14,25 @@ const OPTIONS: { value: ThemePref; label: string; Icon: typeof Sun }[] = [
 
 export function ThemeToggle() {
   const hydrated = useHydrated();
-  const pref = useThemeStore((s) => s.pref);
-  const setPref = useThemeStore((s) => s.setPref);
+  const pref = useThemeStore((state) => state.pref);
+  const setPref = useThemeStore((state) => state.setPref);
   const current = hydrated ? pref : 'auto';
 
   return (
-    <div className="flex gap-1 rounded-pill bg-surface-2 p-1">
+    <div className="flex gap-1 rounded-[1.35rem] border border-line/45 bg-surface-2/70 p-1 shadow-inner-light">
       {OPTIONS.map(({ value, label, Icon }) => {
         const active = current === value;
         return (
           <button
+            type="button"
             key={value}
             onClick={() => setPref(value)}
             aria-pressed={active}
             className={cn(
-              'flex flex-1 items-center justify-center gap-1.5 rounded-pill py-2 text-caption font-medium transition-colors',
-              active ? 'bg-surface text-accent shadow-soft' : 'text-muted',
+              'flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-[1.05rem] px-2 text-caption font-semibold transition-all duration-300 ease-gentle active:scale-95',
+              active
+                ? 'bg-surface text-accent shadow-soft'
+                : 'text-muted hover:bg-surface/45 hover:text-text',
             )}
           >
             <Icon size={15} />
