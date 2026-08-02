@@ -25,6 +25,7 @@ export interface CommercialConfig {
     terms: string;
     commercialDisclosure: string;
     editorialPolicy: string;
+    accessibility: string;
   };
   legal: {
     country: string;
