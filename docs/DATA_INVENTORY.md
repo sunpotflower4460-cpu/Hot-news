@@ -6,10 +6,12 @@ This document must match the production binary, backend, support process, and th
 
 | Data                           | Location                     | Purpose                                        | Sent externally | Retention                              | User control                                   |
 | ------------------------------ | ---------------------------- | ---------------------------------------------- | --------------- | -------------------------------------- | ---------------------------------------------- |
-| Favorite article IDs           | Browser/device local storage | Save articles on this device                   | No              | Until removed or local data is cleared | Toggle favorite or delete all local data       |
+| Saved article IDs              | Browser/device local storage | Save articles on this device                   | No              | Until removed or local data is cleared | Toggle save or delete all local data           |
+| Recently opened article ID/time | Browser/device local storage | Daily progress and return to recently read news | No              | Maximum 50 entries and 30 days         | Delete all local data                          |
 | Theme and time-of-day settings | Browser/device local storage | Visual preferences                             | No              | Until reset                            | Settings or delete all local data              |
 | Notification preferences       | Browser/device local storage | Future preference preview                      | No              | Until reset                            | Notification settings or delete all local data |
 | Privacy choices                | Browser/device local storage | Record future analytics/diagnostics preference | No              | Until reset                            | Privacy settings or delete all local data      |
+| Last online timestamp          | Browser/device local storage | Explain whether offline content may be stale   | No              | Until next connection or local clear   | Delete all local data                          |
 | Static application cache       | Browser/device Cache Storage | Offline shell and previously opened assets     | No              | Until cache expiry/update/clear        | Delete all local data or OS/browser controls   |
 
 ## Currently not collected
@@ -25,9 +27,11 @@ This document must match the production binary, backend, support process, and th
 - support form text on a server
 - analytics or diagnostics events
 
-## External navigation
+## External navigation and sharing
 
 When a user opens an article source, the destination website may receive ordinary web request data under its own policy. Hot News should use a no-referrer policy and should not append user identifiers, tracking parameters, reading history, or consent state to source links.
+
+When a user chooses Share, the app passes the article title, short summary, and current page URL to the operating system share sheet. If a share sheet is unavailable, only the current page URL is copied to the clipboard. The app does not receive the destination selected in the share sheet.
 
 ## Planned production data — not yet approved
 
@@ -38,7 +42,7 @@ Every planned data flow remains disabled until it has an owner, purpose, legal b
 | Anonymous product analytics | event name, app version, coarse device class          | Off             | Explicit consent, reviewed event allowlist, provider contract, retention limit |
 | Diagnostics                 | error class, build, OS version, non-sensitive context | Off             | Explicit consent, redaction, sampling, retention limit, access control         |
 | Accounts                    | user ID, email or Sign in with Apple identifier       | Not implemented | Authentication, recovery, export, in-app deletion, breach process              |
-| Favorites sync              | user ID, article IDs, timestamps                      | Not implemented | Account controls, encryption, retention/deletion                               |
+| Saved-news sync             | user ID, article IDs, timestamps                      | Not implemented | Account controls, encryption, retention/deletion                               |
 | Push notifications          | device push token, topic preference                   | Not implemented | Permission, token rotation/deletion, provider security                         |
 | Subscriptions               | Apple transaction identifiers, entitlement state      | Not implemented | StoreKit, server verification, lifecycle handling, support                     |
 | Support                     | contact details and message                           | Not implemented | Public support channel, retention, access restriction, deletion handling       |
@@ -54,7 +58,7 @@ If analytics is introduced, events must use a fixed schema. Never send:
 - authentication tokens or transaction payloads
 - exact timestamps when a coarser bucket is sufficient
 - full user agent when a coarse device class is enough
-- favorite IDs or reading history unless separately justified and disclosed
+- saved article IDs or reading history unless separately justified and disclosed
 
 Suggested safe event properties:
 
