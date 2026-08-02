@@ -11,7 +11,7 @@ export function Chip({ accent, active = false, className, style, children, ...pr
   const accentStyle = accent
     ? ({
         backgroundColor: active ? `hsl(${accent})` : `hsl(${accent} / 0.14)`,
-        color: active ? '#fff' : `hsl(${accent})`,
+        color: active ? 'hsl(220 25% 18%)' : `hsl(${accent})`,
         ...style,
       } as CSSProperties)
     : style;
@@ -20,7 +20,7 @@ export function Chip({ accent, active = false, className, style, children, ...pr
     <span
       className={cn(
         'inline-flex min-h-9 items-center gap-1 rounded-pill px-3 py-1.5 text-caption font-semibold leading-none shadow-inner-light',
-        !accent && (active ? 'bg-accent text-white' : 'bg-surface-2 text-muted'),
+        !accent && (active ? 'bg-accent-strong text-white' : 'bg-surface-2 text-muted'),
         className,
       )}
       style={accentStyle}
