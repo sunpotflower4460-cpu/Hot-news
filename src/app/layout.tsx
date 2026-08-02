@@ -5,6 +5,7 @@ import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
 import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { commercialConfig, isCommercialPreview } from '@/config/commercial';
 import './globals.css';
+import './ux-polish.css';
 
 const sans = Noto_Sans_JP({
   weight: ['400', '500', '700'],
