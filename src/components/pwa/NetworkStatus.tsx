@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { CloudSun, WifiOff } from 'lucide-react';
+import type { Locale } from '@/lib/i18n/messages';
+import { useI18n } from '@/lib/i18n/useI18n';
 
 const LAST_ONLINE_KEY = 'hotnews-last-online';
 
-function formatLastOnline(value: string | null) {
+function formatLastOnline(value: string | null, locale: Locale) {
   if (!value) return null;
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return null;
@@ -15,17 +17,23 @@ function formatLastOnline(value: string | null) {
     date.getFullYear() === today.getFullYear() &&
     date.getMonth() === today.getMonth() &&
     date.getDate() === today.getDate();
-  const time = new Intl.DateTimeFormat('ja-JP', {
+  const time = new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
     hour: '2-digit',
     minute: '2-digit',
   }).format(date);
 
-  return sameDay ? `今日 ${time}` : `${date.getMonth() + 1}月${date.getDate()}日 ${time}`;
+  if (sameDay) return locale === 'ja' ? `今日 ${time}` : `Today ${time}`;
+  const day = new Intl.DateTimeFormat(locale === 'ja' ? 'ja-JP' : 'en-US', {
+    month: 'short',
+    day: 'numeric',
+  }).format(date);
+  return `${day} ${time}`;
 }
 
 export function NetworkStatus() {
+  const { locale, t } = useI18n();
   const [status, setStatus] = useState<'offline' | 'restored' | null>(null);
-  const [lastOnline, setLastOnline] = useState<string | null>(null);
+  const [lastOnlineRaw, setLastOnlineRaw] = useState<string | null>(null);
   const wasOffline = useRef(false);
 
   useEffect(() => {
@@ -34,12 +42,12 @@ export function NetworkStatus() {
     const recordOnline = () => {
       const now = new Date().toISOString();
       window.localStorage.setItem(LAST_ONLINE_KEY, now);
-      setLastOnline(formatLastOnline(now));
+      setLastOnlineRaw(now);
     };
 
     const offline = () => {
       wasOffline.current = true;
-      setLastOnline(formatLastOnline(window.localStorage.getItem(LAST_ONLINE_KEY)));
+      setLastOnlineRaw(window.localStorage.getItem(LAST_ONLINE_KEY));
       setStatus('offline');
     };
 
@@ -65,6 +73,8 @@ export function NetworkStatus() {
 
   if (!status) return null;
 
+  const lastOnline = formatLastOnline(lastOnlineRaw, locale);
+
   return (
     <div
       role="status"
@@ -76,17 +86,23 @@ export function NetworkStatus() {
           <div className="flex items-start gap-2.5">
             <WifiOff aria-hidden size={16} className="mt-0.5 shrink-0 text-accent" />
             <div>
-              <p className="font-bold">オフラインです</p>
+              <p className="font-bold">{locale === 'ja' ? 'オフラインです' : 'You are offline'}</p>
               <p className="mt-0.5 leading-relaxed text-muted">
-                表示済みのページを利用できます。
-                {lastOnline ? ` 最後の接続：${lastOnline}` : ' 最後の接続時刻は確認できません。'}
+                {t('network.offline')}
+                {lastOnline
+                  ? ` ${t('network.lastConnected')}: ${lastOnline}`
+                  : locale === 'ja'
+                    ? ' 最後の接続時刻は確認できません。'
+                    : ' The last connection time is unavailable.'}
               </p>
             </div>
           </div>
         ) : (
           <div className="flex items-center gap-2 font-semibold">
             <CloudSun aria-hidden size={16} className="text-accent" />
-            接続が戻りました。最新の内容を確認できます。
+            {locale === 'ja'
+              ? '接続が戻りました。最新の内容を確認できます。'
+              : 'Connection restored. You can check the latest content.'}
           </div>
         )}
       </div>
