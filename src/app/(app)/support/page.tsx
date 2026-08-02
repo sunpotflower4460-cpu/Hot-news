@@ -1,5 +1,13 @@
 import Link from 'next/link';
-import { AlertCircle, BookOpenCheck, ChevronRight, LifeBuoy, Mail, ShieldAlert } from 'lucide-react';
+import {
+  Accessibility,
+  AlertCircle,
+  BookOpenCheck,
+  ChevronRight,
+  LifeBuoy,
+  Mail,
+  ShieldAlert,
+} from 'lucide-react';
 import { DiagnosticCopyButton } from '@/components/support/DiagnosticCopyButton';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { Card } from '@/components/ui/Card';
@@ -46,6 +54,11 @@ export default function SupportPage() {
             Icon={ShieldAlert}
             title="権利侵害・安全上の問題"
             body="対象記事、権利者との関係、緊急性、希望する対応をお知らせください。"
+          />
+          <SupportType
+            Icon={Accessibility}
+            title="アクセシビリティ"
+            body="読めない、操作できない、読み上げや動きが負担になる箇所をお知らせください。"
           />
         </Card>
       </section>
@@ -99,6 +112,7 @@ export default function SupportPage() {
 
       <section className="space-y-2 px-5">
         <PolicyLink href="/legal/editorial-policy" label="編集・訂正方針" />
+        <PolicyLink href="/legal/accessibility" label="アクセシビリティ方針" />
         <PolicyLink href="/legal/privacy" label="プライバシーポリシー" />
         <PolicyLink href="/legal/terms" label="利用規約" />
       </section>
