@@ -15,6 +15,7 @@
   --text: 28 23% 20%;
   --muted: 28 12% 45%;
   --accent: 17 83% 64%;
+  --accent-strong: 17 83% 44%;
   --accent-soft: 27 94% 91%;
   --line: 32 34% 88%;
   --shadow: 25 34% 30%;
@@ -28,6 +29,7 @@
   --text: 210 20% 21%;
   --muted: 210 10% 45%;
   --accent: 190 66% 48%;
+  --accent-strong: 190 66% 35%;
   --accent-soft: 181 66% 90%;
   --line: 186 30% 88%;
   --shadow: 205 28% 34%;
@@ -41,6 +43,7 @@
   --text: 348 19% 21%;
   --muted: 348 10% 45%;
   --accent: 5 76% 64%;
+  --accent-strong: 5 76% 50%;
   --accent-soft: 13 84% 91%;
   --line: 18 32% 88%;
   --shadow: 348 28% 32%;
@@ -54,6 +57,7 @@
   --text: 232 25% 23%;
   --muted: 232 12% 47%;
   --accent: 250 50% 63%;
+  --accent-strong: 250 50% 60%;
   --accent-soft: 250 58% 91%;
   --line: 232 24% 87%;
   --shadow: 232 30% 38%;
@@ -67,6 +71,7 @@
   --text: 36 30% 90%;
   --muted: 36 10% 66%;
   --accent: 18 78% 68%;
+  --accent-strong: 18 78% 44%;
   --accent-soft: 18 38% 26%;
   --line: 220 12% 27%;
   --shadow: 0 0% 0%;
@@ -80,6 +85,7 @@
   --text: 210 25% 90%;
   --muted: 210 10% 64%;
   --accent: 190 66% 61%;
+  --accent-strong: 190 66% 35%;
   --accent-soft: 190 38% 26%;
   --line: 215 12% 28%;
   --shadow: 0 0% 0%;
@@ -93,6 +99,7 @@
   --text: 30 25% 90%;
   --muted: 30 10% 66%;
   --accent: 8 76% 69%;
+  --accent-strong: 8 76% 48%;
   --accent-soft: 8 40% 28%;
   --line: 282 12% 28%;
   --shadow: 0 0% 0%;
@@ -106,6 +113,7 @@
   --text: 40 18% 84%;
   --muted: 240 8% 59%;
   --accent: 250 49% 73%;
+  --accent-strong: 250 49% 58%;
   --accent-soft: 250 30% 26%;
   --line: 240 14% 22%;
   --shadow: 0 0% 0%;
@@ -156,7 +164,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid hsl(var(--accent) / 0.72);
+    outline: 2px solid hsl(var(--accent-strong) / 0.9);
     outline-offset: 3px;
     border-radius: 12px;
   }
@@ -255,6 +263,15 @@
 
   .safe-top {
     padding-top: env(safe-area-inset-top);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .glass,
+  .soft-surface {
+    border-width: 2px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
