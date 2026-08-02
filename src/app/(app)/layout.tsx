@@ -1,5 +1,6 @@
 import { BottomTabBar } from '@/components/layout/BottomTabBar';
 import { PhoneFrame } from '@/components/layout/PhoneFrame';
+import { NetworkStatus } from '@/components/pwa/NetworkStatus';
 import { SkyBackground } from '@/components/theme/SkyBackground';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -13,6 +14,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       >
         {children}
       </main>
+      <NetworkStatus />
       <BottomTabBar />
     </PhoneFrame>
   );
