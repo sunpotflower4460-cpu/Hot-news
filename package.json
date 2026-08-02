@@ -15,7 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "commercial:check": "node scripts/validate-commercial.mjs",
-    "release:check": "COMMERCIAL_RELEASE=1 npm run commercial:check",
+    "release:check": "COMMERCIAL_RELEASE=1 npm run commercial:check && npm audit --omit=dev --audit-level=high && npm audit --audit-level=high && npm run format:check && npm test && npm run typecheck && npm run lint && npm run build",
     "check": "npm run format:check && npm run commercial:check && npm test && npm run typecheck && npm run lint && npm run build"
   },
   "dependencies": {
