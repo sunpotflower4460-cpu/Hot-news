@@ -98,8 +98,8 @@ for (const [feature, provider] of integrationChecks) {
 const nextVersion = versionParts(packageJson.dependencies?.next);
 const nextIsSupported =
   nextVersion &&
-  ((nextVersion[0] === 15 && atLeast(nextVersion, [15, 5, 21])) ||
-    (nextVersion[0] === 16 && atLeast(nextVersion, [16, 2, 11])) ||
+  ((nextVersion[0] === 15 && atLeast(nextVersion, [15, 5, 22])) ||
+    (nextVersion[0] === 16 && atLeast(nextVersion, [16, 2, 12])) ||
     nextVersion[0] > 16);
 if (!nextIsSupported) {
   failures.push(
