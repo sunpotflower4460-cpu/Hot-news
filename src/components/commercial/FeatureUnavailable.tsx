@@ -1,8 +1,13 @@
+'use client';
+
 import { Construction } from 'lucide-react';
 import { LinkButton } from '@/components/ui/LinkButton';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
+import { useI18n } from '@/lib/i18n/useI18n';
 
 export function FeatureUnavailable({ title, description }: { title: string; description: string }) {
+  const { t } = useI18n();
+
   return (
     <div className="pb-10">
       <ScreenHeader back />
@@ -14,7 +19,7 @@ export function FeatureUnavailable({ title, description }: { title: string; desc
           <h1 className="mt-5 text-h2 font-bold text-text">{title}</h1>
           <p className="mt-2 text-body leading-relaxed text-muted">{description}</p>
           <LinkButton href="/home" className="mt-6 w-full" size="lg">
-            ホームへもどる
+            {t('notFound.home')}
           </LinkButton>
         </section>
       </div>
