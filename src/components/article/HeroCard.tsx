@@ -1,19 +1,30 @@
+'use client';
+
 import Link from 'next/link';
 import { ChevronRight, Sparkles } from 'lucide-react';
 import { SaveButton } from '@/components/favorites/SaveButton';
+import { localizeArticle } from '@/lib/i18n/articleTranslations';
+import { localizeCategory } from '@/lib/i18n/content';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { getCategory } from '@/mock/categories';
 import type { Article } from '@/types/article';
 import { ComfortScore } from './ComfortScore';
 import { CoverArt } from './CoverArt';
 
-export function HeroCard({ article }: { article: Article }) {
+export function HeroCard({ article: rawArticle }: { article: Article }) {
+  const { locale, t } = useI18n();
+  const article = localizeArticle(rawArticle, locale);
   const primary = article.category[0];
-  const meta = getCategory(primary);
+  const meta = localizeCategory(getCategory(primary), locale);
   const brightnessScore = article.editorialAssessment?.brightnessScore ?? article.comfortScore;
 
   return (
     <article className="soft-surface float-card group relative overflow-hidden rounded-panel shadow-soft-lg">
-      <Link href={`/article/${article.id}`} aria-label={`${article.title}を読む`} className="block">
+      <Link
+        href={`/article/${article.id}`}
+        aria-label={locale === 'ja' ? `${article.title}を読む` : `Read “${article.title}”`}
+        className="block"
+      >
         <CoverArt category={primary} seed={article.id} size="lg" className="h-[15.75rem] w-full" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5" />
 
@@ -25,7 +36,7 @@ export function HeroCard({ article }: { article: Article }) {
             </span>
             <span className="inline-flex min-h-8 items-center gap-1 rounded-pill bg-black/15 px-2.5 text-[0.7rem] font-semibold text-white/92 backdrop-blur-sm">
               <Sparkles aria-hidden size={12} />
-              今日のおすすめ
+              {locale === 'ja' ? '今日のおすすめ' : "Today's pick"}
             </span>
           </div>
 
@@ -39,7 +50,7 @@ export function HeroCard({ article }: { article: Article }) {
           <div className="flex items-center justify-between gap-3 pt-0.5 [&_.text-line]:!text-white/35">
             <ComfortScore score={brightnessScore} showLabel={false} />
             <span className="inline-flex min-h-9 items-center gap-0.5 rounded-pill border border-white/20 bg-white/14 px-3 text-[0.74rem] font-semibold backdrop-blur-sm transition-colors group-hover:bg-white/22">
-              記事を読む
+              {t('common.readArticle')}
               <ChevronRight aria-hidden size={14} />
             </span>
           </div>
