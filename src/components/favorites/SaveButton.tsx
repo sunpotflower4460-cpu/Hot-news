@@ -21,6 +21,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
   return (
     <button
       type="button"
+      disabled={!hydrated}
       aria-pressed={saved}
       aria-label={saved ? 'お気に入りから外す' : 'お気に入りに保存'}
       onClick={(event) => {
@@ -29,7 +30,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
         toggle(id);
       }}
       className={cn(
-        'relative flex h-10 w-10 items-center justify-center overflow-visible rounded-full transition-all duration-300 ease-gentle active:scale-90',
+        'relative flex h-11 w-11 items-center justify-center overflow-visible rounded-full transition-all duration-300 ease-gentle active:scale-90 disabled:cursor-wait disabled:opacity-55',
         variant === 'glass'
           ? 'glass border hover:-translate-y-0.5 hover:shadow-glow'
           : 'bg-transparent',
@@ -40,6 +41,7 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
       <AnimatePresence>
         {saved && (
           <motion.span
+            aria-hidden
             initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0, scale: 0.4 }}
@@ -51,17 +53,21 @@ export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps
         )}
       </AnimatePresence>
       <motion.span
+        aria-hidden
         key={saved ? 'on' : 'off'}
         initial={{ scale: 0.58, rotate: saved ? -12 : 0 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 460, damping: 17 }}
       >
         <Heart
-          size={18}
+          size={19}
           strokeWidth={2}
           className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
         />
       </motion.span>
+      <span className="sr-only" aria-live="polite">
+        {saved ? 'お気に入りに保存済み' : 'お気に入り未保存'}
+      </span>
     </button>
   );
 }
