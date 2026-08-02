@@ -15,6 +15,9 @@ const exists = async (path) => {
   }
 };
 
+const extractQuotedKeys = (source) =>
+  [...source.matchAll(/^\s*'([^']+)':/gm)].map((match) => match[1]);
+
 test('commercial configuration has a valid stage and integration consistency', async () => {
   const config = JSON.parse(await read('src/config/commercial.json'));
   assert.ok(['preview', 'production'].includes(config.releaseStage));
@@ -50,10 +53,14 @@ test('reader-facing selectors retain the central publication gate', async () => 
   const favorites = await read('src/app/(app)/favorites/page.tsx');
   assert.match(favorites, /isArticleEligibleForPublication/);
 
-  const article = await read('src/app/(app)/article/[id]/page.tsx');
-  assert.match(article, /source_link_only/);
-  assert.match(article, /safe_short/);
-  assert.match(article, /ArticleTrustPanel/);
+  const articlePage = await read('src/app/(app)/article/[id]/page.tsx');
+  assert.match(articlePage, /getArticleById/);
+  assert.match(articlePage, /ArticleDetailContent/);
+
+  const detail = await read('src/components/article/ArticleDetailContent.tsx');
+  assert.match(detail, /source_link_only/);
+  assert.match(detail, /safe_short/);
+  assert.match(detail, /ArticleTrustPanel/);
 });
 
 test('publication gate requires safe sources, assessment, and provenance for real articles', async () => {
@@ -79,7 +86,7 @@ test('commercial legal and support routes exist', async () => {
   for (const path of required) assert.equal(await exists(path), true, path);
 });
 
-test('privacy and diagnostics are deny-by-default and feature gated', async () => {
+test('privacy, diagnostics, and notifications are deny-by-default', async () => {
   const privacy = await read('src/lib/store/usePrivacyStore.ts');
   assert.match(privacy, /analytics: 'denied'/);
   assert.match(privacy, /diagnostics: 'denied'/);
@@ -118,7 +125,6 @@ test('static hosting headers contain baseline browser protections', async () => 
 
 test('manifest includes commercial identity and useful shortcuts', async () => {
   const manifest = JSON.parse(await read('public/manifest.webmanifest'));
-  assert.equal(manifest.lang, 'ja');
   assert.equal(manifest.display, 'standalone');
   assert.ok(Array.isArray(manifest.icons) && manifest.icons.length > 0);
 
@@ -128,22 +134,99 @@ test('manifest includes commercial identity and useful shortcuts', async () => {
   assert.ok(shortcutUrls.has('/night'));
 });
 
+test('Japanese and English dictionaries contain identical keys', async () => {
+  const source = await read('src/lib/i18n/messages.ts');
+  const ja = source.match(/ja:\s*\{([\s\S]*?)\n  \},\n  en:/)?.[1];
+  const en = source.match(/en:\s*\{([\s\S]*?)\n  \},\n\} as const/)?.[1];
+  assert.ok(ja, 'Japanese dictionary block is missing');
+  assert.ok(en, 'English dictionary block is missing');
+  assert.deepEqual(extractQuotedKeys(en).sort(), extractQuotedKeys(ja).sort());
+});
+
+test('language preference persists and is applied before hydration', async () => {
+  const store = await read('src/lib/store/useLocaleStore.ts');
+  assert.match(store, /locale: 'ja'/);
+  assert.match(store, /name: 'hotnews-locale'/);
+  assert.match(store, /value === 'ja' \|\| value === 'en'/);
+
+  const layout = await read('src/app/layout.tsx');
+  assert.match(layout, /hotnews-locale/);
+  assert.match(layout, /d\.setAttribute\('lang',locale\)/);
+  assert.match(layout, /LocaleProvider/);
+
+  const provider = await read('src/components/i18n/LocaleProvider.tsx');
+  assert.match(provider, /root\.lang = locale/);
+  assert.match(provider, /document\.title/);
+});
+
+test('language switcher is persistent and accessible', async () => {
+  const switcher = await read('src/components/i18n/LanguageSwitcher.tsx');
+  assert.match(switcher, /role="group"/);
+  assert.match(switcher, /aria-pressed/);
+  assert.match(switcher, /setLocale/);
+  assert.match(switcher, /日本語/);
+  assert.match(switcher, /EN/);
+
+  const settings = await read('src/app/(app)/settings/page.tsx');
+  assert.match(settings, /LanguageSwitcher/);
+  assert.match(settings, /settings\.language/);
+});
+
+test('all fictional preview articles have complete English translations', async () => {
+  const source = await read('src/lib/i18n/articleTranslations.ts');
+  const ids = [...source.matchAll(/^\s*(a\d{2}):\s*\{/gm)].map((match) => match[1]);
+  assert.equal(ids.length, 24);
+  assert.deepEqual(
+    ids.sort(),
+    Array.from({ length: 24 }, (_, index) => `a${String(index + 1).padStart(2, '0')}`),
+  );
+  for (const field of ['title', 'summary', 'body', 'sourceName', 'whyComfort', 'region']) {
+    assert.match(source, new RegExp(`${field}:`));
+  }
+});
+
+test('core reader surfaces use locale-aware content and formatting', async () => {
+  const required = [
+    'src/components/home/HomeGreeting.tsx',
+    'src/components/article/ArticleCard.tsx',
+    'src/components/article/HeroCard.tsx',
+    'src/components/article/ArticleDetailContent.tsx',
+    'src/components/category/BrowseContent.tsx',
+    'src/components/category/CategoryPageContent.tsx',
+    'src/app/(app)/favorites/page.tsx',
+    'src/components/digest/DigestContent.tsx',
+    'src/app/(app)/settings/page.tsx',
+    'src/app/(app)/settings/privacy/page.tsx',
+    'src/app/(app)/support/page.tsx',
+  ];
+
+  for (const path of required) {
+    const source = await read(path);
+    assert.match(source, /useI18n|<T /, path);
+  }
+
+  const dates = await read('src/lib/utils/date.ts');
+  assert.match(dates, /Intl\.DateTimeFormat/);
+  assert.match(dates, /locale === 'ja' \? 'ja-JP' : 'en-US'/);
+});
+
 test('core mobile ux keeps explicit navigation and safe-area spacing', async () => {
   const navigation = await read('src/components/layout/BottomTabBar.tsx');
-  assert.match(navigation, /label: 'テーマ'/);
-  assert.match(navigation, /label: '保存'/);
+  assert.match(navigation, /nav\.home/);
+  assert.match(navigation, /nav\.browse/);
+  assert.match(navigation, /nav\.saved/);
   assert.match(navigation, /Icon: Bookmark/);
-  assert.match(navigation, /label: '週まとめ'/);
+  assert.match(navigation, /nav\.digest/);
 
   const onboarding = await read('src/components/onboarding/OnboardingCarousel.tsx');
-  assert.match(onboarding, /明るい出来事だけを、1日3件/);
-  assert.match(onboarding, /短く読めて、出典も確認できます/);
-  assert.match(onboarding, /戻る/);
-  assert.match(onboarding, /次へ/);
+  assert.match(onboarding, /onboarding\.firstTitle/);
+  assert.match(onboarding, /onboarding\.secondTitle/);
+  assert.match(onboarding, /LanguageSwitcher/);
   assert.match(onboarding, /h-10 w-10/);
 
   const screenHeader = await read('src/components/layout/ScreenHeader.tsx');
   assert.match(screenHeader, /sticky top-0/);
+  assert.match(screenHeader, /LanguageSwitcher/);
 
   const polish = await read('src/app/ux-polish.css');
   assert.match(polish, /calc\(1\.25rem \+ env\(safe-area-inset-top\)\)/);
@@ -152,52 +235,53 @@ test('core mobile ux keeps explicit navigation and safe-area spacing', async () 
 
 test('daily experience is finite, optional, and records history locally', async () => {
   const progress = await read('src/components/home/TodayReadingProgress.tsx');
-  assert.match(progress, /今日の3選はここまでです/);
-  assert.match(progress, /ここで閉じても大丈夫です/);
-  assert.doesNotMatch(progress, /連続/);
+  assert.match(progress, /home\.progressComplete/);
+  assert.match(progress, /home\.progressCloseAnytime/);
+  assert.doesNotMatch(progress, /streak/i);
 
   const hint = await read('src/components/home/HomeUsageHint.tsx');
-  assert.match(hint, /30秒の要点/);
-  assert.match(hint, /ブックマーク/);
+  assert.match(hint, /30-second summary/);
+  assert.match(hint, /bookmark/);
 
   const readingStore = await read('src/lib/store/useReadingStore.ts');
   assert.match(readingStore, /MAX_ENTRIES = 50/);
   assert.match(readingStore, /MAX_AGE_MS = 30/);
   assert.match(readingStore, /name: 'hotnews-reading'/);
 
-  const article = await read('src/app/(app)/article/[id]/page.tsx');
+  const article = await read('src/components/article/ArticleDetailContent.tsx');
   assert.match(article, /ArticleReadTracker/);
 });
 
 test('saved and recent reading actions use unambiguous bookmark language', async () => {
   const saveButton = await read('src/components/favorites/SaveButton.tsx');
   assert.match(saveButton, /Bookmark/);
-  assert.match(saveButton, /あとで読むために保存/);
+  assert.match(saveButton, /Save .* for later/);
   assert.doesNotMatch(saveButton, /Heart/);
 
   const favorites = await read('src/app/(app)/favorites/page.tsx');
-  assert.match(favorites, /最近読んだニュース/);
-  assert.match(favorites, /最大50件|30日/);
+  assert.match(favorites, /saved\.tabRecent/);
+  assert.match(favorites, /30 days/);
 });
 
 test('discovery supports user goals as well as editorial categories', async () => {
-  const browse = await read('src/app/(app)/browse/page.tsx');
-  assert.match(browse, /30秒で読みたい/);
-  assert.match(browse, /ほっとしたい/);
-  assert.match(browse, /未来を感じたい/);
-  assert.match(browse, /子どもと話したい/);
-  assert.match(browse, /寝る前に1件/);
+  const browse = await read('src/components/category/BrowseContent.tsx');
+  assert.match(browse, /browse\.quick/);
+  assert.match(browse, /browse\.calm/);
+  assert.match(browse, /browse\.future/);
+  assert.match(browse, /browse\.family/);
+  assert.match(browse, /browse\.bedtime/);
 });
 
-test('article reading flow exposes summary, source context, sharing, and progressive trust', async () => {
-  const article = await read('src/app/(app)/article/[id]/page.tsx');
-  assert.match(article, /30秒でわかる要点/);
-  assert.match(article, /外部サイトが新しい画面で開きます/);
-  assert.match(article, /記事を読む/);
+test('article reading flow exposes localized summary, source, sharing, and trust', async () => {
+  const article = await read('src/components/article/ArticleDetailContent.tsx');
+  assert.match(article, /article\.summary/);
+  assert.match(article, /article\.sourceOpen/);
+  assert.match(article, /article\.body/);
+  assert.match(article, /localizeArticle/);
 
   const trust = await read('src/components/article/ArticleTrustPanel.tsx');
   assert.match(trust, /<details>/);
-  assert.match(trust, /確認情報と編集履歴/);
+  assert.match(trust, /article\.trustTitle/);
   assert.match(trust, /disclosure-summary/);
   assert.match(trust, /ShareArticleButton/);
 
@@ -206,14 +290,31 @@ test('article reading flow exposes summary, source context, sharing, and progres
   assert.match(share, /navigator\.clipboard\.writeText/);
 });
 
-test('offline and privacy explanations disclose local freshness and retention', async () => {
+test('offline and privacy explanations disclose freshness, language, and retention', async () => {
   const network = await read('src/components/pwa/NetworkStatus.tsx');
-  assert.match(network, /最後の接続/);
+  assert.match(network, /network\.lastConnected/);
   assert.match(network, /hotnews-last-online/);
 
   const privacy = await read('src/app/(app)/legal/privacy/page.tsx');
   assert.match(privacy, /最大50件、最長30日/);
   assert.match(privacy, /閲覧履歴の外部送信は行っていません/);
+
+  const inventory = await read('docs/DATA_INVENTORY.md');
+  assert.match(inventory, /Language preference/);
+  assert.match(inventory, /hotnews-locale|Japanese or English/);
+
+  const offline = await read('public/offline.html');
+  assert.match(offline, /You are offline/);
+});
+
+test('English legal release remains blocked pending specialist review', async () => {
+  const legal = await read('src/components/legal/LegalDocument.tsx');
+  assert.match(legal, /Reviewed English legal text is still required/);
+  assert.match(legal, /Japanese working draft/);
+
+  const checklist = await read('docs/COMMERCIAL_RELEASE_CHECKLIST.md');
+  assert.match(checklist, /Every supported commercial language has specialist-reviewed legal/);
+  assert.match(checklist, /English privacy policy, terms, commerce disclosure/);
 });
 
 test('native privacy manifest starts with tracking and collection disabled', async () => {
