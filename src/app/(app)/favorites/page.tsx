@@ -1,10 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { ArticleCard } from '@/components/article/ArticleCard';
+import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { Button } from '@/components/ui/Button';
+import { LinkButton } from '@/components/ui/LinkButton';
 import { isArticleEligibleForPublication } from '@/lib/editorial/policy';
 import { useFavoritesStore } from '@/lib/store/useFavoritesStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
@@ -21,7 +20,7 @@ export default function FavoritesPage() {
     .filter((article): article is Article => article !== undefined);
 
   return (
-    <div className="pb-8">
+    <div className="pb-10">
       <ScreenHeader
         title="お気に入り"
         subtitle={
@@ -30,19 +29,37 @@ export default function FavoritesPage() {
             : 'もう一度読みたい明るい出来事を、ここに'
         }
       />
-      {!hydrated ? null : saved.length === 0 ? (
+
+      {!hydrated ? (
+        <div aria-label="お気に入りを読み込み中" className="space-y-3.5 px-5 pt-2">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div
+              key={index}
+              className="soft-surface flex animate-pulse gap-4 rounded-card p-3.5 shadow-soft"
+            >
+              <div className="h-[6.75rem] w-[6.75rem] shrink-0 rounded-[1.4rem] bg-surface-2/80" />
+              <div className="flex flex-1 flex-col gap-2 py-1">
+                <div className="h-3 w-20 rounded-pill bg-accent-soft/75" />
+                <div className="h-4 w-full rounded-pill bg-surface-2" />
+                <div className="h-4 w-4/5 rounded-pill bg-surface-2" />
+                <div className="mt-auto h-3 w-24 rounded-pill bg-surface-2/80" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : saved.length === 0 ? (
         <EmptyState
           glyph="🤍"
           title="まだ何もありません"
           description="気になったニュースのハートを押すと、ここにそっと集まります。"
           action={
-            <Link href="/home">
-              <Button variant="soft">ニュースをさがす</Button>
-            </Link>
+            <LinkButton href="/home" variant="soft">
+              ニュースをさがす
+            </LinkButton>
           }
         />
       ) : (
-        <div className="space-y-3 px-5 pt-2">
+        <div className="space-y-3.5 px-5 pt-2">
           {saved.map((article) => (
             <ArticleCard key={article.id} article={article} layout="list" />
           ))}
