@@ -33,13 +33,16 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
+          if (response.ok) {
+            const copy = response.clone();
+            event.waitUntil(caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy)));
+          }
           return response;
         })
         .catch(async () => {
           const cached = await caches.match(request);
-          return cached || caches.match('/offline.html');
+          const offline = await caches.match('/offline.html');
+          return cached || offline || Response.error();
         }),
     );
     return;
@@ -52,11 +55,11 @@ self.addEventListener('fetch', (event) => {
           .then((response) => {
             if (response.ok) {
               const copy = response.clone();
-              caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
+              event.waitUntil(caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy)));
             }
             return response;
           })
-          .catch(() => cached);
+          .catch(() => cached || Response.error());
 
         return cached || network;
       }),
