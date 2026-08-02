@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP, Noto_Serif_JP, Zen_Maru_Gothic } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import { MotionProvider } from '@/components/motion/MotionProvider';
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import './globals.css';
 
 const sans = Noto_Sans_JP({
@@ -26,10 +27,22 @@ const rounded = Zen_Maru_Gothic({
 });
 
 export const metadata: Metadata = {
-  title: '明るいニュース｜Hot News',
+  title: {
+    default: '明るいニュース｜Hot News',
+    template: '%s｜明るいニュース',
+  },
   description:
     '世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。',
   applicationName: '明るいニュース',
+  robots: {
+    index: false,
+    follow: false,
+    noarchive: true,
+    nocache: true,
+  },
+  icons: {
+    icon: '/icons/icon.svg',
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
@@ -61,7 +74,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <a href="#main-content" className="skip-link">
+          本文へ移動
+        </a>
+        <MotionProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </MotionProvider>
         <ServiceWorkerRegister />
       </body>
     </html>
