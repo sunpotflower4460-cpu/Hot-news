@@ -1,14 +1,14 @@
 import { Sun } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 
-interface ComfortScoreProps {
+interface BrightnessScoreProps {
   /** 0–100. Shown as a gentle five-level brightness indicator. */
   score: number;
   showLabel?: boolean;
   className?: string;
 }
 
-export function ComfortScore({ score, showLabel = true, className }: ComfortScoreProps) {
+export function BrightnessScore({ score, showLabel = true, className }: BrightnessScoreProps) {
   const level = Math.max(1, Math.min(5, Math.round(score / 20)));
 
   return (
@@ -17,8 +17,8 @@ export function ComfortScore({ score, showLabel = true, className }: ComfortScor
       role="img"
       aria-label={`明るさ 5段階中 ${level}`}
     >
-      {showLabel && <span className="text-[0.7rem] font-medium text-muted">明るさ</span>}
-      <span className="flex items-center gap-0.5">
+      {showLabel && <span className="text-[0.7rem] font-semibold text-muted">明るさ</span>}
+      <span aria-hidden className="flex items-center gap-0.5">
         {Array.from({ length: 5 }).map((_, index) => (
           <Sun
             key={index}
@@ -31,3 +31,6 @@ export function ComfortScore({ score, showLabel = true, className }: ComfortScor
     </div>
   );
 }
+
+/** @deprecated Use BrightnessScore. Kept temporarily for existing imports. */
+export const ComfortScore = BrightnessScore;
