@@ -1,8 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_JP, Noto_Serif_JP, Zen_Maru_Gothic } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import { LocaleProvider } from '@/components/i18n/LocaleProvider';
+import { SkipLink } from '@/components/i18n/SkipLink';
+import { MotionProvider } from '@/components/motion/MotionProvider';
 import { ServiceWorkerRegister } from '@/components/pwa/ServiceWorkerRegister';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
+import { commercialConfig, isCommercialPreview } from '@/config/commercial';
 import './globals.css';
+import './ux-polish.css';
 
 const sans = Noto_Sans_JP({
   weight: ['400', '500', '700'],
@@ -25,15 +30,55 @@ const rounded = Zen_Maru_Gothic({
   variable: '--font-rounded',
 });
 
+const description =
+  '世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。';
+const publicBaseUrl = commercialConfig.app.publicBaseUrl.trim();
+
 export const metadata: Metadata = {
-  title: 'こころがほっとするニュース',
-  description:
-    '世界の中から、こころがほっとする出来事だけをそっとお届けする、やさしいニュースアプリ。',
-  applicationName: 'こころのニュース',
+  ...(publicBaseUrl ? { metadataBase: new URL(publicBaseUrl) } : {}),
+  title: {
+    default: commercialConfig.app.displayName,
+    template: `%s｜${commercialConfig.app.name}`,
+  },
+  description,
+  applicationName: commercialConfig.app.name,
+  category: 'news',
+  referrer: 'no-referrer',
+  robots: isCommercialPreview
+    ? {
+        index: false,
+        follow: false,
+        noarchive: true,
+        nocache: true,
+      }
+    : {
+        index: true,
+        follow: true,
+      },
+  icons: {
+    icon: '/icons/icon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ja_JP',
+    siteName: commercialConfig.app.name,
+    title: commercialConfig.app.displayName,
+    description,
+  },
+  twitter: {
+    card: 'summary',
+    title: commercialConfig.app.displayName,
+    description,
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'こころのニュース',
+    title: commercialConfig.app.name,
   },
   manifest: '/manifest.webmanifest',
 };
@@ -48,7 +93,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const NO_FLASH = `(function(){try{var d=document.documentElement;var pref='auto',ov=null;var raw=localStorage.getItem('hotnews-theme');if(raw){var p=JSON.parse(raw);if(p&&p.state){pref=p.state.pref||'auto';ov=p.state.timeOverride||null;}}var h=new Date().getHours();var t=ov||(h>=5&&h<10?'morning':h>=10&&h<16?'day':h>=16&&h<19?'evening':'night');var m=pref==='light'?'light':pref==='dark'?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(location.pathname.indexOf('/night')===0){t='night';m='dark';}d.setAttribute('data-theme',m);d.setAttribute('data-time',t);d.style.colorScheme=m;}catch(e){}})();`;
+const NO_FLASH = `(function(){try{var d=document.documentElement;var pref='auto',ov=null,locale='ja';var raw=localStorage.getItem('hotnews-theme');if(raw){var p=JSON.parse(raw);if(p&&p.state){pref=p.state.pref||'auto';ov=p.state.timeOverride||null;}}var localeRaw=localStorage.getItem('hotnews-locale');if(localeRaw){var lp=JSON.parse(localeRaw);if(lp&&lp.state&&(lp.state.locale==='ja'||lp.state.locale==='en'))locale=lp.state.locale;}var h=new Date().getHours();var t=ov||(h>=5&&h<10?'morning':h>=10&&h<16?'day':h>=16&&h<19?'evening':'night');var m=pref==='light'?'light':pref==='dark'?'dark':(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(location.pathname.indexOf('/night')===0){t='night';m='dark';}d.setAttribute('data-theme',m);d.setAttribute('data-time',t);d.setAttribute('data-locale',locale);d.setAttribute('lang',locale);d.style.colorScheme=m;}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -61,8 +106,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
-        <ServiceWorkerRegister />
+        <LocaleProvider>
+          <SkipLink />
+          <MotionProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </MotionProvider>
+          <ServiceWorkerRegister />
+        </LocaleProvider>
       </body>
     </html>
   );

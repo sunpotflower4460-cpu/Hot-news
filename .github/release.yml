@@ -1,0 +1,29 @@
+changelog:
+  exclude:
+    labels:
+      - skip-changelog
+  categories:
+    - title: Product and UX
+      labels:
+        - product
+        - enhancement
+        - ux
+    - title: Editorial integrity
+      labels:
+        - editorial
+        - editorial-review
+    - title: Privacy and security
+      labels:
+        - privacy
+        - security
+    - title: Reliability and operations
+      labels:
+        - reliability
+        - operations
+        - bug
+    - title: Dependencies
+      labels:
+        - dependencies
+    - title: Other changes
+      labels:
+        - '*'

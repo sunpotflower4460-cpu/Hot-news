@@ -9,7 +9,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a01',
     title: '保護された子ギツネ、半年の介抱を経て北の森へ帰る',
-    summary: '骨折した子ギツネを保護した山あいの動物クリニック。半年のリハビリの末、初夏の森へ静かに帰っていきました。',
+    summary:
+      '骨折した子ギツネを保護した山あいの動物クリニック。半年のリハビリの末、初夏の森へ静かに帰っていきました。',
     body: '北海道の山あいにある小さな動物クリニックが、冬のはじめに足を骨折した子ギツネを保護しました。スタッフは野生に戻れるよう、人になつきすぎないよう距離を保ちながら介抱を続けたといいます。\n\n半年のリハビリを経て、子ギツネは自分の力で走れるまでに回復。初夏のある朝、森のふちでケージの扉が開けられると、振り返ることもなく木立の奥へ駆けていきました。\n\n「元気でね、とだけ伝えました」とスタッフ。別れはさびしくても、これがいちばんの結末なのだと話しています。',
     sourceUrl: 'https://example.com/news/fox-returns',
     sourceName: '北の森だより',
@@ -17,7 +18,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-27T06:00:00+09:00',
     category: ['animals-nature'],
     comfortScore: 92,
-    whyComfort: '人の手が、野生に戻る力をそっと支えた話だから。別れがさびしくても、それがいちばんの幸せという余韻が残ります。',
+    whyComfort:
+      '人の手が、野生に戻る力をそっと支えた話だから。別れがさびしくても、それがいちばんの幸せという余韻が残ります。',
     region: '日本・北海道',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -27,7 +29,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a02',
     title: '雪の朝、見知らぬ人たちが立ち往生のバスを押した10分間',
-    summary: '坂道で動けなくなった路線バス。通りがかった人たちが自然と集まり、声をかけ合って後ろから押し上げました。',
+    summary:
+      '坂道で動けなくなった路線バス。通りがかった人たちが自然と集まり、声をかけ合って後ろから押し上げました。',
     body: '記録的な雪が降った朝、市街地の坂道で路線バスがタイヤを滑らせて動けなくなりました。乗客が困っていると、通勤途中の人たちが一人、また一人と集まってきたといいます。\n\n「せーの」というかけ声に合わせて十数人が後ろから押すと、バスはゆっくりと坂を上りはじめました。運転手が窓から何度も頭を下げると、押した人たちは照れたように笑って、それぞれの朝へ戻っていったそうです。\n\n居合わせた人は「だれかがはじめたら、自然と手が出ていた」と話しています。',
     sourceUrl: 'https://example.com/news/snowy-bus',
     sourceName: 'まちかど通信',
@@ -35,7 +38,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-27T06:05:00+09:00',
     category: ['kindness'],
     comfortScore: 88,
-    whyComfort: '誰かが始めた小さな行動に、見知らぬ人たちが自然と続いていく。やさしさは伝染するのだと思える光景です。',
+    whyComfort:
+      '誰かが始めた小さな行動に、見知らぬ人たちが自然と続いていく。やさしさは伝染するのだと思える光景です。',
     region: '日本・東北',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -45,7 +49,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a03',
     title: '視覚に障がいのある人へ。手のひらで「色」を感じる装置が試験導入',
-    summary: '色を微細な振動のパターンに変える小さな装置。美術館での体験会では、来場者が絵画の色彩を手で味わいました。',
+    summary:
+      '色を微細な振動のパターンに変える小さな装置。美術館での体験会では、来場者が絵画の色彩を手で味わいました。',
     body: '色の違いを振動のパターンに置き換えて伝える手のひらサイズの装置が、ある美術館の体験会で試験的に使われました。開発したのは大学の研究チームと福祉施設の合同プロジェクトです。\n\n青はゆったり、赤は細かく——色ごとに異なるリズムが指先に伝わる仕組み。体験した人は「絵に色があることを、はじめて自分の感覚で受け取れた」と話したといいます。\n\nチームは「正確さより、心が動く体験を大切にしたい」と説明。今後は学校や図書館への導入も検討しているとのことです。',
     sourceUrl: 'https://example.com/news/feel-color',
     sourceName: 'テックの灯り',
@@ -53,7 +58,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-27T06:10:00+09:00',
     category: ['bright-tech', 'kindness'],
     comfortScore: 90,
-    whyComfort: '技術が「便利さ」ではなく「心が動く体験」のために使われている。やさしい未来の手ざわりが伝わってきます。',
+    whyComfort:
+      '技術が「便利さ」ではなく「心が動く体験」のために使われている。やさしい未来の手ざわりが伝わってきます。',
     region: '日本・関西',
     readingMinutes: 3,
     status: 'PUBLISHED',
@@ -63,7 +69,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a04',
     title: '町じゅうの本棚をつないだ「歩く図書館」、3年目の春',
-    summary: '玄関先に小さな本棚を置き、だれでも本を借りられる取り組み。気づけば町に120の本棚が並びました。',
+    summary:
+      '玄関先に小さな本棚を置き、だれでも本を借りられる取り組み。気づけば町に120の本棚が並びました。',
     body: '一軒の家の玄関先に置かれた小さな本棚から始まった取り組みが、3年で町じゅうに広がりました。借りた本はいつ返してもよく、別の本を置いていってもいい——ゆるやかな約束だけのしくみです。\n\n本棚はいまや120か所に。子どもが絵本を選ぶ横で、お年寄りが文庫本を手に取る光景が日常になりました。「本を通して、近所の人とあいさつが増えた」という声も多いそうです。\n\n発起人は「本が町の縁側になった」と笑います。',
     sourceUrl: 'https://example.com/news/walking-library',
     sourceName: 'まちかど通信',
@@ -71,7 +78,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-26T18:00:00+09:00',
     category: ['arts-culture', 'kindness'],
     comfortScore: 84,
-    whyComfort: 'ささやかな善意が、ゆっくりと町の風景を変えていく。信頼でつながる暮らしの心地よさを感じます。',
+    whyComfort:
+      'ささやかな善意が、ゆっくりと町の風景を変えていく。信頼でつながる暮らしの心地よさを感じます。',
     region: '日本・中部',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -80,7 +88,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a05',
     title: '渡り鳥の中継地、市民の手で湿地がよみがえる',
-    summary: '埋め立て予定だった湿地を、市民グループが少しずつ再生。今年は数千羽の渡り鳥が羽を休めました。',
+    summary:
+      '埋め立て予定だった湿地を、市民グループが少しずつ再生。今年は数千羽の渡り鳥が羽を休めました。',
     body: 'かつて埋め立てが検討されていた沿岸の湿地に、この春、数千羽の渡り鳥が舞い降りました。市民グループが十年かけて水路を整え、植生を戻してきた成果だといいます。\n\n週末ごとに集まる参加者は、子どもから定年後の人までさまざま。「鳥が増えるたびに、自分たちの手の跡を感じる」と語ります。\n\n専門家は「都市の近くにこれだけの中継地が戻った例は貴重」と評価。観察会には県外からも人が訪れるようになりました。',
     sourceUrl: 'https://example.com/news/wetland',
     sourceName: '北の森だより',
@@ -88,7 +97,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-26T12:00:00+09:00',
     category: ['animals-nature'],
     comfortScore: 81,
-    whyComfort: '失われかけた自然が、人の根気で少しずつ戻っていく。長い時間をかけたやさしさには静かな力があります。',
+    whyComfort:
+      '失われかけた自然が、人の根気で少しずつ戻っていく。長い時間をかけたやさしさには静かな力があります。',
     region: '日本・関東',
     readingMinutes: 3,
     status: 'PUBLISHED',
@@ -97,7 +107,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a06',
     title: '深夜のコンビニ、店員さんが残した一枚のメモ',
-    summary: '残業帰りの客が落とした手袋。翌朝、レジ横に添えられた手書きのメモに、思わず足が止まりました。',
+    summary:
+      '残業帰りの客が落とした手袋。翌朝、レジ横に添えられた手書きのメモに、思わず足が止まりました。',
     body: '残業帰りに立ち寄ったコンビニで手袋を片方落としてしまった会社員。翌朝もう一度訪れると、レジ横に手袋と一枚のメモが置かれていました。\n\n「寒くなりますね。見つけておきました。あたたかくして」——短い言葉に、思わず胸が熱くなったといいます。\n\nSNSに写真を載せると「こういう小さなやさしさに救われる」という共感が静かに広がりました。店員は「当たり前のことをしただけ」と話しているそうです。',
     sourceUrl: 'https://example.com/news/konbini-note',
     sourceName: '夜のニュース帖',
@@ -105,7 +116,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-26T22:00:00+09:00',
     category: ['kindness', 'night-reads'],
     comfortScore: 86,
-    whyComfort: '見返りのない小さな気づかいが、知らない誰かの一日をそっと支える。寝る前に思い出したいやさしさです。',
+    whyComfort:
+      '見返りのない小さな気づかいが、知らない誰かの一日をそっと支える。寝る前に思い出したいやさしさです。',
     region: '日本・関東',
     readingMinutes: 1,
     status: 'PUBLISHED',
@@ -115,7 +127,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a07',
     title: '廃校の音楽室が、世代をこえた合唱団の練習場に',
-    summary: '閉校した小学校の音楽室を地域が引き継ぎ、7歳から82歳までが声を合わせる合唱団が生まれました。',
+    summary:
+      '閉校した小学校の音楽室を地域が引き継ぎ、7歳から82歳までが声を合わせる合唱団が生まれました。',
     body: '少子化で閉校した小学校の音楽室が、地域の合唱団の練習場としてよみがえりました。メンバーは7歳から82歳まで。世代をこえて週に一度、声を合わせています。\n\n「孫みたいな子と同じ歌をうたうなんて」と最年長の女性。子どもたちは「おじいちゃんの低い声がかっこいい」とうれしそうに話します。\n\n秋には地域の人を招いた小さな演奏会を予定。指揮を務める元教員は「校歌をもう一度この部屋で響かせたい」と話しています。',
     sourceUrl: 'https://example.com/news/choir',
     sourceName: 'まちかど通信',
@@ -123,7 +136,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-26T09:00:00+09:00',
     category: ['arts-culture'],
     comfortScore: 83,
-    whyComfort: '役目を終えた場所と、世代の違う人たちが、歌でひとつになる。終わりが新しい始まりになる温かさがあります。',
+    whyComfort:
+      '役目を終えた場所と、世代の違う人たちが、歌でひとつになる。終わりが新しい始まりになる温かさがあります。',
     region: '日本・四国',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -132,7 +146,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a08',
     title: '迷子の犬、AIの首輪カメラが3時間で家族のもとへ',
-    summary: '迷子になった犬を、近所の人のスマホと連携する見守りタグが発見。わずか3時間で再会できました。',
+    summary:
+      '迷子になった犬を、近所の人のスマホと連携する見守りタグが発見。わずか3時間で再会できました。',
     body: '散歩中にリードがはずれて迷子になった犬が、地域の見守りネットワークの力でわずか3時間後に家族のもとへ戻りました。\n\n犬の首輪につけた小さなタグが、近所の人のスマホとゆるやかに連携するしくみ。プライバシーに配慮し、位置は飼い主にだけ通知される設計だといいます。\n\n「もうだめかと思った矢先に通知が来て」と飼い主。技術を手がけたチームは「不安な時間を少しでも短くしたかった」と話しています。',
     sourceUrl: 'https://example.com/news/lost-dog',
     sourceName: 'テックの灯り',
@@ -140,7 +155,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-25T18:00:00+09:00',
     category: ['bright-tech', 'animals-nature'],
     comfortScore: 80,
-    whyComfort: '技術が、家族の不安な時間を短くするために働いた話。便利さの先にある安心が伝わってきます。',
+    whyComfort:
+      '技術が、家族の不安な時間を短くするために働いた話。便利さの先にある安心が伝わってきます。',
     region: '日本・九州',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -157,7 +173,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-25T22:00:00+09:00',
     category: ['kindness', 'night-reads'],
     comfortScore: 87,
-    whyComfort: '時間をこえて届いたやさしさが、過去と今をやわらかくつなぐ。夜にそっと読みたい再会の話です。',
+    whyComfort:
+      '時間をこえて届いたやさしさが、過去と今をやわらかくつなぐ。夜にそっと読みたい再会の話です。',
     region: '海外・ヨーロッパ',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -167,7 +184,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a10',
     title: '砂漠に緑の帯。種を包んだ粘土だんごが芽吹いた',
-    summary: '乾いた大地に、種を粘土で包んでまくだけの素朴な緑化。数年かけて、点が線になりはじめました。',
+    summary:
+      '乾いた大地に、種を粘土で包んでまくだけの素朴な緑化。数年かけて、点が線になりはじめました。',
     body: '乾燥が進む地域で、種を粘土で包んだ小さなだんごをまくだけの素朴な緑化活動が、静かに成果を見せています。雨を待って自然に芽吹くのを待つやり方です。\n\n「大きな機械も水路もいらない。だれでもできることが大事」と地元の参加者。点々と芽吹いた緑は、数年かけて少しずつ帯のようにつながりはじめました。\n\n専門家は「派手さはないが、土地に根づく方法」と評価しています。',
     sourceUrl: 'https://example.com/news/seed-balls',
     sourceName: '北の森だより',
@@ -175,7 +193,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-25T12:00:00+09:00',
     category: ['animals-nature'],
     comfortScore: 78,
-    whyComfort: '誰にでもできる素朴な一歩が、大地をゆっくり変えていく。気負わないやさしさの強さを感じます。',
+    whyComfort:
+      '誰にでもできる素朴な一歩が、大地をゆっくり変えていく。気負わないやさしさの強さを感じます。',
     region: '海外・アフリカ',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -184,7 +203,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a11',
     title: '商店街の手描き看板、若い職人が受け継ぐ',
-    summary: '消えかけていた手描きの看板文化を、20代の職人が学びはじめました。古い道具も一緒に受け継いで。',
+    summary:
+      '消えかけていた手描きの看板文化を、20代の職人が学びはじめました。古い道具も一緒に受け継いで。',
     body: 'デジタル印刷に押されて姿を消しつつあった手描きの看板。その技術を、20代の職人が老舗の看板店で学びはじめました。\n\n筆の運び、絵の具の調合、文字のふところ——師匠から受け継ぐのは技術だけでなく、長年使い込まれた道具たちでもあります。「同じ字でも、手で書くと町の表情になる」と若い職人。\n\n商店街の店主たちからは「うちの看板も頼みたい」という声が次々に上がっているそうです。',
     sourceUrl: 'https://example.com/news/signboard',
     sourceName: 'まちかど通信',
@@ -192,7 +212,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-24T18:00:00+09:00',
     category: ['arts-culture'],
     comfortScore: 76,
-    whyComfort: '消えかけた手しごとが、若い世代へ手渡される。受け継ぐことそのものの美しさが残ります。',
+    whyComfort:
+      '消えかけた手しごとが、若い世代へ手渡される。受け継ぐことそのものの美しさが残ります。',
     region: '日本・関西',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -201,7 +222,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a12',
     title: 'こども食堂で生まれた「おかえり」の合言葉',
-    summary: '週末のこども食堂で、子どもたちが帰るときにかける言葉が、いつしか地域みんなの合言葉になりました。',
+    summary:
+      '週末のこども食堂で、子どもたちが帰るときにかける言葉が、いつしか地域みんなの合言葉になりました。',
     body: '週末に開かれるこども食堂で、子どもが帰るときにスタッフが「おかえり」と声をかけるのが習わしになっています。「ただいま」ではなく「おかえり」——ここがもう一つの家だという気持ちを込めて。\n\nやがてその言葉は地域に広がり、商店街ですれちがう大人たちも子どもに「おかえり」と声をかけるようになったといいます。\n\n運営者は「だれかに帰る場所があると思える。それだけで十分」と話しています。',
     sourceUrl: 'https://example.com/news/okaeri',
     sourceName: '夜のニュース帖',
@@ -209,7 +231,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-24T22:00:00+09:00',
     category: ['kindness', 'night-reads'],
     comfortScore: 89,
-    whyComfort: '「おかえり」のひとことが、子どもに居場所を贈る。短い言葉のあたたかさに、夜のこころがほどけます。',
+    whyComfort:
+      '「おかえり」のひとことが、子どもに居場所を贈る。短い言葉のあたたかさに、夜のこころがほどけます。',
     region: '日本・中国',
     readingMinutes: 1,
     status: 'PUBLISHED',
@@ -219,7 +242,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a13',
     title: '点字ブロックを照らす、足元のやわらかな光',
-    summary: '夜道で見えにくい点字ブロックを、ほのかに光る舗装でやさしく示す試みが駅前で始まりました。',
+    summary:
+      '夜道で見えにくい点字ブロックを、ほのかに光る舗装でやさしく示す試みが駅前で始まりました。',
     body: '夜間に見えにくくなる点字ブロックを、昼間の光をためてほのかに発光する舗装でやさしく示す試みが、ある駅前で始まりました。電気を使わず、まぶしすぎない光が特徴です。\n\n「白杖の人だけでなく、子どもやお年寄りにも歩きやすい」と利用者。設計者は「目立たせるのではなく、そっと寄りそう明るさを目指した」と話します。\n\n反応は上々で、ほかの駅でも導入が検討されています。',
     sourceUrl: 'https://example.com/news/glow-path',
     sourceName: 'テックの灯り',
@@ -227,7 +251,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-24T12:00:00+09:00',
     category: ['bright-tech', 'kindness'],
     comfortScore: 79,
-    whyComfort: '「目立たせる」のではなく「そっと寄りそう」明るさ。やさしさの設計思想そのものに、ほっとします。',
+    whyComfort:
+      '「目立たせる」のではなく「そっと寄りそう」明るさ。やさしさの設計思想そのものに、ほっとします。',
     region: '日本・関東',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -236,7 +261,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a14',
     title: '高齢の象、群れの仲間が交代で寄りそった一週間',
-    summary: '保護区で弱った高齢の象を、群れの仲間が交代で見守り、最後まで寄りそう姿が記録されました。',
+    summary:
+      '保護区で弱った高齢の象を、群れの仲間が交代で見守り、最後まで寄りそう姿が記録されました。',
     body: 'ある保護区で、年老いて歩くのが難しくなった象を、群れの仲間が代わるがわる見守る姿が記録されました。\n\n一頭が離れると別の一頭が寄りそい、鼻でそっと体を支える——その光景が一週間続いたといいます。研究者は「象の社会的なきずなの深さを改めて見せられた」と話します。\n\n「悲しい場面のはずなのに、見ていてあたたかかった」とスタッフ。群れはいまも穏やかに過ごしているそうです。',
     sourceUrl: 'https://example.com/news/elephants',
     sourceName: '北の森だより',
@@ -244,7 +270,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-23T18:00:00+09:00',
     category: ['animals-nature', 'night-reads'],
     comfortScore: 82,
-    whyComfort: '仲間に寄りそう動物たちの姿に、種をこえた思いやりを感じます。静かな夜に味わいたい一篇です。',
+    whyComfort:
+      '仲間に寄りそう動物たちの姿に、種をこえた思いやりを感じます。静かな夜に味わいたい一篇です。',
     region: '海外・アジア',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -262,7 +289,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-23T12:00:00+09:00',
     category: ['arts-culture', 'kindness'],
     comfortScore: 85,
-    whyComfort: '会ったことのない誰かを思って描かれた絵。まっすぐな善意が、距離をこえて届く様子に心が和みます。',
+    whyComfort:
+      '会ったことのない誰かを思って描かれた絵。まっすぐな善意が、距離をこえて届く様子に心が和みます。',
     region: '日本・東北',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -271,7 +299,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a16',
     title: '雨水をためる小さな庭、街の暑さをやわらげる',
-    summary: '住宅街のすきまにつくられた小さな「雨の庭」が、夏の街の暑さをやわらげていることがわかりました。',
+    summary:
+      '住宅街のすきまにつくられた小さな「雨の庭」が、夏の街の暑さをやわらげていることがわかりました。',
     body: '住宅街のわずかなすきまに、雨水をためて植物を育てる小さな「雨の庭」をつくる取り組みが広がっています。舗装を減らし、土と緑を増やすことで、夏の街の暑さがやわらぐといいます。\n\n計測の結果、庭の周りでは気温が数度低くなる時間帯もあったとのこと。「打ち水のいらない庭」と住民は呼んでいます。\n\nちょうちょやトンボも戻ってきて、子どもたちの観察スポットにもなっているそうです。',
     sourceUrl: 'https://example.com/news/rain-garden',
     sourceName: 'テックの灯り',
@@ -279,7 +308,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-22T12:00:00+09:00',
     category: ['bright-tech', 'animals-nature'],
     comfortScore: 74,
-    whyComfort: '暮らしの工夫が、街と生きものの両方にやさしい。等身大の知恵が未来をつくる手応えがあります。',
+    whyComfort:
+      '暮らしの工夫が、街と生きものの両方にやさしい。等身大の知恵が未来をつくる手応えがあります。',
     region: '日本・中部',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -288,7 +318,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a17',
     title: '駅ピアノに集まった、終電前の小さなセッション',
-    summary: '誰でも弾ける駅のピアノで、終電前に居合わせた人たちが、いつのまにか一曲を奏でていました。',
+    summary:
+      '誰でも弾ける駅のピアノで、終電前に居合わせた人たちが、いつのまにか一曲を奏でていました。',
     body: '誰でも自由に弾ける駅のピアノの前で、終電前のある夜、小さな出来事がありました。一人が弾きはじめたメロディーに、足を止めた人が口ずさみ、別の人が手拍子を添え——いつのまにか即席のセッションになっていたのです。\n\n演奏が終わると、知らない同士の拍手と笑顔が残りました。「一日の疲れが、すっと軽くなった」と居合わせた人。\n\n誰が始めたわけでもない、夜の駅のささやかな贈りものでした。',
     sourceUrl: 'https://example.com/news/station-piano',
     sourceName: '夜のニュース帖',
@@ -296,7 +327,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-22T22:00:00+09:00',
     category: ['arts-culture', 'night-reads'],
     comfortScore: 81,
-    whyComfort: '見知らぬ人どうしが、音楽でひとときつながる。終電前のやわらかな魔法を、夜にそっと。',
+    whyComfort:
+      '見知らぬ人どうしが、音楽でひとときつながる。終電前のやわらかな魔法を、夜にそっと。',
     region: '日本・関東',
     readingMinutes: 1,
     status: 'PUBLISHED',
@@ -306,7 +338,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a18',
     title: '子ねこの里親会、ボランティアの輪が県をこえる',
-    summary: '保護された子ねこたちの里親会が、SNSでつながったボランティアの輪で県をこえて広がっています。',
+    summary:
+      '保護された子ねこたちの里親会が、SNSでつながったボランティアの輪で県をこえて広がっています。',
     body: '保護された子ねこたちに新しい家族を探す里親会が、SNSでつながったボランティアの協力で、県をこえて開かれるようになりました。\n\n移動の負担を減らすため、近くの参加者がリレー方式で子ねこを送り届けるしくみも生まれています。「一人ではできないことも、つながれば形になる」と主催者。\n\nこの春だけで多くの子ねこが新しい家族のもとへ。譲渡後も近況を報告し合う、ゆるやかなつながりが続いているそうです。',
     sourceUrl: 'https://example.com/news/kittens',
     sourceName: '北の森だより',
@@ -314,7 +347,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-21T18:00:00+09:00',
     category: ['animals-nature', 'kindness'],
     comfortScore: 83,
-    whyComfort: '小さな命を思う人たちが、ゆるやかにつながって支え合う。やさしさが連なっていく様子にほっとします。',
+    whyComfort:
+      '小さな命を思う人たちが、ゆるやかにつながって支え合う。やさしさが連なっていく様子にほっとします。',
     region: '日本・関東',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -323,7 +357,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a19',
     title: '失語症の人と話す「ゆっくりカフェ」、月一の開店',
-    summary: '言葉が出にくい人もあせらず話せるよう、待つことを大切にしたカフェが月に一度開かれています。',
+    summary:
+      '言葉が出にくい人もあせらず話せるよう、待つことを大切にしたカフェが月に一度開かれています。',
     body: '脳の病気などで言葉が出にくくなった人が、あせらず話せる場所をと、月に一度だけ開く「ゆっくりカフェ」があります。店員も常連も、相手の言葉をゆっくり待つことを何より大切にしています。\n\n「言いたいことが伝わるまで、だれもせかさない。それがこんなに安心するなんて」と利用者。筆談やジェスチャーも、ここでは立派な会話です。\n\n「待つやさしさ」が、少しずつほかの店にも広がりはじめているそうです。',
     sourceUrl: 'https://example.com/news/slow-cafe',
     sourceName: 'まちかど通信',
@@ -331,7 +366,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-21T12:00:00+09:00',
     category: ['kindness'],
     comfortScore: 86,
-    whyComfort: '「待つ」ことがこんなにやさしい行為だと気づかせてくれる。せかさない時間の豊かさが胸に残ります。',
+    whyComfort:
+      '「待つ」ことがこんなにやさしい行為だと気づかせてくれる。せかさない時間の豊かさが胸に残ります。',
     region: '日本・九州',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -340,7 +376,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a20',
     title: '古い灯台、星空を守る「やさしい明かり」に',
-    summary: '役目を終えた灯台が、まわりの星空を邪魔しない照明に切り替え、天体観測の名所になりました。',
+    summary:
+      '役目を終えた灯台が、まわりの星空を邪魔しない照明に切り替え、天体観測の名所になりました。',
     body: '長く船を見守ってきた古い灯台が、その役目を終えたあと、まわりの星空を邪魔しないやさしい照明に切り替えられました。光を上に漏らさない工夫で、夜空の暗さを取り戻したのです。\n\nいまでは天の川がくっきり見える観測スポットとして人気に。「灯台の足元で寝そべって星を見る時間がたまらない」と訪れた人は話します。\n\n「海を照らす役目から、空を守る役目へ」。地域の人はそう表現しています。',
     sourceUrl: 'https://example.com/news/lighthouse',
     sourceName: '夜のニュース帖',
@@ -348,7 +385,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-20T22:00:00+09:00',
     category: ['night-reads', 'arts-culture'],
     comfortScore: 84,
-    whyComfort: '役目を変えて生き続ける灯台。失われずに姿を変えていくものの美しさを、星空とともに味わえます。',
+    whyComfort:
+      '役目を変えて生き続ける灯台。失われずに姿を変えていくものの美しさを、星空とともに味わえます。',
     region: '日本・北海道',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -358,7 +396,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a21',
     title: '車いすでも登れる森の小道、地元の大工さんが手づくり',
-    summary: '車いすやベビーカーでも森を楽しめるようにと、地元の大工さんたちがゆるやかな木道をつくりました。',
+    summary:
+      '車いすやベビーカーでも森を楽しめるようにと、地元の大工さんたちがゆるやかな木道をつくりました。',
     body: '急な斜面で車いすでは入れなかった森に、だれもが奥まで行けるようにと、地元の大工さんたちがゆるやかな木道をつくりました。手すりの高さも、車いすの人や子どもに合わせて細かく調整したといいます。\n\n「森の匂いや鳥の声を、もっと多くの人に」という思いから始まった取り組み。完成した日には、長年あきらめていた人が木道の先で深呼吸する姿があったそうです。\n\n材料の多くは間伐材を活用。森を整えることにもつながっています。',
     sourceUrl: 'https://example.com/news/forest-path',
     sourceName: 'テックの灯り',
@@ -366,7 +405,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-20T12:00:00+09:00',
     category: ['kindness', 'animals-nature'],
     comfortScore: 80,
-    whyComfort: '「もっと多くの人に森を」という思いが、手づくりの道になる。だれも置き去りにしないやさしさが心地よいです。',
+    whyComfort:
+      '「もっと多くの人に森を」という思いが、手づくりの道になる。だれも置き去りにしないやさしさが心地よいです。',
     region: '日本・中部',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -375,7 +415,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a22',
     title: '古楽器の修理を学ぶ人が増加。眠っていた音がよみがえる',
-    summary: '蔵や物置で眠っていた古い楽器を直して奏でる人が増えています。よみがえった音色に静かな人気が。',
+    summary:
+      '蔵や物置で眠っていた古い楽器を直して奏でる人が増えています。よみがえった音色に静かな人気が。',
     body: '蔵や物置で長く眠っていた古い楽器を修理して、もう一度奏でる人が静かに増えています。修理の講座は申し込みが続き、世代を問わず参加者が集まるといいます。\n\n「祖父が触れていた楽器の音を、自分の手でよみがえらせたかった」という人も。直した楽器で小さな演奏会を開く人もいます。\n\n講師は「楽器が鳴る瞬間、時間がつながる気がする」と話しています。',
     sourceUrl: 'https://example.com/news/old-instruments',
     sourceName: 'まちかど通信',
@@ -383,7 +424,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-19T12:00:00+09:00',
     category: ['arts-culture'],
     comfortScore: 75,
-    whyComfort: '眠っていた音がよみがえり、過去と今がつながる。ものを大切に受け継ぐ豊かさを感じます。',
+    whyComfort:
+      '眠っていた音がよみがえり、過去と今がつながる。ものを大切に受け継ぐ豊かさを感じます。',
     region: '日本・関西',
     readingMinutes: 2,
     status: 'PUBLISHED',
@@ -392,7 +434,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a23',
     title: '夜間救急の待合室に、そっと置かれた手編みのひざ掛け',
-    summary: '不安な夜を過ごす人のためにと、ボランティアが手編みのひざ掛けを夜間救急の待合室に届けています。',
+    summary:
+      '不安な夜を過ごす人のためにと、ボランティアが手編みのひざ掛けを夜間救急の待合室に届けています。',
     body: '夜間の救急外来で長い時間を過ごす人のためにと、地域のボランティアが手編みのひざ掛けを届けています。色も柄もさまざまで、「気に入ったら持ち帰ってもいい」というやさしいルールです。\n\n「不安な夜に、ひざがあたたかいだけで少しほっとした」と受け取った人。編み手の多くは、自身も病院で支えられた経験を持つそうです。\n\n返ってきたひざ掛けには、お礼の手紙が添えられていることもあるといいます。',
     sourceUrl: 'https://example.com/news/blanket',
     sourceName: '夜のニュース帖',
@@ -400,7 +443,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-19T22:00:00+09:00',
     category: ['kindness', 'night-reads'],
     comfortScore: 88,
-    whyComfort: '不安な夜に、ひざのあたたかさがそっと寄りそう。受けた恩を次へ渡していく循環に、こころがゆるみます。',
+    whyComfort:
+      '不安な夜に、ひざのあたたかさがそっと寄りそう。受けた恩を次へ渡していく循環に、こころがゆるみます。',
     region: '日本・関東',
     readingMinutes: 1,
     status: 'PUBLISHED',
@@ -410,7 +454,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a24',
     title: '川にすむ生きものを子どもたちが記録、10年分の地図に',
-    summary: '子どもたちが毎年続けてきた川の生きもの調べが、10年分集まり、地域の宝物のような地図になりました。',
+    summary:
+      '子どもたちが毎年続けてきた川の生きもの調べが、10年分集まり、地域の宝物のような地図になりました。',
     body: '地域の子どもたちが毎年続けてきた川の生きもの調べが、ついに10年分たまり、一枚の大きな地図にまとめられました。どこにどんな魚や虫がいたか、季節ごとの変化までが手描きで記されています。\n\n「最初に調べた子は、もう大学生。今は新しい一年生が引き継いでいます」と見守ってきた地域の人。地図は川がきれいになってきたことも静かに物語っているそうです。\n\n来年は隣町の子どもたちとも一緒に調べる計画だといいます。',
     sourceUrl: 'https://example.com/news/river-map',
     sourceName: '北の森だより',
@@ -418,7 +463,8 @@ export const ARTICLES: Article[] = [
     appPublishedAt: '2026-05-18T12:00:00+09:00',
     category: ['animals-nature', 'arts-culture'],
     comfortScore: 77,
-    whyComfort: '子どもたちの根気が、10年をかけて地域の宝物になる。続けることの尊さと、川の回復が重なって温かいです。',
+    whyComfort:
+      '子どもたちの根気が、10年をかけて地域の宝物になる。続けることの尊さと、川の回復が重なって温かいです。',
     region: '日本・中国',
     readingMinutes: 2,
     status: 'PUBLISHED',

@@ -4,126 +4,146 @@
 
 /* ── Semantic color tokens ───────────────────────────────────────────────
    Two orthogonal axes on <html>: data-theme (light|dark) × data-time
-   (morning|day|evening|night). Components only use semantic classes
-   (bg-bg, text-text, bg-surface, text-accent …), so a palette swap is a
-   single attribute change. Values are HSL channels for /<alpha-value>. */
+   (morning|day|evening|night). Every surface stays warm and low-contrast so
+   the app feels like a calm place rather than a dense news feed. */
 
 :root,
 :root[data-theme='light'][data-time='morning'] {
-  --bg: 40 100% 98%;
-  --surface: 36 60% 97%;
-  --surface-2: 32 48% 94%;
-  --text: 28 25% 20%;
+  --bg: 42 100% 98%;
+  --surface: 39 82% 98%;
+  --surface-2: 34 58% 94%;
+  --text: 28 23% 20%;
   --muted: 28 12% 45%;
-  --accent: 14 85% 63%;
-  --accent-soft: 24 90% 91%;
-  --line: 30 26% 88%;
-  --shadow: 28 30% 30%;
+  --accent: 17 83% 44%;
+  --accent-strong: 17 83% 38%;
+  --accent-soft: 27 94% 91%;
+  --line: 32 34% 88%;
+  --shadow: 25 34% 30%;
+  --sky-glow: 42 100% 91%;
 }
 
 :root[data-theme='light'][data-time='day'] {
-  --bg: 42 64% 98%;
-  --surface: 0 0% 100%;
-  --surface-2: 40 32% 95%;
-  --text: 220 22% 22%;
-  --muted: 220 10% 46%;
-  --accent: 196 72% 48%;
-  --accent-soft: 196 72% 90%;
-  --line: 40 22% 90%;
-  --shadow: 220 25% 35%;
+  --bg: 190 70% 98%;
+  --surface: 180 50% 99%;
+  --surface-2: 185 42% 94%;
+  --text: 210 20% 21%;
+  --muted: 210 10% 45%;
+  --accent: 190 66% 35%;
+  --accent-strong: 190 66% 29%;
+  --accent-soft: 181 66% 90%;
+  --line: 186 30% 88%;
+  --shadow: 205 28% 34%;
+  --sky-glow: 178 76% 91%;
 }
 
 :root[data-theme='light'][data-time='evening'] {
-  --bg: 28 72% 97%;
-  --surface: 24 52% 96%;
-  --surface-2: 20 46% 93%;
-  --text: 350 20% 22%;
-  --muted: 350 10% 45%;
-  --accent: 8 78% 61%;
-  --accent-soft: 12 82% 90%;
-  --line: 20 32% 88%;
-  --shadow: 350 26% 32%;
+  --bg: 24 76% 98%;
+  --surface: 30 64% 98%;
+  --surface-2: 16 50% 94%;
+  --text: 348 19% 21%;
+  --muted: 348 10% 45%;
+  --accent: 5 76% 46%;
+  --accent-strong: 5 76% 40%;
+  --accent-soft: 13 84% 91%;
+  --line: 18 32% 88%;
+  --shadow: 348 28% 32%;
+  --sky-glow: 38 94% 90%;
 }
 
 :root[data-theme='light'][data-time='night'] {
-  --bg: 232 30% 96%;
-  --surface: 230 34% 98%;
-  --surface-2: 232 26% 93%;
-  --text: 232 26% 24%;
-  --muted: 232 12% 48%;
-  --accent: 250 50% 60%;
-  --accent-soft: 250 52% 91%;
-  --line: 232 22% 88%;
-  --shadow: 232 30% 40%;
+  --bg: 232 38% 96%;
+  --surface: 228 46% 98%;
+  --surface-2: 232 29% 92%;
+  --text: 232 25% 23%;
+  --muted: 232 12% 47%;
+  --accent: 250 50% 52%;
+  --accent-strong: 250 50% 45%;
+  --accent-soft: 250 58% 91%;
+  --line: 232 24% 87%;
+  --shadow: 232 30% 38%;
+  --sky-glow: 250 70% 91%;
 }
 
 :root[data-theme='dark'][data-time='morning'] {
-  --bg: 220 18% 12%;
-  --surface: 222 16% 16%;
-  --surface-2: 222 14% 21%;
+  --bg: 220 18% 11%;
+  --surface: 220 16% 16%;
+  --surface-2: 220 14% 21%;
   --text: 36 30% 90%;
   --muted: 36 10% 66%;
-  --accent: 18 82% 66%;
+  --accent: 18 78% 68%;
+  --accent-strong: 18 78% 44%;
   --accent-soft: 18 38% 26%;
-  --line: 222 12% 27%;
+  --line: 220 12% 27%;
   --shadow: 0 0% 0%;
+  --sky-glow: 20 70% 28%;
 }
 
 :root[data-theme='dark'][data-time='day'] {
-  --bg: 215 18% 13%;
+  --bg: 215 18% 12%;
   --surface: 215 16% 17%;
   --surface-2: 215 14% 22%;
   --text: 210 25% 90%;
   --muted: 210 10% 64%;
-  --accent: 196 70% 60%;
-  --accent-soft: 196 38% 26%;
+  --accent: 190 66% 61%;
+  --accent-strong: 190 66% 35%;
+  --accent-soft: 190 38% 26%;
   --line: 215 12% 28%;
   --shadow: 0 0% 0%;
+  --sky-glow: 190 60% 28%;
 }
 
 :root[data-theme='dark'][data-time='evening'] {
-  --bg: 280 18% 13%;
+  --bg: 280 18% 12%;
   --surface: 282 16% 17%;
   --surface-2: 282 14% 22%;
   --text: 30 25% 90%;
   --muted: 30 10% 66%;
-  --accent: 8 80% 67%;
+  --accent: 8 76% 69%;
+  --accent-strong: 8 76% 48%;
   --accent-soft: 8 40% 28%;
   --line: 282 12% 28%;
   --shadow: 0 0% 0%;
+  --sky-glow: 8 60% 28%;
 }
 
 :root[data-theme='dark'][data-time='night'] {
-  --bg: 240 24% 9%;
+  --bg: 240 24% 8%;
   --surface: 240 20% 13%;
   --surface-2: 240 18% 17%;
-  --text: 40 18% 83%;
-  --muted: 240 8% 58%;
-  --accent: 250 48% 72%;
+  --text: 40 18% 84%;
+  --muted: 240 8% 59%;
+  --accent: 250 49% 73%;
+  --accent-strong: 250 49% 58%;
   --accent-soft: 250 30% 26%;
   --line: 240 14% 22%;
   --shadow: 0 0% 0%;
+  --sky-glow: 250 52% 26%;
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    background: hsl(var(--bg));
   }
 
   body {
     @apply bg-bg font-sans text-body text-text antialiased;
-    /* smooth palette crossfade when time-of-day or theme changes */
+    min-height: 100dvh;
+    background-image:
+      radial-gradient(circle at 8% 2%, hsl(var(--sky-glow) / 0.58), transparent 30rem),
+      radial-gradient(circle at 94% 16%, hsl(var(--accent-soft) / 0.38), transparent 27rem),
+      linear-gradient(180deg, hsl(var(--bg)), hsl(var(--bg)));
     transition:
-      background-color 0.8s ease,
-      color 0.8s ease;
+      background-color 0.9s ease,
+      color 0.9s ease;
     word-break: normal;
     overflow-wrap: anywhere;
     line-break: strict;
   }
 
   ::selection {
-    background-color: hsl(var(--accent) / 0.25);
+    background-color: hsl(var(--accent) / 0.22);
   }
 
   h1,
@@ -131,12 +151,22 @@
   h3 {
     @apply font-rounded;
     word-break: keep-all;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
   }
 
   :focus-visible {
-    outline: 2px solid hsl(var(--accent) / 0.7);
-    outline-offset: 2px;
-    border-radius: 6px;
+    outline: 2px solid hsl(var(--accent-strong) / 0.9);
+    outline-offset: 3px;
+    border-radius: 12px;
   }
 }
 
@@ -145,32 +175,101 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
 
-  /* Vertical text rhythm tuned for Japanese reading. */
   .prose-ja {
     @apply text-body-lg;
+    letter-spacing: 0.015em;
   }
+
   .prose-ja p {
-    margin-bottom: 1.15em;
+    margin-bottom: 1.45em;
   }
+
   .prose-ja p:last-child {
     margin-bottom: 0;
   }
 
   .glass {
-    background-color: hsl(var(--surface) / 0.72);
-    backdrop-filter: blur(16px) saturate(1.4);
-    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    background: linear-gradient(145deg, hsl(var(--surface) / 0.82), hsl(var(--surface) / 0.62));
+    border-color: hsl(var(--line) / 0.58);
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.42),
+      0 14px 40px -24px hsl(var(--shadow) / 0.35);
+    backdrop-filter: blur(22px) saturate(1.35);
+    -webkit-backdrop-filter: blur(22px) saturate(1.35);
+  }
+
+  .soft-surface {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid hsl(var(--line) / 0.55);
+    background: linear-gradient(145deg, hsl(var(--surface) / 0.96), hsl(var(--surface) / 0.76));
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.6),
+      0 20px 54px -30px hsl(var(--shadow) / 0.42);
+  }
+
+  .soft-surface::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 10% 0%, hsl(0 0% 100% / 0.42), transparent 32%),
+      radial-gradient(circle at 92% 100%, hsl(var(--accent-soft) / 0.34), transparent 38%);
+  }
+
+  .float-card {
+    transform: translateZ(0);
+    transition:
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 420ms ease;
+  }
+
+  @media (hover: hover) {
+    .float-card:hover {
+      transform: translateY(-4px);
+      border-color: hsl(var(--accent) / 0.24);
+      box-shadow:
+        inset 0 1px 0 hsl(0 0% 100% / 0.58),
+        0 28px 64px -32px hsl(var(--shadow) / 0.48);
+    }
+  }
+
+  .float-card:active {
+    transform: translateY(1px) scale(0.986);
+    transition-duration: 110ms;
+  }
+
+  .ambient-ring {
+    border: 1px solid hsl(0 0% 100% / 0.5);
+    box-shadow:
+      inset 0 0 28px hsl(0 0% 100% / 0.24),
+      0 0 36px hsl(var(--accent) / 0.14);
   }
 
   .safe-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
+
   .safe-top {
     padding-top: env(safe-area-inset-top);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .glass,
+  .soft-surface {
+    border-width: 2px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -181,5 +280,6 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

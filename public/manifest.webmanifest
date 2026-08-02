@@ -1,19 +1,45 @@
 {
-  "name": "こころがほっとするニュース",
-  "short_name": "こころのニュース",
-  "description": "世界の中から、こころがほっとする出来事だけをそっとお届けする、やさしいニュースアプリ。",
+  "id": "/",
+  "name": "明るいニュース｜Hot News",
+  "short_name": "明るいニュース",
+  "description": "世界の中から、出来事そのものが明るく、希望や喜びを感じられるニュースだけを届けるアプリ。",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#fffaf2",
   "theme_color": "#fffaf2",
   "orientation": "portrait",
   "lang": "ja",
+  "dir": "ltr",
+  "categories": ["news", "lifestyle"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "今日の明るいニュース",
+      "short_name": "今日のニュース",
+      "url": "/home",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "お気に入り",
+      "short_name": "お気に入り",
+      "url": "/favorites",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "寝る前モード",
+      "short_name": "寝る前",
+      "url": "/night",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
     }
   ]
 }

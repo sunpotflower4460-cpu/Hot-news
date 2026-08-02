@@ -16,11 +16,22 @@ export const useFavoritesStore = create<FavoritesState>()(
       toggle: (id) =>
         set((state) => ({
           ids: state.ids.includes(id)
-            ? state.ids.filter((x) => x !== id)
+            ? state.ids.filter((savedId) => savedId !== id)
             : [id, ...state.ids],
         })),
       isFavorite: (id) => get().ids.includes(id),
     }),
-    { name: 'hotnews-favorites' },
+    {
+      name: 'hotnews-favorites',
+      version: 1,
+      partialize: (state) => ({ ids: state.ids }),
+      migrate: (persistedState) => {
+        const stored = persistedState as { ids?: unknown };
+        const ids = Array.isArray(stored.ids)
+          ? [...new Set(stored.ids.filter((id): id is string => typeof id === 'string'))]
+          : [];
+        return { ids };
+      },
+    },
   ),
 );

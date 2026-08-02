@@ -1,47 +1,83 @@
 'use client';
 
-import { Heart } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Bookmark, Sparkles } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useFavoritesStore } from '@/lib/store/useFavoritesStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 import { cn } from '@/lib/utils/cn';
 
 interface SaveButtonProps {
   id: string;
+  articleTitle?: string;
   variant?: 'glass' | 'plain';
   className?: string;
 }
 
-export function SaveButton({ id, variant = 'glass', className }: SaveButtonProps) {
+export function SaveButton({ id, articleTitle, variant = 'glass', className }: SaveButtonProps) {
   const hydrated = useHydrated();
-  const ids = useFavoritesStore((s) => s.ids);
-  const toggle = useFavoritesStore((s) => s.toggle);
+  const { locale, t } = useI18n();
+  const ids = useFavoritesStore((state) => state.ids);
+  const toggle = useFavoritesStore((state) => state.toggle);
   const saved = hydrated && ids.includes(id);
+  const label = articleTitle
+    ? locale === 'ja'
+      ? saved
+        ? `「${articleTitle}」を保存から外す`
+        : `「${articleTitle}」をあとで読むために保存`
+      : saved
+        ? `Remove “${articleTitle}” from saved stories`
+        : `Save “${articleTitle}” for later`
+    : saved
+      ? locale === 'ja'
+        ? '保存から外す'
+        : 'Remove from saved stories'
+      : t('common.save');
 
   return (
     <button
       type="button"
+      title={saved ? (locale === 'ja' ? '保存から外す' : 'Remove from saved') : t('common.save')}
+      disabled={!hydrated}
       aria-pressed={saved}
-      aria-label={saved ? 'お気に入りから外す' : 'お気に入りに保存'}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      aria-label={label}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
         toggle(id);
       }}
       className={cn(
-        'flex h-9 w-9 items-center justify-center rounded-full transition-colors',
-        variant === 'glass' ? 'glass border border-line/60' : 'bg-transparent',
+        'relative flex h-11 w-11 items-center justify-center overflow-visible rounded-full transition-all duration-300 ease-gentle active:scale-90 disabled:cursor-wait disabled:opacity-55',
+        variant === 'glass'
+          ? 'glass border hover:-translate-y-0.5 hover:shadow-glow'
+          : 'bg-transparent',
+        saved && 'border-accent/20 bg-accent-soft/80 shadow-glow',
         className,
       )}
     >
+      <AnimatePresence>
+        {saved && (
+          <motion.span
+            aria-hidden
+            initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.4 }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="pointer-events-none absolute -right-1 -top-1 text-accent"
+          >
+            <Sparkles size={12} />
+          </motion.span>
+        )}
+      </AnimatePresence>
       <motion.span
+        aria-hidden
         key={saved ? 'on' : 'off'}
-        initial={{ scale: 0.6 }}
-        animate={{ scale: 1 }}
-        transition={{ type: 'spring', stiffness: 500, damping: 18 }}
+        initial={{ scale: 0.58, rotate: saved ? -8 : 0 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 460, damping: 17 }}
       >
-        <Heart
-          size={18}
+        <Bookmark
+          size={19}
           strokeWidth={2}
           className={cn(saved ? 'fill-accent text-accent' : 'text-text/70')}
         />

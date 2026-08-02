@@ -1,25 +1,70 @@
+'use client';
+
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { localizeCategory } from '@/lib/i18n/content';
+import { useI18n } from '@/lib/i18n/useI18n';
 import type { CategoryMeta } from '@/types/article';
 
-export function CategoryCard({ category, count }: { category: CategoryMeta; count: number }) {
+export function CategoryCard({
+  category: rawCategory,
+  count,
+}: {
+  category: CategoryMeta;
+  count: number;
+}) {
+  const { locale } = useI18n();
+  const category = localizeCategory(rawCategory, locale);
+  const countLabel =
+    count > 0
+      ? locale === 'ja'
+        ? `${count}件`
+        : `${count} ${count === 1 ? 'story' : 'stories'}`
+      : locale === 'ja'
+        ? '準備中'
+        : 'Coming soon';
+
   return (
     <Link
       href={`/browse/${category.id}`}
-      className="group relative flex items-center gap-4 overflow-hidden rounded-card border border-line/60 bg-surface p-4 shadow-soft transition-transform active:scale-[0.99]"
+      aria-label={
+        locale === 'ja'
+          ? `${category.labelJa}のニュースを見る、${countLabel}`
+          : `View ${category.labelJa}, ${countLabel}`
+      }
+      className="soft-surface float-card group relative flex min-h-[6.5rem] items-center gap-4 rounded-card p-4 shadow-soft"
     >
       <div
-        className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl"
-        style={{ backgroundColor: `hsl(${category.accent} / 0.16)` }}
+        className="ambient-ring relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[1.45rem] text-[2rem] shadow-inner-light"
+        style={{ backgroundColor: `hsl(${category.accent} / 0.17)` }}
       >
-        {category.glyph}
+        <div
+          aria-hidden
+          className="absolute -right-2 -top-2 h-8 w-8 rounded-full bg-white/30 blur-md"
+        />
+        <span
+          aria-hidden
+          className="relative transition-transform duration-500 ease-gentle group-hover:-rotate-3 group-hover:scale-110"
+        >
+          {category.glyph}
+        </span>
       </div>
+
       <div className="min-w-0 flex-1">
-        <h3 className="text-body font-bold text-text">{category.labelJa}</h3>
-        <p className="line-clamp-1 text-caption text-muted">{category.blurb}</p>
-        <span className="text-[0.7rem] text-muted/80">{count}本のお話</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="text-[1rem] font-bold text-text">{category.labelJa}</h3>
+          <span className="rounded-pill bg-surface/60 px-2 py-0.5 text-[0.68rem] font-bold text-muted shadow-inner-light">
+            {countLabel}
+          </span>
+        </div>
+        <p className="mt-1 line-clamp-2 text-caption leading-relaxed text-muted">
+          {category.blurb}
+        </p>
       </div>
-      <ChevronRight size={18} className="shrink-0 text-muted" />
+
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent-soft/70 text-accent shadow-inner-light transition-transform duration-300 group-hover:translate-x-0.5">
+        <ChevronRight aria-hidden size={18} />
+      </span>
     </Link>
   );
 }

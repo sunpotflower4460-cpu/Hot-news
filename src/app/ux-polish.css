@@ -1,0 +1,36 @@
+/* Cross-device interaction and disclosure refinements loaded after Tailwind. */
+
+.safe-top {
+  padding-top: calc(1.25rem + env(safe-area-inset-top));
+}
+
+.safe-bottom {
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+}
+
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+.disclosure-summary {
+  list-style: none;
+}
+
+.disclosure-summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] .disclosure-chevron {
+  transform: rotate(180deg);
+}
+
+@media (min-width: 768px) {
+  .safe-top {
+    padding-top: 1.25rem;
+  }
+
+  .safe-bottom {
+    padding-bottom: 0.5rem;
+  }
+}

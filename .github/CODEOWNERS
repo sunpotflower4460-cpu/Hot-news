@@ -1,0 +1,10 @@
+* @sunpotflower4460-cpu
+
+/PRODUCT_PRINCIPLES.md @sunpotflower4460-cpu
+/src/lib/editorial/ @sunpotflower4460-cpu
+/src/config/commercial.json @sunpotflower4460-cpu
+/src/app/(app)/legal/ @sunpotflower4460-cpu
+/src/lib/store/usePrivacyStore.ts @sunpotflower4460-cpu
+/.github/workflows/ @sunpotflower4460-cpu
+/public/_headers @sunpotflower4460-cpu
+/public/sw.js @sunpotflower4460-cpu

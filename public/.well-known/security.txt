@@ -1,0 +1,4 @@
+Contact: https://github.com/sunpotflower4460-cpu/Hot-news/security/advisories/new
+Expires: 2027-08-02T00:00:00.000Z
+Preferred-Languages: ja, en
+Policy: https://github.com/sunpotflower4460-cpu/Hot-news/blob/main/SECURITY.md

@@ -13,6 +13,9 @@ interface ThemeState {
   setTimeOverride: (time: TimeOfDay | null) => void;
 }
 
+const PREFS = new Set<ThemePref>(['auto', 'light', 'dark']);
+const TIMES = new Set<TimeOfDay>(['morning', 'day', 'evening', 'night']);
+
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
@@ -21,6 +24,18 @@ export const useThemeStore = create<ThemeState>()(
       setPref: (pref) => set({ pref }),
       setTimeOverride: (timeOverride) => set({ timeOverride }),
     }),
-    { name: 'hotnews-theme' },
+    {
+      name: 'hotnews-theme',
+      version: 1,
+      partialize: (state) => ({ pref: state.pref, timeOverride: state.timeOverride }),
+      migrate: (persistedState) => {
+        const stored = persistedState as Partial<ThemeState>;
+        const pref = PREFS.has(stored.pref as ThemePref) ? (stored.pref as ThemePref) : 'auto';
+        const timeOverride = TIMES.has(stored.timeOverride as TimeOfDay)
+          ? (stored.timeOverride as TimeOfDay)
+          : null;
+        return { pref, timeOverride };
+      },
+    },
   ),
 );

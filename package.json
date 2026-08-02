@@ -2,34 +2,47 @@
   "name": "hot-news",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "start": "node scripts/serve-static.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "commercial:check": "node scripts/validate-commercial.mjs",
+    "release:check": "COMMERCIAL_RELEASE=1 npm run commercial:check && npm audit --omit=dev --audit-level=high && npm audit --audit-level=high && npm run format:check && npm test && npm run typecheck && npm run lint && npm run build",
+    "check": "npm run format:check && npm run commercial:check && npm test && npm run typecheck && npm run lint && npm run build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.469.0",
-    "next": "^15.1.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "16.2.12",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "tailwind-merge": "^2.6.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
-    "@types/react": "^19.0.4",
-    "@types/react-dom": "^19.0.2",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.1.4",
-    "postcss": "^8.4.49",
+    "eslint": "9.39.2",
+    "eslint-config-next": "16.2.12",
+    "postcss": "8.5.22",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
+  },
+  "overrides": {
+    "postcss": "$postcss",
+    "sharp": "0.35.3"
   }
 }

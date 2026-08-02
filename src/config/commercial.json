@@ -1,0 +1,53 @@
+{
+  "releaseStage": "preview",
+  "app": {
+    "name": "明るいニュース",
+    "displayName": "明るいニュース｜Hot News",
+    "bundleId": "",
+    "version": "0.1.0",
+    "publicBaseUrl": ""
+  },
+  "localization": {
+    "defaultLocale": "ja",
+    "supportedLocales": ["ja", "en"],
+    "reviewedReleaseLocales": []
+  },
+  "operator": {
+    "legalName": "",
+    "representative": "",
+    "postalAddress": "",
+    "phone": "",
+    "contactEmail": ""
+  },
+  "urls": {
+    "support": "/support",
+    "privacy": "/legal/privacy",
+    "privacyChoices": "/settings/privacy",
+    "terms": "/legal/terms",
+    "commercialDisclosure": "/legal/commerce",
+    "editorialPolicy": "/legal/editorial-policy",
+    "accessibility": "/legal/accessibility"
+  },
+  "legal": {
+    "country": "JP",
+    "privacyEffectiveDate": "",
+    "termsEffectiveDate": ""
+  },
+  "features": {
+    "realNewsApi": false,
+    "analytics": false,
+    "diagnostics": false,
+    "accounts": false,
+    "subscriptions": false,
+    "pushNotifications": false,
+    "ads": false,
+    "mockContent": true
+  },
+  "integrations": {
+    "contentApi": "mock",
+    "analyticsProvider": "none",
+    "diagnosticsProvider": "none",
+    "billingProvider": "none",
+    "notificationProvider": "none"
+  }
+}
