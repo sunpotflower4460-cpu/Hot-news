@@ -91,17 +91,10 @@ export default function NotificationsPage() {
                 className={cn(
                   'min-h-11 rounded-pill border px-4 py-2 text-caption font-semibold shadow-inner-light transition-all duration-300 ease-gentle active:scale-95',
                   active
-                    ? 'border-transparent shadow-glow'
+                    ? 'border-transparent text-white shadow-glow'
                     : 'border-line/60 bg-surface/72 text-muted hover:-translate-y-0.5 hover:border-accent/20',
                 )}
-                style={
-                  active
-                    ? {
-                        backgroundColor: `hsl(${category.accent})`,
-                        color: 'hsl(220 25% 18%)',
-                      }
-                    : undefined
-                }
+                style={active ? { backgroundColor: `hsl(${category.accent})` } : undefined}
               >
                 {category.glyph} {category.labelJa}
               </button>
