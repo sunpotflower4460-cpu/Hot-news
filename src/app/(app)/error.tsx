@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { CloudSun, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { LinkButton } from '@/components/ui/LinkButton';
+import { captureException } from '@/lib/telemetry/client';
 
 export default function AppError({
   error,
@@ -13,7 +14,14 @@ export default function AppError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error('Hot News route error', error);
+    captureException(error, {
+      errorType: error.name,
+      hasDigest: Boolean(error.digest),
+    });
+
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Hot News route error', error);
+    }
   }, [error]);
 
   return (
@@ -23,7 +31,7 @@ export default function AppError({
         className="soft-surface w-full max-w-sm rounded-panel px-6 py-9 text-center shadow-float"
       >
         <div className="ambient-ring mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/35 text-accent shadow-glow">
-          <CloudSun size={36} strokeWidth={1.6} />
+          <CloudSun aria-hidden size={36} strokeWidth={1.6} />
         </div>
         <h1 className="mt-5 text-h2 font-bold text-text">うまく開けませんでした</h1>
         <p className="mt-2 text-body leading-relaxed text-muted">
@@ -31,7 +39,7 @@ export default function AppError({
         </p>
         <div className="mt-6 flex flex-col gap-2.5">
           <Button size="lg" onClick={reset} className="w-full">
-            <RotateCcw size={17} />
+            <RotateCcw aria-hidden size={17} />
             もう一度ひらく
           </Button>
           <LinkButton href="/home" variant="ghost" size="md" className="w-full">
