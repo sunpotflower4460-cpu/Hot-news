@@ -48,6 +48,36 @@ function isValidDate(value: string) {
   return Number.isFinite(Date.parse(value));
 }
 
+export function isSafeSourceUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return (
+      url.protocol === 'https:' &&
+      Boolean(url.hostname) &&
+      !url.username &&
+      !url.password &&
+      !['localhost', '127.0.0.1', '0.0.0.0', '::1'].includes(url.hostname.toLowerCase())
+    );
+  } catch {
+    return false;
+  }
+}
+
+function isArticleShapeSafe(article: Article) {
+  return (
+    article.id.trim().length > 0 &&
+    article.title.trim().length > 0 &&
+    article.summary.trim().length > 0 &&
+    article.sourceName.trim().length > 0 &&
+    isSafeSourceUrl(article.sourceUrl) &&
+    isValidDate(article.sourcePublishedAt) &&
+    isValidDate(article.appPublishedAt) &&
+    article.category.length > 0 &&
+    Number.isFinite(article.readingMinutes) &&
+    article.readingMinutes >= 1
+  );
+}
+
 export function isAssessmentApproved(assessment: EditorialAssessment) {
   const t = BRIGHT_NEWS_THRESHOLDS;
 
@@ -88,12 +118,13 @@ function isLegacyMockEligible(article: Article) {
 /**
  * Single publication gate used by every reader-facing selector.
  *
+ * - Every article must have a safe HTTPS source and valid reader-facing shape.
  * - Real articles require an approved structured assessment and provenance.
  * - Existing example.com mock articles use a conservative temporary fallback.
  * - A warm ending never overrides a dark or distressing premise.
  */
 export function isArticleEligibleForPublication(article: Article) {
-  if (!isPublishedStatus(article)) return false;
+  if (!isPublishedStatus(article) || !isArticleShapeSafe(article)) return false;
 
   if (article.editorialAssessment) {
     return Boolean(
