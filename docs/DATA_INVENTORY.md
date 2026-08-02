@@ -4,15 +4,15 @@ This document must match the production binary, backend, support process, and th
 
 ## Current preview data
 
-| Data                           | Location                     | Purpose                                        | Sent externally | Retention                              | User control                                   |
-| ------------------------------ | ---------------------------- | ---------------------------------------------- | --------------- | -------------------------------------- | ---------------------------------------------- |
-| Saved article IDs              | Browser/device local storage | Save articles on this device                   | No              | Until removed or local data is cleared | Toggle save or delete all local data           |
+| Data                            | Location                     | Purpose                                         | Sent externally | Retention                              | User control                                   |
+| ------------------------------- | ---------------------------- | ----------------------------------------------- | --------------- | -------------------------------------- | ---------------------------------------------- |
+| Saved article IDs               | Browser/device local storage | Save articles on this device                    | No              | Until removed or local data is cleared | Toggle save or delete all local data           |
 | Recently opened article ID/time | Browser/device local storage | Daily progress and return to recently read news | No              | Maximum 50 entries and 30 days         | Delete all local data                          |
-| Theme and time-of-day settings | Browser/device local storage | Visual preferences                             | No              | Until reset                            | Settings or delete all local data              |
-| Notification preferences       | Browser/device local storage | Future preference preview                      | No              | Until reset                            | Notification settings or delete all local data |
-| Privacy choices                | Browser/device local storage | Record future analytics/diagnostics preference | No              | Until reset                            | Privacy settings or delete all local data      |
-| Last online timestamp          | Browser/device local storage | Explain whether offline content may be stale   | No              | Until next connection or local clear   | Delete all local data                          |
-| Static application cache       | Browser/device Cache Storage | Offline shell and previously opened assets     | No              | Until cache expiry/update/clear        | Delete all local data or OS/browser controls   |
+| Theme and time-of-day settings  | Browser/device local storage | Visual preferences                              | No              | Until reset                            | Settings or delete all local data              |
+| Notification preferences        | Browser/device local storage | Future preference preview                       | No              | Until reset                            | Notification settings or delete all local data |
+| Privacy choices                 | Browser/device local storage | Record future analytics/diagnostics preference  | No              | Until reset                            | Privacy settings or delete all local data      |
+| Last online timestamp           | Browser/device local storage | Explain whether offline content may be stale    | No              | Until next connection or local clear   | Delete all local data                          |
+| Static application cache        | Browser/device Cache Storage | Offline shell and previously opened assets      | No              | Until cache expiry/update/clear        | Delete all local data or OS/browser controls   |
 
 ## Currently not collected
 

@@ -89,7 +89,9 @@ export default function FavoritesPage() {
       ) : visible.length === 0 ? (
         <EmptyState
           glyph={view === 'saved' ? '🔖' : '🕊️'}
-          title={view === 'saved' ? 'まだ保存したニュースはありません' : '最近読んだニュースはありません'}
+          title={
+            view === 'saved' ? 'まだ保存したニュースはありません' : '最近読んだニュースはありません'
+          }
           description={
             view === 'saved'
               ? '記事カードのブックマークを押すと、あとで読み返せるようここに保存されます。'
@@ -132,7 +134,9 @@ function ViewButton({
       aria-pressed={active}
       className={cn(
         'flex min-h-11 items-center justify-center gap-1.5 rounded-[1.05rem] px-3 text-caption font-bold transition-all duration-300 ease-gentle active:scale-95',
-        active ? 'bg-surface text-accent shadow-soft' : 'text-muted hover:bg-surface/50 hover:text-text',
+        active
+          ? 'bg-surface text-accent shadow-soft'
+          : 'text-muted hover:bg-surface/50 hover:text-text',
       )}
     >
       <Icon aria-hidden size={15} />

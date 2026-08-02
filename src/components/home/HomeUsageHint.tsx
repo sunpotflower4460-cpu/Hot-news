@@ -12,7 +12,10 @@ export function HomeUsageHint() {
   if (!hydrated || dismissed) return null;
 
   return (
-    <aside className="glass relative rounded-card border px-4 py-3.5 pr-12 shadow-soft" aria-label="使い方のヒント">
+    <aside
+      className="glass relative rounded-card border px-4 py-3.5 pr-12 shadow-soft"
+      aria-label="使い方のヒント"
+    >
       <button
         type="button"
         aria-label="使い方のヒントを閉じる"

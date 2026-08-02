@@ -1,13 +1,5 @@
 import Link from 'next/link';
-import {
-  Baby,
-  ChevronRight,
-  Clock3,
-  HeartHandshake,
-  Moon,
-  Rocket,
-  Sparkles,
-} from 'lucide-react';
+import { Baby, ChevronRight, Clock3, HeartHandshake, Moon, Rocket, Sparkles } from 'lucide-react';
 import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { CategoryCard } from '@/components/category/CategoryCard';
 import { CATEGORIES } from '@/mock/categories';

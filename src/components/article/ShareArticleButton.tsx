@@ -56,7 +56,9 @@ export function ShareArticleButton({ title, summary }: { title: string; summary:
             <Check aria-hidden size={17} />
             リンクをコピーしました
           </>
-        ) : navigatorShareLabel(status)}
+        ) : (
+          navigatorShareLabel(status)
+        )}
       </button>
       {status === 'error' && (
         <p role="status" className="mt-2 text-center text-caption text-muted">
