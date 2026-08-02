@@ -1,14 +1,31 @@
+'use client';
+
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
+import { localizeCategory } from '@/lib/i18n/content';
+import { useI18n } from '@/lib/i18n/useI18n';
 import type { CategoryMeta } from '@/types/article';
 
-export function CategoryCard({ category, count }: { category: CategoryMeta; count: number }) {
-  const countLabel = count > 0 ? `${count}件` : '準備中';
+export function CategoryCard({ category: rawCategory, count }: { category: CategoryMeta; count: number }) {
+  const { locale } = useI18n();
+  const category = localizeCategory(rawCategory, locale);
+  const countLabel =
+    count > 0
+      ? locale === 'ja'
+        ? `${count}件`
+        : `${count} ${count === 1 ? 'story' : 'stories'}`
+      : locale === 'ja'
+        ? '準備中'
+        : 'Coming soon';
 
   return (
     <Link
       href={`/browse/${category.id}`}
-      aria-label={`${category.labelJa}のニュースを見る、${countLabel}`}
+      aria-label={
+        locale === 'ja'
+          ? `${category.labelJa}のニュースを見る、${countLabel}`
+          : `View ${category.labelJa}, ${countLabel}`
+      }
       className="soft-surface float-card group relative flex min-h-[6.5rem] items-center gap-4 rounded-card p-4 shadow-soft"
     >
       <div
