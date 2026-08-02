@@ -95,6 +95,14 @@ for (const [feature, provider] of integrationChecks) {
   }
 }
 
+const nodeMajor = Number.parseInt((await read('.nvmrc').catch(() => '0')).trim(), 10);
+if (nodeMajor !== 24) {
+  failures.push('Node.js 24 LTS must be selected in .nvmrc before release');
+}
+if (!/>=24\s*<25/.test(String(packageJson.engines?.node ?? ''))) {
+  failures.push('package.json engines.node must require the Node.js 24 LTS line');
+}
+
 const nextVersion = versionParts(packageJson.dependencies?.next);
 const nextIsSupported =
   nextVersion &&
