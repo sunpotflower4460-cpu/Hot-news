@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useI18n } from '@/lib/i18n/useI18n';
 
 export function ResetAppDataButton() {
+  const { locale } = useI18n();
   const [armed, setArmed] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -48,10 +50,18 @@ export function ResetAppDataButton() {
         onClick={clearData}
       >
         <Trash2 aria-hidden size={17} />
-        {armed ? 'もう一度押して端末内データを削除' : '端末内データをすべて削除'}
+        {armed
+          ? locale === 'ja'
+            ? 'もう一度押して端末内データを削除'
+            : 'Press again to delete on-device data'
+          : locale === 'ja'
+            ? '端末内データをすべて削除'
+            : 'Delete all on-device data'}
       </Button>
       <p className="mt-2 text-center text-[0.7rem] leading-relaxed text-muted">
-        保存した記事、最近読んだ履歴、表示・通知の希望、同意設定、キャッシュをこの端末から削除します。
+        {locale === 'ja'
+          ? '保存した記事、最近読んだ履歴、表示・通知の希望、同意設定、言語設定、キャッシュをこの端末から削除します。'
+          : 'Deletes saved stories, recent reading history, display and notification preferences, consent choices, language settings, and caches from this device.'}
       </p>
     </div>
   );
