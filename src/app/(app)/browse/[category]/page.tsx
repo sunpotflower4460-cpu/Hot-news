@@ -1,15 +1,17 @@
 import { notFound } from 'next/navigation';
-import { ScreenHeader } from '@/components/layout/ScreenHeader';
 import { ArticleCard } from '@/components/article/ArticleCard';
-import { CATEGORIES, getCategory } from '@/mock/categories';
+import { ScreenHeader } from '@/components/layout/ScreenHeader';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { LinkButton } from '@/components/ui/LinkButton';
 import { getArticlesByCategory } from '@/lib/data/selectors';
+import { CATEGORIES, getCategory } from '@/mock/categories';
 import type { CategoryId } from '@/types/article';
 
 export function generateStaticParams() {
-  return CATEGORIES.map((c) => ({ category: c.id }));
+  return CATEGORIES.map((category) => ({ category: category.id }));
 }
 
-const VALID = new Set(CATEGORIES.map((c) => c.id));
+const VALID = new Set(CATEGORIES.map((category) => category.id));
 
 export default async function CategoryPage({
   params,
@@ -23,13 +25,26 @@ export default async function CategoryPage({
   const articles = await getArticlesByCategory(category as CategoryId);
 
   return (
-    <div className="pb-8">
+    <div className="pb-10">
       <ScreenHeader title={`${meta.glyph} ${meta.labelJa}`} subtitle={meta.blurb} back />
-      <div className="space-y-3 px-5 pt-2">
-        {articles.map((a) => (
-          <ArticleCard key={a.id} article={a} layout="list" />
-        ))}
-      </div>
+      {articles.length === 0 ? (
+        <EmptyState
+          glyph={meta.glyph}
+          title="いまは準備中です"
+          description="掲載基準を満たす明るいニュースが見つかり次第、ここへそっと追加します。"
+          action={
+            <LinkButton href="/browse" variant="soft">
+              ほかのテーマを見る
+            </LinkButton>
+          }
+        />
+      ) : (
+        <div className="space-y-3.5 px-5 pt-2">
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} layout="list" />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
