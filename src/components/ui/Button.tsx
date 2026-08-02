@@ -1,11 +1,7 @@
 'use client';
 
 import { forwardRef, type ButtonHTMLAttributes } from 'react';
-import {
-  buttonStyles,
-  type ButtonSize,
-  type ButtonVariant,
-} from '@/components/ui/buttonStyles';
+import { buttonStyles, type ButtonSize, type ButtonVariant } from '@/components/ui/buttonStyles';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
