@@ -33,7 +33,9 @@ jobs:
       - name: Install secure Next.js and React baseline
         run: |
           npm install --save-exact next@16.2.12 react@19.2.0 react-dom@19.2.0
-          npm install --save-dev --save-exact eslint@9.39.2 eslint-config-next@16.2.12 @types/react@19.2.2 @types/react-dom@19.2.2
+          npm install --save-dev --save-exact eslint@9.39.2 eslint-config-next@16.2.12 @types/react@19.2.2 @types/react-dom@19.2.2 postcss@8.5.22
+          npm pkg set 'overrides.postcss=$postcss' overrides.sharp=0.35.3
+          npm install
 
       - name: Migrate next lint to ESLint CLI
         run: npx --yes @next/codemod@canary next-lint-to-eslint-cli . --force
