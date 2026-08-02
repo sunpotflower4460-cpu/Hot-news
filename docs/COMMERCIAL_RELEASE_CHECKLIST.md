@@ -10,6 +10,7 @@ This checklist is the release gate for publishing Hot News as a commercial produ
 - [ ] Operator legal name, representative, address, contact email, and required phone disclosure are final
 - [ ] Privacy policy and terms have effective dates
 - [ ] Legal text has been reviewed for the actual business and data flows
+- [ ] Every supported commercial language has specialist-reviewed legal, privacy, support, billing, and App Store text
 - [ ] `features.mockContent` is false
 - [ ] Real news API and production database are configured
 - [ ] No preview or fictional article can appear in production
@@ -28,6 +29,21 @@ This checklist is the release gate for publishing Hot News as a commercial produ
 - [ ] Account UI is hidden until account creation, recovery, export, and deletion exist
 - [ ] Ads are hidden until disclosures, consent, and policy review are complete
 - [ ] Empty, loading, error, offline, and maintenance states are tested
+
+## Localization and language quality
+
+- [ ] Japanese and English dictionary keys are identical
+- [ ] Every visible reader and settings route has been reviewed in both languages
+- [ ] All production articles include reviewed English content or are clearly unavailable in English
+- [ ] Dates, times, numbers, reading-time labels, and accessibility labels follow the selected locale
+- [ ] Language choice persists across restart and is included in local-data deletion
+- [ ] `<html lang>` changes with the selected language before hydration
+- [ ] Dynamic Type and narrow-screen layouts are tested with longer English copy
+- [ ] VoiceOver pronunciation and reading order are tested in Japanese and English
+- [ ] Search, notifications, support templates, and system emails use the selected language
+- [ ] English privacy policy, terms, commerce disclosure, editorial policy, and accessibility statement receive specialist review
+- [ ] App Store metadata, screenshots, support URL, privacy URL, and review notes are complete for every storefront language
+- [ ] Translation fallback never presents Japanese legal text as reviewed English text
 
 ## Bright-news editorial integrity
 
