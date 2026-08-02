@@ -3,17 +3,27 @@
 import { useRouter } from 'next/navigation';
 import { ChevronLeft } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { cn } from '@/lib/utils/cn';
 
 interface ScreenHeaderProps {
-  title?: string;
-  subtitle?: string;
+  title?: ReactNode;
+  subtitle?: ReactNode;
   back?: boolean;
   action?: ReactNode;
+  showLanguage?: boolean;
 }
 
-export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHeaderProps) {
+export function ScreenHeader({
+  title,
+  subtitle,
+  back = false,
+  action,
+  showLanguage = true,
+}: ScreenHeaderProps) {
   const router = useRouter();
+  const { t } = useI18n();
 
   const goBack = () => {
     if (window.history.length > 1) router.back();
@@ -31,7 +41,7 @@ export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHe
       {back && (
         <button
           type="button"
-          aria-label="前の画面へ戻る"
+          aria-label={t('common.back')}
           onClick={goBack}
           className="glass float-card -ml-1 mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-text"
         >
@@ -39,10 +49,15 @@ export function ScreenHeader({ title, subtitle, back = false, action }: ScreenHe
         </button>
       )}
       <div className="min-w-0 flex-1 pt-0.5">
-        {title && <h1 className="truncate text-h1 font-bold text-text">{title}</h1>}
+        {title && <h1 className="text-h1 font-bold text-text">{title}</h1>}
         {subtitle && <p className="mt-1 max-w-sm text-caption text-muted">{subtitle}</p>}
       </div>
-      {action && <div className="shrink-0">{action}</div>}
+      {(action || showLanguage) && (
+        <div className="flex shrink-0 items-center gap-1.5">
+          {action}
+          {showLanguage && <LanguageSwitcher compact />}
+        </div>
+      )}
     </header>
   );
 }
