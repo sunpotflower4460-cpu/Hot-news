@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AlertCircle, Check, ClipboardCopy } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { commercialConfig } from '@/config/commercial';
+import { useI18n } from '@/lib/i18n/useI18n';
 
 type CopyState = 'idle' | 'copied' | 'failed';
 
@@ -25,6 +26,7 @@ const legacyCopy = (text: string) => {
 };
 
 export function DiagnosticCopyButton() {
+  const { locale } = useI18n();
   const [state, setState] = useState<CopyState>('idle');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -42,7 +44,8 @@ export function DiagnosticCopyButton() {
       `Stage: ${commercialConfig.releaseStage}`,
       `Page: ${window.location.pathname}`,
       `Online: ${navigator.onLine ? 'yes' : 'no'}`,
-      `Language: ${navigator.language}`,
+      `App locale: ${locale}`,
+      `Device language: ${navigator.language}`,
       `User agent: ${navigator.userAgent}`,
       `Time: ${new Date().toISOString()}`,
     ].join('\n');
@@ -65,10 +68,16 @@ export function DiagnosticCopyButton() {
   const Icon = state === 'copied' ? Check : state === 'failed' ? AlertCircle : ClipboardCopy;
   const label =
     state === 'copied'
-      ? '診断情報をコピーしました'
+      ? locale === 'ja'
+        ? '診断情報をコピーしました'
+        : 'Diagnostic information copied'
       : state === 'failed'
-        ? 'コピーできませんでした'
-        : '問い合わせ用の診断情報をコピー';
+        ? locale === 'ja'
+          ? 'コピーできませんでした'
+          : 'Could not copy diagnostic information'
+        : locale === 'ja'
+          ? '問い合わせ用の診断情報をコピー'
+          : 'Copy diagnostic information for support';
 
   return (
     <div>
@@ -78,7 +87,9 @@ export function DiagnosticCopyButton() {
       </Button>
       {state === 'failed' && (
         <p role="status" className="mt-2 text-center text-[0.68rem] leading-relaxed text-muted">
-          ブラウザの権限や安全な接続を確認して、もう一度お試しください。
+          {locale === 'ja'
+            ? 'ブラウザの権限や安全な接続を確認して、もう一度お試しください。'
+            : 'Check the browser permission and secure connection, then try again.'}
         </p>
       )}
     </div>
