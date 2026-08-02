@@ -1,19 +1,22 @@
 'use client';
 
 import { Moon, Sun, SunMoon } from 'lucide-react';
+import type { TranslationKey } from '@/lib/i18n/messages';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useThemeStore } from '@/lib/store/useThemeStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 import type { ThemePref } from '@/lib/theme/types';
 import { cn } from '@/lib/utils/cn';
 
-const OPTIONS: { value: ThemePref; label: string; shortLabel: string; Icon: typeof Sun }[] = [
-  { value: 'auto', label: '端末の設定に合わせる', shortLabel: '端末に合わせる', Icon: SunMoon },
-  { value: 'light', label: '明るい画面にする', shortLabel: '明るい', Icon: Sun },
-  { value: 'dark', label: '暗い画面にする', shortLabel: '暗い', Icon: Moon },
+const OPTIONS: { value: ThemePref; labelKey: TranslationKey; Icon: typeof Sun }[] = [
+  { value: 'auto', labelKey: 'theme.system', Icon: SunMoon },
+  { value: 'light', labelKey: 'theme.light', Icon: Sun },
+  { value: 'dark', labelKey: 'theme.dark', Icon: Moon },
 ];
 
 export function ThemeToggle() {
   const hydrated = useHydrated();
+  const { t } = useI18n();
   const pref = useThemeStore((state) => state.pref);
   const setPref = useThemeStore((state) => state.setPref);
   const current = hydrated ? pref : 'auto';
@@ -21,11 +24,12 @@ export function ThemeToggle() {
   return (
     <div
       role="group"
-      aria-label="画面の明るさ"
+      aria-label={t('settings.appearance')}
       className="flex gap-1 rounded-[1.35rem] border border-line/45 bg-surface-2/70 p-1 shadow-inner-light"
     >
-      {OPTIONS.map(({ value, label, shortLabel, Icon }) => {
+      {OPTIONS.map(({ value, labelKey, Icon }) => {
         const active = current === value;
+        const label = t(labelKey);
         return (
           <button
             type="button"
@@ -41,7 +45,7 @@ export function ThemeToggle() {
             )}
           >
             <Icon aria-hidden size={15} className="shrink-0" />
-            <span className="truncate">{shortLabel}</span>
+            <span className="truncate">{label}</span>
           </button>
         );
       })}
