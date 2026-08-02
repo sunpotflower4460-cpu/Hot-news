@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: セキュリティ脆弱性を非公開で報告
+    url: https://github.com/sunpotflower4460-cpu/Hot-news/security/advisories/new
+    about: 個人情報、秘密情報、不正アクセス、課金、管理権限などの問題は公開Issueに書かないでください。
+  - name: 商用アプリ内のサポート
+    url: https://github.com/sunpotflower4460-cpu/Hot-news/blob/main/SECURITY.md
+    about: 正式公開後はアプリ内サポートURLへ置き換えます。
