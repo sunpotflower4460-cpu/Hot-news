@@ -1,0 +1,62 @@
+name: 記事の訂正・権利・安全性
+about: 事実誤認、出典切れ、権利問題、暗い前提の見落としを報告します
+labels: [editorial-review]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        緊急の権利侵害や安全問題では、公開Issueに個人情報や非公開資料を載せず、アプリ内サポートまたは公開済みの正式連絡先を使用してください。
+  - type: input
+    id: article
+    attributes:
+      label: 記事タイトルまたは記事ID
+      placeholder: 例：a03
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 問題の種類
+      options:
+        - 重大な事実誤認
+        - 軽微な事実誤認・表記
+        - 出典リンク切れ・出典不一致
+        - 著作権・画像・引用の権利
+        - 当事者のプライバシー
+        - 暗い前提・感情的負担の見落とし
+        - 広告・利害関係の表示
+        - その他
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 問題箇所
+      description: どの表現・数値・出典・画像に問題があるかを具体的に記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 確認できる根拠
+      description: 公開情報の名称や、運営者が確認できる説明を記載してください。権利書類や個人情報は公開Issueに添付しないでください。
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: 緊急性
+      options:
+        - 即時非公開が必要と思う
+        - 早めの訂正が必要
+        - 通常確認でよい
+        - 不明
+    validations:
+      required: true
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: 確認
+      options:
+        - label: 公開してよい情報だけを記載しています
+          required: true
+        - label: 善意に基づく正確な報告です
+          required: true
