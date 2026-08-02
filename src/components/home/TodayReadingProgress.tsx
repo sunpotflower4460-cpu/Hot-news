@@ -2,22 +2,42 @@
 
 import Link from 'next/link';
 import { Bookmark, Check, ChevronRight, Circle } from 'lucide-react';
+import { useI18n } from '@/lib/i18n/useI18n';
 import { useReadingStore } from '@/lib/store/useReadingStore';
 import { useHydrated } from '@/lib/utils/useHydrated';
 
 export function TodayReadingProgress({ articleIds }: { articleIds: string[] }) {
   const hydrated = useHydrated();
+  const { locale, t } = useI18n();
   const entries = useReadingStore((state) => state.entries);
   const readIds = new Set(entries.map((entry) => entry.id));
   const total = articleIds.length;
   const readCount = hydrated ? articleIds.filter((id) => readIds.has(id)).length : 0;
   const complete = total > 0 && readCount === total;
+  const remaining = total - readCount;
 
   if (total === 0) return null;
 
+  const title = complete
+    ? t('home.progressComplete')
+    : locale === 'ja'
+      ? `${t('home.progressTitle')}　${readCount} / ${total}件`
+      : `${t('home.progressTitle')}: ${readCount} / ${total}`;
+  const description = complete
+    ? t('home.progressCompleteBody')
+    : readCount === 0
+      ? `${t('home.progressOneEnough')} ${
+          locale === 'ja' ? '自分のペースでどうぞ。' : 'Read at your own pace.'
+        }`
+      : locale === 'ja'
+        ? `あと${remaining}件あります。${t('home.progressCloseAnytime')}`
+        : `${remaining} ${remaining === 1 ? 'story remains' : 'stories remain'}. ${t(
+            'home.progressCloseAnytime',
+          )}`;
+
   return (
     <aside
-      aria-label="今日のニュースの読了状況"
+      aria-label={locale === 'ja' ? '今日のニュースの読了状況' : "Today's reading progress"}
       className={
         complete
           ? 'relative overflow-hidden rounded-card border border-accent/12 bg-accent-soft/60 px-4 py-4 shadow-inner-light'
@@ -53,16 +73,8 @@ export function TodayReadingProgress({ articleIds }: { articleIds: string[] }) {
         </div>
 
         <div className="min-w-0 flex-1">
-          <p className="text-body font-bold text-text">
-            {complete ? '今日の3選はここまでです' : `今日の3選　${readCount} / ${total}件`}
-          </p>
-          <p className="mt-0.5 text-caption leading-relaxed text-muted">
-            {complete
-              ? '世界には、今日も静かに前へ進んでいる出来事がありました。'
-              : readCount === 0
-                ? '一件だけでも大丈夫です。自分のペースでどうぞ。'
-                : `あと${total - readCount}件あります。ここで閉じても大丈夫です。`}
-          </p>
+          <p className="text-body font-bold text-text">{title}</p>
+          <p className="mt-0.5 text-caption leading-relaxed text-muted">{description}</p>
         </div>
       </div>
 
@@ -72,7 +84,7 @@ export function TodayReadingProgress({ articleIds }: { articleIds: string[] }) {
             href="/browse"
             className="flex min-h-11 items-center justify-center gap-1.5 rounded-pill bg-accent-strong px-4 text-caption font-bold text-white shadow-glow"
           >
-            もう少し見る
+            {t('home.more')}
             <ChevronRight aria-hidden size={14} />
           </Link>
           <Link
@@ -80,7 +92,7 @@ export function TodayReadingProgress({ articleIds }: { articleIds: string[] }) {
             className="flex min-h-11 items-center justify-center gap-1.5 rounded-pill border border-line/60 bg-surface/75 px-4 text-caption font-bold text-text shadow-inner-light"
           >
             <Bookmark aria-hidden size={14} />
-            保存したニュース
+            {t('home.saved')}
           </Link>
         </div>
       )}
