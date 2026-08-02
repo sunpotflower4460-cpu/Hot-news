@@ -1,5 +1,9 @@
 import type { Config } from 'tailwindcss';
 
+const opacityScale = Object.fromEntries(
+  Array.from({ length: 101 }, (_, value) => [String(value), String(value / 100)]),
+);
+
 const config: Config = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
@@ -13,6 +17,11 @@ const config: Config = {
         accent: 'hsl(var(--accent) / <alpha-value>)',
         'accent-soft': 'hsl(var(--accent-soft) / <alpha-value>)',
         line: 'hsl(var(--line) / <alpha-value>)',
+      },
+      opacity: opacityScale,
+      spacing: {
+        '4.5': '1.125rem',
+        '18': '4.5rem',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
