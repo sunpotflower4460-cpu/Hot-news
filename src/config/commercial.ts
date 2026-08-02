@@ -1,6 +1,7 @@
 import rawConfig from './commercial.json';
 
 export type ReleaseStage = 'preview' | 'production';
+export type SupportedLocale = 'ja' | 'en';
 
 export interface CommercialConfig {
   releaseStage: ReleaseStage;
@@ -10,6 +11,11 @@ export interface CommercialConfig {
     bundleId: string;
     version: string;
     publicBaseUrl: string;
+  };
+  localization: {
+    defaultLocale: SupportedLocale;
+    supportedLocales: SupportedLocale[];
+    reviewedReleaseLocales: SupportedLocale[];
   };
   operator: {
     legalName: string;
