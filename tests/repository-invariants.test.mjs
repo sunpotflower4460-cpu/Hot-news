@@ -46,6 +46,16 @@ test('reader-facing selectors retain the central publication gate', async () => 
   const article = await read('src/app/(app)/article/[id]/page.tsx');
   assert.match(article, /source_link_only/);
   assert.match(article, /safe_short/);
+  assert.match(article, /ArticleTrustPanel/);
+});
+
+test('publication gate requires safe sources, assessment, and provenance for real articles', async () => {
+  const policy = await read('src/lib/editorial/policy.ts');
+  assert.match(policy, /isSafeSourceUrl/);
+  assert.match(policy, /url\.protocol === 'https:'/);
+  assert.match(policy, /isAssessmentApproved/);
+  assert.match(policy, /isProvenanceComplete/);
+  assert.match(policy, /correctionStatus !== 'RETRACTED'/);
 });
 
 test('commercial legal and support routes exist', async () => {
@@ -54,11 +64,24 @@ test('commercial legal and support routes exist', async () => {
     'src/app/(app)/legal/terms/page.tsx',
     'src/app/(app)/legal/commerce/page.tsx',
     'src/app/(app)/legal/editorial-policy/page.tsx',
+    'src/app/(app)/legal/accessibility/page.tsx',
     'src/app/(app)/settings/privacy/page.tsx',
     'src/app/(app)/support/page.tsx',
   ];
 
   for (const path of required) assert.equal(await exists(path), true, path);
+});
+
+test('privacy and diagnostics are deny-by-default and feature gated', async () => {
+  const privacy = await read('src/lib/store/usePrivacyStore.ts');
+  assert.match(privacy, /analytics: 'denied'/);
+  assert.match(privacy, /diagnostics: 'denied'/);
+
+  const telemetry = await read('src/lib/telemetry/client.ts');
+  assert.match(telemetry, /commercialConfig\.features\.analytics/);
+  assert.match(telemetry, /analytics !== 'allowed'/);
+  assert.match(telemetry, /commercialConfig\.features\.diagnostics/);
+  assert.match(telemetry, /diagnostics !== 'allowed'/);
 });
 
 test('preview indexing state matches robots.txt', async () => {
@@ -99,8 +122,24 @@ test('native privacy manifest starts with tracking and collection disabled', asy
   assert.match(manifest, /<key>NSPrivacyCollectedDataTypes<\/key>\s*<array\/>/);
 });
 
+test('commercial operations and incident documents exist', async () => {
+  const required = [
+    'docs/COMMERCIAL_RELEASE_CHECKLIST.md',
+    'docs/APP_STORE_SUBMISSION.md',
+    'docs/APP_STORE_METADATA_JA.md',
+    'docs/DATA_INVENTORY.md',
+    'docs/CONTENT_OPERATIONS.md',
+    'docs/INCIDENT_RESPONSE.md',
+    'docs/PRODUCTION_ARCHITECTURE.md',
+    'SECURITY.md',
+  ];
+
+  for (const path of required) assert.equal(await exists(path), true, path);
+});
+
 test('quality command includes tests and commercial validation', async () => {
   const packageJson = JSON.parse(await read('package.json'));
   assert.match(packageJson.scripts.check, /commercial:check/);
-  assert.match(packageJson.scripts.check, /test/);
+  assert.match(packageJson.scripts.check, /npm test/);
+  assert.match(packageJson.scripts['release:check'], /COMMERCIAL_RELEASE=1/);
 });
